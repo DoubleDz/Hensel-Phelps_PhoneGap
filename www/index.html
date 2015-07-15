@@ -129,7 +129,9 @@
         window._log = window.Function.prototype.bind.call(window.console.log, window.console);
         window._log2 = window.Function.prototype.bind.call(window.console.log, window.console);
         //window._log3 = window.Function.prototype.bind.call(window.console.log, window.console);
+        alert('JQuery')
         window.jQuery.support.cors = true; // IE needs this
+        alert('FAIL!!')
         window.EpicMvc.Extras.localCache= new window.EpicMvc.Extras.LocalCache();
         function pre_flight_check(action, vals) {
             _log3('pre_flight_check', action, vals.to, vals.at, vals.from);
