@@ -138,31 +138,33 @@
             $('.the-clipboard').slideDown();
             return (vals.to !== vals.at && vals.to !== vals.from);
         }
-        var drop = new window.EpicMvc.Extras.GlobalDrag(pre_flight_check);
-        window.EpicMvc.Epic.run([ 'Base', 'bootstrap', 'BaseDevl','iPM','iBeacon'], 'LoadStrategy$BaseDevl', 'bootstrap$bootstrap', [ drop.update, ipm_content_update ], {
-            click_warning_text : "The previous request did not complete.\n\n" + "If this problem persists, please contact support@iprojectmobile.com\n\n" + "Reference error 907."
-        });
+        function startEpic(action, vals){
+            var drop = new window.EpicMvc.Extras.GlobalDrag(pre_flight_check);
+            window.EpicMvc.Epic.run([ 'Base', 'bootstrap', 'BaseDevl','iPM','iBeacon'], 'LoadStrategy$BaseDevl', 'bootstrap$bootstrap', [ drop.update, ipm_content_update ], {
+                click_warning_text : "The previous request did not complete.\n\n" + "If this problem persists, please contact support@iprojectmobile.com\n\n" + "Reference error 907."
+            });
+        }
 
-        (function() {
-            $.getScript('//assets.zendesk.com/external/zenbox/v2.6/zenbox.js', function() {
-                if (typeof (Zenbox) !== "undefined") {
-                    Zenbox.init({
-                        dropboxID : "20238728",
-                        url : "https://iprojectmobile.zendesk.com",
-                        tabTooltip : "Help",
-                        tabImageURL : "https://assets.zendesk.com/external/zenbox/images/tab_help_right.png",
-                        tabColor : "#F58522",
-                        tabPosition : "Right",
-                        hide_tab : "true"
-                    });
-                }
-            });
-        })();
-        (function($){
-            $(document).ready(function(){
-                $("[title]").style_my_tooltips();
-            });
-        })(jQuery);
+        // (function() {
+        //     $.getScript('//assets.zendesk.com/external/zenbox/v2.6/zenbox.js', function() {
+        //         if (typeof (Zenbox) !== "undefined") {
+        //             Zenbox.init({
+        //                 dropboxID : "20238728",
+        //                 url : "https://iprojectmobile.zendesk.com",
+        //                 tabTooltip : "Help",
+        //                 tabImageURL : "https://assets.zendesk.com/external/zenbox/images/tab_help_right.png",
+        //                 tabColor : "#F58522",
+        //                 tabPosition : "Right",
+        //                 hide_tab : "true"
+        //             });
+        //         }
+        //     });
+        // })();
+        // (function($){
+        //     $(document).ready(function(){
+        //         $("[title]").style_my_tooltips();
+        //     });
+        // })(jQuery);
     </script>
 </body>
 </html>
