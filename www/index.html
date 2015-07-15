@@ -108,9 +108,7 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-        app.initialize();
-    </script>
-    <script type="text/javascript">
+        alert('AAAAAA')
         preload_images([ 
             "Package/iPM/images/iprojectmobile-web-logo-large.png", 
             "Package/iPM/images/bg_bottom.png",
@@ -139,12 +137,16 @@
             return (vals.to !== vals.at && vals.to !== vals.from);
         }
         function startEpic(action, vals){
+            alert('BBBBB')
             var drop = new window.EpicMvc.Extras.GlobalDrag(pre_flight_check);
             window.EpicMvc.Epic.run([ 'Base', 'bootstrap', 'BaseDevl','iPM','iBeacon'], 'LoadStrategy$BaseDevl', 'bootstrap$bootstrap', [ drop.update, ipm_content_update ], {
                 click_warning_text : "The previous request did not complete.\n\n" + "If this problem persists, please contact support@iprojectmobile.com\n\n" + "Reference error 907."
             });
+            alert('OK')
         }
-
+        alert('CCCCCCC')
+        app.initialize();
+        alert('DDDDDDD')
         // (function() {
         //     $.getScript('//assets.zendesk.com/external/zenbox/v2.6/zenbox.js', function() {
         //         if (typeof (Zenbox) !== "undefined") {
