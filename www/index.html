@@ -104,6 +104,11 @@
 <!-- -->
 </head>
 <body id="ipm-body">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
     <script type="text/javascript">
         preload_images([ 
             "Package/iPM/images/iprojectmobile-web-logo-large.png", 
@@ -158,10 +163,5 @@
             });
         })(jQuery);
     </script>
-     <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
 </body>
 </html>
