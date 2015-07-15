@@ -1,0 +1,39 @@
+<div class="row-fluid">
+	<div class="login-box">
+		<div>
+			<h1 class="ipm-orange center" style="font-weight: normal; font-size: 70px; letter-spacing: 5px; line-height: 70px;">Sign In</h1>
+			<h4 align="center" style="font-weight: normal; color: #AAA;">Access your secure account.</h4>
+		</div>
+		<br>
+		<div class="row-fluid">
+			<div class="form-container span10 offset1">
+				<div class="form-container">
+					<epic:page_part part="issues" />
+					<epic:if not_set="&External/Browser/is_chrome;&External/Browser/is_mobile;">
+						<div class="alert alert-info">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							iProjectMobile has been optimized for Chrome.
+							<a href="https://www.google.com/intl/en/chrome/browser/" target="_blank" class="ipm-orange">Download it here</a>
+							or switch to Chrome for full functionality.
+						</div>
+					</epic:if>
+					<form>
+						<epic:form_part form="Login" part="fist_login" show_req="" />
+						<div class="controls controls-row">
+							<div class="center">
+								<epic:link_action action="forgot" class="ipm-blue pull-left" style="margin-top:5px;">Forgot Password</epic:link_action>
+								<epic:form_action action="login" value="Sign In" class="btn pull-right ipm-blue" type="submit" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="center reg-option">
+	Need an account?
+	<span class="inline-home-nav">
+		<epic:link_action action="go_signup" class="ipm-blue"> Register Here </epic:link_action>
+	</span>
+</div>

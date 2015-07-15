@@ -1,0 +1,150 @@
+<legend>Billing Overview</legend>
+
+<epic:if val="&User/Me/bill_state;" in_list="BT-TRIAL-ACTIVE,BT-TRIAL-EXPIRED">
+	<epic:foreach table="User/Me"><epic:foreach table="Me/Plan"><epic:foreach table="Me/Stats">
+		<p>Thank you for using iProjectMobile and taking the time to evaluate our product.<epic:if val="&User/Me/bill_state;" eq="BT-TRIAL-EXPIRED"> However, your <b>Free Trial</b> has <b class="red"> expired</b>.</epic:if></p>
+		<p>Based on your current usage, we recommend buying the <b>&Plan/plan_name; Plan</b> for <b>$&Plan/estimated_price##cents;/month</b>.  Here are the details of how we determined this recommendation:</p>
+				<table class="table table-hover table-striped table-bordered">
+					<tr>
+						<th>&nbsp;</th>
+						<th>&Plan/plan_name; Plan</th>
+						<th>Current Usage</th>
+					</tr>
+					<tr>
+						<td>Join Projects:</td>
+						<td>&Plan/join;</td>
+						<td>&Stats/projects_on;</td>
+					</tr>
+					<tr>
+						<td>Create/Own Projects:</td>
+						<td>&Plan/create;</td>
+						<td>&Stats/projects_owned;</td>
+					</tr>
+					<tr>
+						<td>Manage Projects:</td>
+						<td>&Plan/manage;</td>
+						<td>&Stats/projects_owned;</td>
+					</tr>
+					<tr>
+						<td>Storage Capacity:</td>
+						<td>&Plan/base_gigs; GB</td>
+						<td>&Stats/mbytes_used; MB</td>
+					</tr>
+					<tr>
+						<td>Sponsored Users:</td>
+						<td>&Plan/base_spships;</td>
+						<td>&Stats/sponsorships;</td>
+					</tr>
+				</table>
+	</epic:foreach></epic:foreach></epic:foreach>
+	<div class="text-center"><epic:link_action action="go_select" class="btn btn-large">Select a Plan Now</epic:link_action></div>
+</epic:if>
+
+<epic:if val="&User/Me/bill_state;" not_in_list="BT-TRIAL-ACTIVE,BT-TRIAL-EXPIRED">
+	<epic:if val="&User/Me/bill_system;" eq="1">
+		<table class="table table-hover table-striped table-bordered bill-table">
+			<tr>
+				<td width="20%" style="vertical-align: top;">Current Plan:</td>
+				<td width="80%" style="vertical-align: top;">
+					<epic:foreach table="Billing/Overview">
+						<!-- Only one row, but this cuts down on typing -->
+						<b>&Overview/plan_name;
+						<epic:if val="&User/Me/bill_state;" eq="BT-TRIAL-EXPIRED"><span class="red"> (Expired)</span></epic:if>
+						</b> - 
+						Join &Overview/join; projects; 
+						<epic:if val="&Overview/create;" gt="0">
+						Create &Overview/create; projects; 
+						</epic:if>
+						&Overview/allowed_users; user account(s); 
+						<epic:if val="&Overview/allowed_gigs;" gt="0">
+						&Overview/allowed_gigs; GB of storage;
+						</epic:if>
+						<epic:if val="&Overview/allowed_gigs;" gt="0">
+						Price: $&Overview/total##dollars;/month
+						</epic:if>
+						&nbsp;<epic:link_action action="go_select" class="btn btn-mini">Change Plan</epic:link_action>
+					</epic:foreach>
+					<epic:if set="&Billing/MyCard/can_cancel;">
+						<epic:link_action action="go_cancel_billing" class="btn btn-mini red">
+							Cancel Plan
+						</epic:link_action>
+					</epic:if>
+					<epic:if set="&Billing/MyCard/is_canceled;">
+						<epic:link_action action="go_uncancel_billing" class="btn btn-mini ipm-green">
+							Undo Plan Cancellation
+						</epic:link_action>
+					</epic:if>
+				</td>
+			</tr>
+			<epic:if set="&Billing/MyCard/is_card;">
+				<epic:if val="&User/Me/bill_state;" ne="BT-FREE-ACTIVE">
+					<tr>
+						<td width="20%" style="vertical-align: top;">Next Bill Date:</td>
+						<td width="80%" style="vertical-align: top;">
+								&Billing/MyCard/nextBillDate##date:long;
+						</td>
+						</tr>
+				</epic:if>
+			</epic:if>
+			<tr>
+				<td width="20%" style="vertical-align: top;">Credit Card:</td>
+				<td width="80%" style="vertical-align: top;">
+					<epic:foreach table="Billing/MyCard">
+						<epic:if not_set="&MyCard/is_card;">None</epic:if>
+						<epic:if set="&MyCard/is_card;">
+							<div class="pull-left cc-icons cc-&MyCard/cardType##clean_to_lower;"></div><b>&MyCard/cardholderName;</b>
+							<div style="margin-left:56px;">**** **** **** &MyCard/last4;<epic:if val="&MyCard/is_card;" eq="expired"><span class="red"> Expired</span></epic:if></div>
+							<div style="margin-left:56px;font-size:12px;"><epic:link_action action="go_card_change" class="ipm-blue">Update Credit Card</epic:link_action></div>
+							<epic:if val="&User/Me/bill_state;" eq="BT-FREE-ACTIVE">
+								<div style="margin-left:56px;font-size:12px;"><epic:link_action action="go_remove_card" class="red">Remove Credit Card on File</epic:link_action></div>
+							</epic:if>
+						</epic:if>
+					</epic:foreach>
+				</td>
+			</tr>
+			<tr>
+				<td width="20%" style="vertical-align: top;">Billing History:</td>
+				<td width="80%" style="vertical-align: top;">
+					<epic:if table_is_empty="Billing/Invoice">None</epic:if>
+					<epic:foreach table="Billing/Invoice">
+						<epic:if val="&Invoice/status;" not_in_list="voided">
+							<epic:link_action action="go_invoice" p:id="&Invoice/id;">
+								<p>Invoice #&Invoice/id##to_upper; for $&Invoice/amount##cents; on &Invoice/createdAt##date;</p>
+							</epic:link_action>
+						</epic:if>
+					</epic:foreach>
+				</td>
+			</tr>
+		</table>
+		<div class="text-center"><epic:link_action action="go_select" class="btn btn-large">View Available Plans</epic:link_action></div>
+	</epic:if>
+
+	<epic:if val="&User/Me/bill_system;" eq="2">
+		<table class="table table-hover table-striped table-bordered bill-table">
+			<tr>
+				<td width="20%" style="vertical-align: top;">Current Plan:</td>
+				<td width="80%" style="vertical-align: top;">
+					<epic:foreach table="Billing/Overview">
+						<!-- Only one row, but this cuts down on typing -->
+						<b>&Overview/plan_name;</b> - &Overview/create; projects; &Overview/allowed_users; user(s); &Overview/allowed_gigs; GB ($&Overview/total##dollars;/mo)
+					</epic:foreach>
+				</td>
+			</tr>
+			<tr>
+				<td width="20%" style="vertical-align: top;">Billing History:</td>
+				<td width="80%" style="vertical-align: top;">
+					<epic:if table_is_empty="Billing/Invoice">None</epic:if>
+					<epic:foreach table="Billing/Invoice">
+						<!-- <epic:link_action action="go_invoice" p:id="&Invoice/id;"> -->
+							<p>Invoice #: &Invoice/invoice_ref;; Check #: &Invoice/check_ref;; Amount: $&Invoice/check_total##cents;; Payment Date: &Invoice/created##date;; Expiration Date: &Invoice/expires##date;</p>
+						<!-- </epic:link_action> -->
+					</epic:foreach>
+				</td>
+			</tr>
+		</table>
+	</epic:if>
+</epic:if>
+
+<epic:if val="&User/Me/bill_system;" ne="2">
+<p style="margin-top: 25px;">Need more information? View our <epic:link_action action="go_billing_faqs" class="ipm-blue">Billing FAQs</epic:link_action></p>
+</epic:if>

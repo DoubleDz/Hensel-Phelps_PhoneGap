@@ -1,0 +1,33 @@
+<style>
+	.watching, tr.watching, tr.watching td  {
+		color: #468847 !important;
+		background-color: #dff0d8 !important;
+		font-weight: bold;
+	}
+</style>
+<div class="row-fluid">
+	<h2>
+		<span class="span8">All Projects Listed Below: <span style="font-size:80%;font-weight: normal;"> (Watched projects are highlighted <span class="watching">green</span>)</span></span>
+		<input class="span4" type="text" name="filter" onkeyup="window.char_filter( $(this).val())" placeholder="Filter users by typing here...">
+	</h2>
+</div>
+<div class="row-fluid">
+	<table class="table table-hover table-striped table-bordered">
+		<tr>
+			<th class="span1 center">ID</th>
+			<th>Project Name</th>
+			<th>Owner's name</th>
+			<th>Email</th>
+		</tr>
+		<epic:foreach table="Admin/Owner">
+			<tr class="char-filter&Owner/is_watching#..watching;" data-chars="&Owner/id;~&Owner/name;~&Owner/first_name;~&Owner/last_name;~&Owner/email;">
+				<td>
+					<epic:link_action action="admin_&Owner/is_watching#?.stop?start;_watching" p:id="&Owner/id;" p:name="&Owner/name;" class="btn">&Owner/id;</epic:link_action>
+				</td>
+				<td>&Owner/name;</td>
+				<td>&Owner/first_name; &Owner/last_name;</td>
+				<td>&Owner/email;</td>
+			</tr>
+		</epic:foreach>
+	</table>
+</div>

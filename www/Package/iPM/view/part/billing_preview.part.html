@@ -1,0 +1,94 @@
+<epic:defer name="pro_calc">
+	Date.prototype.dayofYear= function() {
+		var d= new Date(this.getFullYear(), 0, 0);
+		return Math.floor((this-d)/8.64e+7);
+	};
+	
+	function days_calc() {
+		var one_day = 1000*60*60*24;
+		var start = new Date("&Billing/MyCard/billingPeriodStartDate;");
+		console.log(start);
+		var now = new Date();
+		console.log(now);
+		var end = new Date("&Billing/MyCard/billingPeriodEndDate;");
+		console.log(end);
+		var days_in_cycle = end.dayofYear() - start.dayofYear();
+		var days_left_cycle = end.dayofYear() - now.dayofYear();
+		return { days_left: days_left_cycle, days_total: days_in_cycle};
+	}
+	
+	var calc= days_calc();
+	console.log(calc);
+	
+	var one_time_charge= (&Billing/SelectedPlan/total##dollars; - &Billing/Overview/total##dollars;) * (calc.days_left / calc.days_total);
+	one_time_charge += one_time_charge * 0.00125;
+	console.log(one_time_charge);
+	
+	if ('&User/Me/bill_state;' == 'BT-TRIAL-ACTIVE' || '&User/Me/bill_state;' == 'BT-TRIAL-EXPIRED' || '&User/Me/bill_state;' == 'BT-FREE-ACTIVE') {
+		$('.one_time_charge').html('$&Billing/SelectedPlan/total##cents;');
+		one_time_charge = '&Billing/SelectedPlan/total##cents;';
+	} else {
+		$('.one_time_charge').html('$' + one_time_charge.toFixed(2));
+	}
+	
+	if (one_time_charge < 0){
+		$('.one_time_charge').append(' &nbsp; <i class="icon-question-sign icon-large" title="You will not see an invoice for this amount since it is a credit, but it will be applied to your next month\'s bill."></i>');
+	} else if (! /\.00$/.test(one_time_charge)) {
+		$('.one_time_charge').append(' &nbsp; <i class="icon-question-sign icon-large" title="This amount has been prorated based on the fact that you only have ' + calc.days_left + ' days left before reaching the end of your billing cycle."></i>');
+	}
+</epic:defer>
+<table class="table table-striped table-bordered bill-table">
+	<tr>
+		<td width="20%">Current Plan</td>
+		<td width="80%">
+			<epic:foreach table="Billing/Overview">
+				<!-- Only one row, but this cuts down on typing -->
+				<b>&Overview/plan_name;<epic:if val="&User/Me/bill_state;" eq="BT-TRIAL-EXPIRED"><span class="red"> (Expired)</span></epic:if></b> - &Overview/create; projects; &Overview/allowed_users; user(s); &Overview/allowed_gigs; GB - <b>$&Overview/total##dollars;</b>/month			
+			</epic:foreach>
+		</td>
+	</tr>
+	<tr>
+		<td width="20%">New Plan</td>
+		<td width="80%">
+			<epic:foreach table="Billing/SelectedPlan">
+				<!-- Only one row, but this cuts down on typing -->
+				<b>&SelectedPlan/plan_name;</b> - Join &SelectedPlan/join; projects;  Create &SelectedPlan/create; projects; &SelectedPlan/users; user account(s) - <b>$&SelectedPlan/base_price##dollars;</b>/month
+			</epic:foreach>
+		</td>
+	</tr>
+	<tr>
+		<td width="20%">Plan Additions</td>
+		<td width="80%">
+			<epic:foreach table="Billing/SelectedPlan">
+				&SelectedPlan/extra_gblocks; additional blocks of 50 GB storage capacity - <b>$&SelectedPlan/extra_gblocks_price##dollars;</b>/month
+				<br />
+				&SelectedPlan/extra_users; additional users- <b>$&SelectedPlan/extra_users_price##dollars;</b>/month
+			</epic:foreach>
+		</td>
+	</tr>
+	<tr>
+		<td width="20%">Credit Card</td>
+		<td width="80%">
+			<epic:foreach table="Billing/MyCard">
+				<div class="pull-left cc-icons cc-&MyCard/cardType##clean_to_lower;"></div> 
+					&MyCard/cardholderName; <br>**** **** **** &MyCard/last4;
+			</epic:foreach>
+		</td>
+	</tr>
+	<tr>
+		<td width="20%">Recurring Monthly Payment</td>
+		<td width="80%">
+			<epic:foreach table="Billing/SelectedPlan">
+				<b>$&SelectedPlan/total##cents; </b>/month
+			</epic:foreach>
+		</td>
+	</tr>
+	<tr>
+		<td width="20%" class="ipm-green">Payment</td>
+		<td width="80%">
+			<epic:foreach table="Billing/SelectedPlan">
+				<b class="one_time_charge"></b>
+			</epic:foreach>
+		</td>
+	</tr>
+</table>

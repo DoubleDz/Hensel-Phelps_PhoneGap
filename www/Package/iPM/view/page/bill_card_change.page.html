@@ -1,0 +1,25 @@
+<legend>
+	<epic:link_action action="go_overview">Overview</epic:link_action>
+	&nbsp;&gt;&nbsp; Change Card
+</legend>
+<form>
+	<h4>Update Credit Card:</h4>
+	<div>
+		<div align="center" style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">
+			<img src="Package/iPM/images/cc_icons.png" />
+		</div>
+		<epic:form_part form="CardInfo" part="fist_cc_input" />
+	</div>
+	<div class="clearfix"></div>
+	<hr>
+	<div class="text-center" style="font-size: 18px; line-height: 40px; margin-top: 20px;">
+		<epic:if set="&Billing/MyCard/is_card;">
+			<!-- Only allow cancel if we have a card on file -->
+			<epic:link_action action="cancel" class="ipm-blue">Cancel</epic:link_action>&nbsp;&nbsp;
+		</epic:if>
+		<epic:if not_set="&Billing/MyCard/is_card;">
+			<epic:link_action action="go_overview" class="ipm-blue">Back</epic:link_action>&nbsp;&nbsp;
+		</epic:if>
+		<epic:form_action action="update" class="btn btn-large" value="Update"></epic:form_action>
+	</div>
+</form>

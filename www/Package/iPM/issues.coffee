@@ -1,0 +1,182 @@
+window.EpicMvc.issues$ipm=
+	Sponsor:
+		sponsor_level: [
+			[ /OWNERS_REMOVED/, 'SOME PROJECTS REQUIRE YOUR ATTENTION!']
+			[ /NO_OWNER_FOR_PROJECT/, '%1% No Longer has an owner']
+		]
+		sponsor_del: [
+			[ /OWNERS_REMOVED/, 'SOME PROJECTS REQUIRE YOUR ATTENTION!']
+			[ /NO_OWNER_FOR_PROJECT/, '%1% No Longer has an owner']
+		]
+		default: [
+			[ /PERM_403_CHILD_USER_LEVEL/, 'This user is already on your team.']
+			[ /REST_403_EXISTING_PROJECTS/, 'This user cannot be added to your team because they own projects.']
+			[ /REST_403_EXISTING_TEAM_MEMBER/, 'This user cannot be added to your team.  They may have already purchased their account, joined another team, or own projects.']
+			[ /INVITE_SPONSOR_ROW_SUCCESS/, 'Successfully invited (%1%) to the team.']
+			[ /ADD_SPONSOR_ROW_SUCCESS/, 'Successfully added %1% User(s) to the team.']
+			[ /ER_DUP_ENTRY/, 'The email you entered is already a registered user of iProjectMobile.']
+			[ /SENT/, 'Invite email has been sent.']
+		]
+	Admin:
+		default: [
+			[ /SENT/, 'Invite email has been sent.']
+			[ /FREE_OR_FREE_TRIAL_ONLY/, 'The Expires field only applies when you want to make the user an Active Free Trial and expire on the given date.']
+		]
+	User:
+		send_forgot: [ [ /EMAIL_SENT/, 'Check your email (%1%) for a link to access your profile to change your password.'] ]
+		register: [ [ /CONFIRM/, 'Check your new email (%1%) for a link to confirm your changes.'] ]
+		confirm_code: [ [ /SUCCESS/, 'Your email address has been validated.'] ]
+		pre_reg_confirm_code: [ [ /SUCCESS/, 'Your email address has been validated.'] ]
+		invite_admin_ltd: [
+			[ /ER_DUP_ENTRY/, 'The person you are trying to invite is already a registered user of iProjectMobile.' ]
+		]
+		login: [ [ /FALSE/, 'Login failed'] ]
+		request_invite: [
+			[ /ER_DUP_ENTRY/, 'The email you entered is already a registered user of iProjectMobile.']
+			[ /REST_403_USER_EMAIL_EXISTS/, 'The email you entered is already a registered user of iProjectMobile.']
+			[ /SENT/, 'Account created successfully. An email has been sent to "<b>%1%</b>". Click the link within the email to begin using your account.  If the email is incorrect, simply re-register below using the correct email address.' ]
+			[ /FORM_ERRORS/, 'Please correct any errors in the form below, then press Register Now.']
+		]
+		invite: [
+			[ /ER_DUP_ENTRY/, 'The email you entered is already a registered user of iProjectMobile. There is no need to add them. Simply add them to the projects you want them to be a part of from the Manage Team section.']
+			[ /FORM_ERRORS/, 'Please correct any errors in the form below, then press send.']
+		]
+		invite_pro: [
+			[ /ER_DUP_ENTRY/, 'The email you entered is already a registered user of iProjectMobile. There is no need to add them. Simply add them to the projects you want them to be a part of from the Manage Team section.']
+			[ /FORM_ERRORS/, 'Please correct any errors in the form below, then press send.']
+		]
+		invite_team_project: [
+			[ /SENT/, 'An email has been sent to "<b>%1%</b>". Once they register, they will be part of your project team.']
+		]
+		save_profile: [
+			[ /FORM_ERRORS/, 'Please correct any errors in the form below, then press update.']
+			[ /SENT/, 'An email has been sent to "<b>%1%</b>". Click its link to confirm this change.']
+			[ /SUCCESS/, 'Your profile has been successfully updated.']
+		]
+		save_profile_extended: [
+			[ /FORM_ERRORS/, 'Please correct any errors in the form below, then press update.']
+			[ /SUCCESS/, 'Your contact information has been successfully updated.']
+		]
+		save_profile_expose: [
+			[ /SUCCESS/, 'Your project visibility settings have been updated.']
+		]
+		save_password: [
+			[ /SUCCESS/, 'Your password on file has been updated.']
+			[ /FORM_ERRORS/, 'Please correct any errors in the form below, then press change.']
+		]
+		default: [
+			[ /INVALID_CODE/, 'Your code [%1%] is invalid or may have expired.']
+			[ /RE_SENT/, 'Invite email has been sent again.']
+			[ /SENT/, 'The message has been sent.  Invite additional users or click Cancel to return.']
+		]
+	Directory:
+		notify_send: [
+			[ /SUCCESS/, 'Your message was sent successfully to %1% team members.' ]
+			[ /NOTHING_SELECTED/, 'Please Select at least 1 member to send to' ]
+		]
+		add_project: [
+			[ /FORM_ERRORS/, 'Please correct any errors in the form below, then press create.']
+		]
+		add_folder: [ [ /FORM_ERRORS/, 'Please correct any errors in the form below, then press save.'] ]
+		add_template: [ [ /FORM_ERRORS/, 'Please correct any errors in the form below, then press create.'] ]
+		add_member: [
+			[ /FORM_ERRORS/, 'Please enter a valid email address, then press add new member.']
+			[ /RESTRICTED_MEMBER/, 'The User was successfully added to the team, but they have restricted access until they upgrade their account level']
+			[ /RESTRICTED_MANAGER/, 'The User was successfully added as a manager to the team, but they have restricted access until they upgrade their account level']
+			[ /...._400_.*/, 'User with this email is already on the team (Error: 400).']
+		]
+		change_member: [
+			[ /PROJECT_MAX_STANDARD/, 'Unable to Transfer Project. This User has reached their maximum project limit. An Email notification has been sent.']
+			[ /NEW_OWNER_USER_LEVEL/, 'Unable to Transfer Project. This User is unable to own projects. An Email notification has been sent.']
+			[ /NEW_OWNER_MAX_QUOTA/, 'Unable to Transfer Project. This User has reached their max storage capacity. An Email notification has been sent.']
+			[ /PROJECT_TRANSFER_SUCCESS/, 'Project Transfered Successfully. An Email notification has been sent.']
+			[ /RESTRICTED_MEMBER/, 'The User was successfully updated, but they have restricted access until they upgrade their account']
+			[ /RESTRICTED_MANAGER/, 'The User was successfully updated, however they will be unable to manage the project until they upgrade their account']
+		]
+		clone_project: [
+			[ /FORM_ERRORS/, 'Please correct any errors in the form below, then press clone.']
+			[ /RESTRICTED_MEMBER/, '%1% %2% (%3%) was successfully added to the team, but will have restricted access until they upgrade their account']
+		]
+		recover_folder: [
+			[ /REST_404_FOLDERS/, 'Unable to Recover Folder. This Folder has been moved to a different project.']
+			[ /MAX_QUOTA/, 'Unable to Recover Folder. Not enough storage space. Please Upgrade your account or delete some files.']
+		]
+		recover_file: [
+			[ /REST_404_FILES/, 'Unable to Recover File. This File has been moved to a different project.']
+			[ /MAX_QUOTA/, 'Unable to Recover File. Not enough storage space. Please Upgrade your account or delete some files.']
+		]
+		rename_project: [
+			[ /.*_NO_CHANGE/, 'Please give the project a new name when renaming.']
+			[ /FORM_ERRORS/, 'Please correct any errors in the form below, then press rename.']
+		]
+		default: [
+			[ /MAX_QUOTA_3PP/, 'Not enough storage space. An email has been sent to the Account Owner.']
+			[ /PING_MEMBER/, 'Email was successfully sent']
+			[ /COULD_BE_MANAGER/, 'You have been made a Manager on this project.  Only Standard users and above can manage projects.  You remain as a Member until you upgrade. ']
+			[ /PDF_ONLY/, 'Only .pdf files can be uploaded as a Form.']
+			[ /REST_403_MEMBER_MAX/, 'This Team User can be no higher than a Member.']
+			[ /REST_403_MANAGER_MAX/, 'This Team User can be no higher than a Manager.']
+			[ /REST_..._FILE_ACTIVE/, 'The file has already been recovered.']
+			[ /REST_..._FOLDER_ACTIVE/, 'The folder has already been recovered.']
+		]
+	Billing:
+		validate_plan_update: [
+			[ /NO_PLAN_CHANGE/, 'To continue, you need to either select a different plan or make a modification to your current plan.']
+		]
+		default: [
+			[ /RETRY_SUB_SUCCESS/, 'Your Past Due Subscription was successfully Re-Activated' ]
+			[ /RETRY_SUB_FAIL/, 'Your Past Due Subscription was unable to be Re-Activated with this card. Please contact iProjectMobile Support' ]
+			[ /CARD_REMOVED/, 'Your Credit card information has been removed.' ]
+			[ /PLAN_CANCEL/, 'Your plan and subscription have been cancelled. You will continue to have your selected plan and service level until the end of this pay period.' ]
+			[ /PLAN_UNCANCEL/, 'Your request for cancellation has been reversed.  Your plan will continue based on your last selection and payment.' ]
+			[ /MONTH_YEAR_IN_PAST/, 'Card must have a valid expiration date' ]
+			[ /YEAR_IN_PAST/, 'Card must have a valid expiration date'  ]
+			[ /PLAN_TOO_LOW/, 'Your usage does not allow a plan lower than "%1%". This is based on the number of projects you have joined, created, own, or if your account has team users.' ]
+			[ /GBLOCKS_TOO_LOW/, 'Your usage does not allow Extra Storage Blocks lower than "%1%". This is based on the number and size of projects created.' ]
+			[ /USERS_TOO_LOW/, 'Your usage does not allow Extra Users lower than "%1%". This is based on the current number of Users on your team.' ]
+			[ /BTMSG/, 'An error occurred processing your purchase - %2%' ]
+			[ /FORM_ERRORS/, 'There were errors, see below.']
+			[ /FIELD_EMPTY_TEXT/, '%3%']
+			[ /FIELD_EMPTY/, '%2:1% is a required field.']
+			[ /FIELD_ISSUE_TEXT/, '%3%']
+			[ /FIELD_ISSUE/, '%2:1% is invalid.']
+			[ /.*/, 'Billing system error. Please try again later.']
+		]
+	default:
+		sponsor_add: [
+			[ /ER_DUP_ENTRY/, 'The user you are attempting to sponsor has already been sponsored.']
+			[ /PERM_403_CHILD_USER_LEVEL/, 'The user you are attempting to sponsor is a paid user.']
+		]
+		default: [
+			[ /BAD_DATE/, 'That date isn\'t workin\' for me (%1%)' ]
+			[ /SUCCESS/, 'Action completed successfully.' ]
+			[ /REST_403_USER_EMAIL_EXISTS/, 'This email belongs to a registered user.' ]
+			[ /REST_403_MAX_SPONSOR_COUNT/, 'You have reached your maximum user limit of %2% additional users.' ]
+			[ /RECOVERED_FILE_TO_ORIGINAL_PARENT/, 'The file (%1%) was recovered to it\'s original folder.']
+			[ /RECOVERED_FILE_TO_PROJECT/, 'The file (%1%) was recovered to the project.']
+			[ /RECOVERED_FOLDER_TO_ORIGINAL_PARENT/, 'The folder (%1%) was recovered to it\'s original parent folder.']
+			[ /RECOVERED_FOLDER_TO_PROJECT/, 'The folder (%1%) was recovered to the project.']
+			[ /RE_SENT/, 'Invite email has been sent again.']
+			[ /FORM_ERRORS/, 'There were errors, see below.']
+			[ /FIELD_EMPTY_TEXT/, '%3%']
+			[ /FIELD_EMPTY/, '%2:1% is a required field.']
+			[ /FIELD_ISSUE_TEXT/, '%3%']
+			[ /FIELD_ISSUE/, '%2:1% is invalid.']
+			[ /__STORAGE/, 'You have reached your storage capacity.  You will need to purchase additional storage in order to complete this action. ']
+			[ /DEEP_PURPLE_CREATE_PROJECTS/, 'You have reached your maximum for Project ownership.  You will need to upgrade to at least Professional to create or own additional projects.' ]
+			[ /PURPLE_CREATE_PROJECTS/, 'You will need to upgrade to at least Standard to create or access owned projects.' ]
+			[ /WHITE_JOIN_PROJECTS/, 'In order to view projects, you need to be a paying customer.  Please upgrade to complete this action.' ]
+			[ /NON_PAY_JOIN_PROJECTS/, 'Please update your billing information under My Account to complete this action.' ]
+			[ /DEEP_BLUE_JOIN_PROJECTS/, 'In order to join additional projects, you need to upgrade to at least Starter User.' ]
+			[ /FILE_VERSION_EXTENSION_NOT/, 'Files types do not match.  Please upload a ".%1%" to version this file.']
+			[ /REST_403_RESTRICTED_PROJECT/, 'Access to this project is currently restricted. Please contact the project owner for more information.']
+			[ /ResourceNotFound/, 'REST Endpoint Missing (%1%). Please Contact Support.' ]
+			[ /...._400_.*/, 'Invalid parameters (Error: 400).']
+			[ /...._403_.*/, 'You do not have permissions to perform this operation (Error: 403).']
+			[ /...._404_.*/, 'Associated record could not be found (Error: 404).']
+			[ /...._500_.*/, 'General server error (Error: 500).']
+			[ /...._001_.*/, 'Unknown server error (Error: 001).']
+			[ /FALSE/, 'Unknown server error (Error: 901).']
+			[ /.*/, 'Unmapped result token (%0%) (Reference: 900).']
+		]
+

@@ -1,0 +1,38 @@
+<style>.alert { text-align: left; padding: 10px 30px 10px 10px; }</style>
+<epic:if table_is_not_empty="Pageflow/Message">
+	<div class="alert alert-block alert-success fade in">
+		<button data-dismiss="alert" class="close" type="button">
+			<i class="icon-remove"></i>
+		</button>
+		<epic:foreach table="Pageflow/Message">
+			<p title="&Message/title;">&Message/issue;</p>
+		</epic:foreach>
+	</div>
+</epic:if>
+<epic:if table_is_not_empty="Pageflow/Issue">
+	<div class="alert alert-block alert-error fade in">
+		<button data-dismiss="alert" class="close" type="button">
+			<i class="icon-remove"></i>
+		</button>
+		<epic:foreach table="Pageflow/Issue">
+			<p>
+			<span title="&Issue/title;">&Issue/issue;</span>
+				<epic:if val="&Issue/token;" eq="REST_403_USER_LEVEL_DEEP_BLUE_JOIN_PROJECTS">
+ 					<epic:link_action action="billing_upgrade_to" p:prefix="STR" class="btn btn-small">
+						Upgrade to Starter
+					</epic:link_action>
+				</epic:if>
+				<epic:if val="&Issue/token;" eq="REST_403_USER_LEVEL_PURPLE_CREATE_PROJECTS">
+ 					<epic:link_action action="billing_upgrade_to" p:prefix="STD" class="btn btn-small">
+						Upgrade to Standard
+					</epic:link_action>
+				</epic:if>
+				<epic:if val="&Issue/token;" eq="REST_403_PROJECT_MAX_STANDARD_DEEP_PURPLE_CREATE_PROJECTS">
+ 					<epic:link_action action="billing_upgrade_to" p:prefix="PRO" class="btn btn-small">
+						Upgrade to Professional
+					</epic:link_action>
+				</epic:if>
+			</p>
+		</epic:foreach>
+	</div>
+</epic:if>

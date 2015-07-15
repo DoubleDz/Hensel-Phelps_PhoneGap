@@ -1,0 +1,75 @@
+<div>
+<h1>Sponsors for Team-user: &Admin/UserEdit/first_name; &Admin/UserEdit/last_name;</h1>
+			<div class="widget-header">
+				<epic:if not_set="&Admin/SponsorAdd/open;">
+					<div id="add-sponsor-member-placeholder">
+						<epic:link_action action="add_sponsor_open">
+							<i class="icon-plus icon-large"></i> &nbsp; Add New Sponsored User</epic:link_action>
+					</div>
+				</epic:if>
+				<epic:if set="&Admin/SponsorAdd/open;">
+					<form id="add-sponsor-member-form" class="form-inline add-sponsor-email">
+						<epic:form_part form="SponsorAddEmail" part="fist_inline" />
+						<epic:if set="&Admin/SponsorAdd/issue;">
+							<div class="invite-unregistered" style="font-size:80%;margin-top:7px;">
+							The email entered is not registered with iProjectMobile.
+							<epic:link_action action="go_new_user_email"
+								p:email="&Admin/SponsorAdd/issue_email;"
+								class="btn btn-mini btn-primary"
+								style="line-height:14px">Want to invite them to join?</epic:link_action>
+							</div>
+						</epic:if>
+						<div style="margin-top: 10px;">
+							<epic:form_action action="add_sponsor_email" class="btn" value="Add Sponsored User"></epic:form_action>
+							<epic:link_action action="add_sponsor_close" class="btn">Cancel</epic:link_action>
+						</div>
+					</form>
+				</epic:if>
+			</div>
+		<table class="table"><tr style="vertical-align:top;">
+		<th>Name</th> <th>Email</th> <th>Level</th>
+		</tr>
+		<epic:foreach table="Admin/Sponsor">
+		<tr>
+		<td>&Sponsor/first_name; &Sponsor/last_name;</td>
+		<td>&Sponsor/email;</td>
+		<td>
+			<ul class="nav team-manage ">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="get_my_position($(this).next(), 15, -100);">
+						&Sponsor/level_nice; <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<epic:if val="&Sponsor/level_token" ne="team_member">
+						<li>
+							<epic:link_action action="set_as_team_member" p:id="&Sponsor/id;">Member</epic:link_action>
+						</li>
+						</epic:if>
+						<epic:if val="&Sponsor/level_token" ne="team_manager">
+						<li>
+							<epic:link_action action="set_as_team_manager" p:id="&Sponsor/id;">Manager</epic:link_action>
+						</li>
+						</epic:if>
+						<epic:if val="&Sponsor/level_token" ne="team_creator">
+						<li>
+							<epic:link_action action="set_as_team_creator" p:id="&Sponsor/id;">Creator</epic:link_action>
+						</li>
+						</epic:if>
+						<epic:if val="&Sponsor/level_token" ne="team_admin">
+						<li>
+							<epic:link_action action="set_as_team_admin" p:id="&Sponsor/id;">Admin</epic:link_action>
+						</li>
+						</epic:if>
+						<li>
+							<epic:link_action action="sponsor_del" p:id="&Sponsor/id;">Remove
+								<i class="icon-remove red"></i>
+							</epic:link_action>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</td>
+		</tr>
+		</epic:foreach>
+		</table>
+</div>

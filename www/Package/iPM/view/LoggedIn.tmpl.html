@@ -1,0 +1,70 @@
+<div class="navbar navbar-fixed-top">
+	<epic:page_part part="head" />
+	<epic:page_part part="restricted_project" dynamic="span" />
+</div>
+<a name="top"></a>
+<div id="ipm-page-container">
+	<epic:if val="&User/Me/bill_state;" eq="BT-TRIAL-ACTIVE">
+		<epic:if val="&User/Me/level;" not_in_list="7,8,9">
+			<div class="trial-notification">
+				<epic:link_action action="go_billing">You have &User/Me/expires_days; days remaining in your free trial.</epic:link_action>
+				<epic:if set="&User/Me/is_recommendation;">
+					<epic:link_action action="go_billing">Your current estimated monthly charge is $&User/Me/recommended_price##cents;.</epic:link_action>
+				</epic:if>
+				<epic:link_action action="go_billing" class="btn btn-mini" style="margin-top:-2px;">Upgrade Now</epic:link_action>
+				<div class="bottom-gradient" style="bottom: -2px;"></div>
+			</div>
+		</epic:if>
+		<epic:if val="&User/Me/level;" in_list="7,8,9">
+			<div class="trial-notification">You are a team member and part of your Team's free trial.</div>
+		</epic:if>
+	</epic:if>
+	<epic:if val="&User/Me/bill_state;" eq="BT-TRIAL-EXPIRED">
+		<epic:if val="&User/Me/level;" not_in_list="7,8,9">
+			<div class="trial-notification" style="background-color: #F6841F;">
+				<epic:link_action action="go_billing" style="color:#fff;">Your Free Trial has expired, but you can continue to access all features for &User/Me/expires_days; days.</epic:link_action>
+				<epic:if set="&User/Me/is_recommendation;">
+					<epic:link_action action="go_billing" style="color:#fff;">Your current estimated monthly charge is $&User/Me/recommended_price##cents;</epic:link_action>
+				</epic:if>
+				<epic:link_action action="go_billing" class="btn btn-mini" style="margin-top:-2px;">Upgrade Now</epic:link_action>
+				<div class="bottom-gradient" style="bottom: -2px;"></div>
+			</div>
+		</epic:if>
+		<epic:if val="&User/Me/level;" in_list="7,8,9">
+			<div class="trial-notification" style="background-color: #F6841F;">Your Team's free trial has expired.</div>
+		</epic:if>
+	</epic:if>
+	<epic:if val="&User/Me/bill_state;" in_list="BT-STD-EXPIRED,BT-TEAM-EXPIRED,BT-PRO-EXPIRED,BT-STR-EXPIRED">
+		<div class="trial-notification" style="background-color: #F6841F;">
+			<epic:link_action action="go_billing" style="color:#fff;">Your plan has expired, but you can continue to access all features for &User/Me/expires_days; days.</epic:link_action>
+			<epic:link_action action="go_card_change" class="btn btn-mini" style="margin-top:-2px;">Update Billing Information</epic:link_action>
+			<div class="bottom-gradient" style="bottom: -2px;"></div>
+		</div>
+	</epic:if>	
+	<div id="ipm-left-sidebar">
+		<!--Sidebar content-->
+		<epic:page_part part="progress_summary" dynamic="div" />
+		<epic:page_part part="side" />
+	</div>
+	<div id="ipm-center-content">
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					<div id="ipm-main-content">
+						<epic:page_part part="issues" />
+						<!--Body content-->
+						<epic:page />
+					</div>
+					<div id="ipm-right-sidebar">
+						<epic:page_part part="activity" dynamic="div" delay="5" class="right-widget-container activity-container" />
+						<epic:page_part part="team" dynamic="div" class="right-widget-container team-container" />
+					</div>
+					<div class="clearfix"></div>
+					<footer class="site-footer row-fluid">
+						<epic:page_part part="foot" />
+					</footer>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

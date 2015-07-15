@@ -1,0 +1,102 @@
+<div class="file-selection">
+<!-- Elastic menu -->
+<div class="container">
+	<div class="menu-wrap">
+		<nav class="menu" style="overflow-y:auto;">
+			
+			<div class="morph-shape" id="morph-shape" data-morph-open="M-1,0h101c0,0,0-1,0,395c0,404,0,405,0,405H-1V0z">
+				<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+					<path d="M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z"/>
+				</svg>
+			</div>
+			<div id="solid-background">
+			</div>
+			<div class="icon-list">
+				<epic:link_action action="ipm">iProjectmobile	</epic:link_action>
+				<!-- breadcrumb -->
+				<ul class="breadcrumb">
+					<epic:foreach table="Directory/Crumb">
+						<epic:if false="&Crumb/_LAST;">
+							<li>
+								<epic:link_action action="select_folder" p:id="&Crumb/id;">&Crumb/name;</epic:link_action>
+							</li>
+						</epic:if>
+						<epic:if true="&Crumb/_LAST;">
+							<li class="active">&Crumb/name;</li>
+						</epic:if>
+					</epic:foreach>
+				</ul>
+				<!-- Navigation -->
+				<epic:if set="&Directory/Options/cache_pending;&Directory/Options/cache_pending_project;">
+					<img src="Package/iPM/images/loading.gif" /> &nbsp; Public Loading...
+				</epic:if>
+				<epic:if not_set="&Directory/Options/cache_pending;&Directory/Options/cache_pending_project;">
+				<epic:page_part part="file_folder_js" />
+					<div id="ipm-public-folders">
+						<div class="public-folders-files">
+							<!--  PUBLIC FOLDERS INSERTED HERE -->
+							<epic:if set="&Directory/Options/is_root;">
+								<epic:foreach table="Directory/PUBLIC">
+									<epic:foreach table="PUBLIC/Folder">
+										<epic:link_action action="select_folder" class="folder" p:id="&Folder/id;">
+											<span>&Folder/name;</span>
+										</epic:link_action>
+									</epic:foreach>
+									<epic:foreach table="Directory/RootFile">
+										<!-- file_selection_row -->
+										<div class="row">
+											<div class="span3 clearfix">		
+												<div class="icon-&RootFile/icon_ext; ipm-icon ipm-icon-doc" style="margin-top: 10px; float:left;"></div>										
+												<epic:if val="&RootFile/icon_ext;" in_list="png,jpg,gif,jpeg">
+													<epic:link_action action="go_open_s3_file" p:id="&RootFile/id;">&RootFile/name; </epic:link_action>
+												</epic:if>
+												<epic:if val="&RootFile/icon_ext;" not_in_list="png,jpg,gif,jpeg">
+													<a href="#" class="file" onclick="S3Open(&Directory/Options/active_project;,&RootFile/id;,true);return false;" style="float:left;">&RootFile/name;</a>
+												</epic:if>
+											</div>
+											<div class="span3" style="display:block;">
+												<div class="size-col" style="float:left !important; margin-right:10px !important; margin-left:10px !important;">&RootFile/size#bytes;</div>
+												<div class="modified-col" style="float:left !important; margin-right:10px !important; margin-left:10px !important;">			
+														<time class="timeago" dateTime="&RootFile/modified;"> &RootFile/modified; </time>
+												</div>
+											</div>
+										</div>
+									</epic:foreach>
+								</epic:foreach>
+							</epic:if>
+							<epic:if set="&Directory/Options/is_public;">
+								<epic:foreach table="Directory/Folder">
+									<epic:link_action action="select_folder" class="folder" p:id="&Folder/id;">
+										<span></span>>&Folder/name;</span>
+									</epic:link_action>
+								</epic:foreach>
+								<epic:foreach table="Directory/BeaconFile">
+									<epic:page_part part="file_selection_row" />
+								</epic:foreach>
+								<epic:if table_is_empty="Directory/Folder">
+									<epic:if table_is_empty="Directory/BeaconFile">
+										<span class="item-name muted">There are no folders or files here.</span>
+									</epic:if>
+								</epic:if>
+							</epic:if>
+						</div>
+					</div>
+				</epic:if>
+				<!-- <a href="#"><i class="fa fa-fw fa-star-o"></i><span>Favorites</span></a>
+				<a href="#"><i class="fa fa-fw fa-bell-o"></i><span>Alerts</span></a>
+				<a href="#"><i class="fa fa-fw fa-envelope-o"></i><span>Messages</span></a>
+				<a href="#"><i class="fa fa-fw fa-comment-o"></i><span>Comments</span></a>
+				<a href="#"><i class="fa fa-fw fa-bar-chart-o"></i><span>Analytics</span></a>
+				<a href="#"><i class="fa fa-fw fa-newspaper-o"></i><span>Reading List</span></a> -->
+			</div>
+		</nav>
+		<epic:link_action action="toggle_menu">
+			<button class="close-button">Close Menu</button>
+		</epic:link_action>
+	</div>
+	<epic:link_action action="toggle_menu">
+		<button class="menu-button">Open Menu</button>
+	</epic:link_action>
+</div>
+
+ </div>

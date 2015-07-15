@@ -1,0 +1,136 @@
+<div class="row private-row&Folder/drawer_open#..open-drawer-parent;">
+	<div class="col span9 clearfix">
+		<h5 class="item-name data-drag data-drop"
+			data-drag-data='{"from":&Folder/id;,"at":&Folder/folder_id;}'
+			data-drag-type="folder"
+			data-drop-data='{"to":&Folder/id;,"callback_class":"ProgressSample2"}'
+			data-drop-folder="move_folder" 
+			data-drop-clip-folder="move_folder"
+			data-drop-file="move_file" 
+			data-drop-clip-file="move_file"
+			data-drop-undofile="recover_file_to"
+			data-drop-undofolder="recover_folder_to"
+			data-drop-Files="os_upload_drop">
+			<epic:if set="&Folder/edit;">
+				<form class="form-inline">
+					<div class="icon-closed-folder ipm-icon"></div>
+					<i class="icon-lock folder-lock"></i>
+					<epic:form_part form="Folder" part="fist_inline" />
+					<epic:form_action action="save_rename_folder" value="Save" class="btn btn-primary save-btn" />
+					<epic:form_action action="cancel_rename_folder" value="Cancel" class="btn" />
+				</form>
+			</epic:if>
+			<epic:if not_set="&Folder/edit;">
+				<span class="add-drop-zone folder-drop-zone">
+					<div class="icon-closed-folder ipm-icon" data-folder="&Folder/id;"></div>
+					<i class="icon-lock folder-lock"></i>
+				</span>
+				<epic:link_action action="choose_folder" class="folder" p:id="&Folder/id;">&Folder/name;</epic:link_action>				
+				<div class="action-pane&Folder/actions_open#..active;&Folder/activity_open#..active;&Folder/users_open#..active;">
+					<ul class="nav nav-pills drawer-handles">
+						<li class="&Folder/users_open#..active;">
+							<epic:link_action action="toggle" p:type="users" p:id="&Folder/id;">
+								<i class="icon-user icon-large"></i>
+								<epic:if set="&Folder/users_open;">
+									<div class="input-prepend input-append" onclick="event.stopPropagation();return false;" style="right: -158px; position: absolute; top: 3px;">
+										<input type="text" class="filter_users_textbox" style="width: 120px; border-color: #0088cc;" placeholder="Filter Users..." onkeyup="filter_users_text=$(this).val();input_filter( filter_users_text, '.users-filter-container', '~', true);return false;">
+										<span class="add-on" style="border-color: #0088cc; background-color: #0088cc; border-radius: 0;">
+											<i class="icon-remove links" onclick="$('.filter_users_textbox').val('').keyup().focus();return false;"></i>
+										</span>
+									</div>
+								</epic:if>
+							</epic:link_action>
+						</li>
+						<!--  
+						<li class="&Folder/activity_open#..active;">
+							<epic:link_action action="toggle" p:type="activity" p:id="&Folder/id;">
+								<i class="icon-rss icon-large"></i>
+							</epic:link_action>
+						</li>
+						-->
+						<li class="&Folder/actions_open#..active;">
+							<epic:link_action action="toggle" p:type="actions" p:id="&Folder/id;">
+								<i class="icon-cog icon-large"></i>
+							</epic:link_action>
+						</li>
+					</ul>
+				</div>
+			</epic:if>
+		</h5>
+	</div>
+	<div class="col span1">
+		<div class="size-col"></div>
+	</div>
+	<div class="col span2">
+		<div class="modified-col"></div>
+	</div>
+</div>
+<epic:if not_set="&Folder/edit;">
+	<div class="row private-row clearfix drawer-row&Folder/drawer_open#..open-drawer-child;">
+		<epic:if set="&Folder/actions_open;">
+			<div class="col drawer span12">
+				<div class="tab-content box-shadow">
+					<div class="drawer-inner action-drawer">
+						<epic:if set="&Folder/can_edit;">
+							<span class="action-btn"> 
+								<epic:link_action action="rename_folder" p:id="&Folder/id;">
+									<i class="icon-pencil icon-large"></i>
+									<span class="action-labels"> Rename</span>
+								</epic:link_action>
+							</span> 
+							<span class="action-btn"> 
+								<epic:link_action action="folder_to_clip" p:from="&Folder/id;">
+									<i class="icon-move icon-large"></i>
+									<span class="action-labels"> Move</span>
+								</epic:link_action>
+							</span> 
+							<span class="action-btn"> 
+								<epic:link_action action="delete_folder" p:id="&Folder/id;">
+									<i class="icon-trash icon-large"></i>
+									<span class="action-labels"> Delete</span>
+								</epic:link_action>
+							</span>
+						</epic:if>
+						<epic:if set="&External/Browser/is_chrome;">
+							<epic:if not_set="&External/Browser/is_mobile;">
+								<epic:if set="&Folder/can_add;"> 
+									<span class="action-btn"> 
+										<label>
+											<i class="icon-upload-alt icon-large"></i>
+											<span class="action-labels"> Upload</span>
+											<input class="hidden" multiple name="file" type="file" onchange="window.EpicMvc.Epic.makeClick(false,'add_os_dialog',{id:'&Folder/id;',input_obj:this,callback_class:'ProgressSample2'},true)"/>
+										</label>
+									</span> 
+								</epic:if>
+							</epic:if>
+							<span class="action-btn"> 
+								<epic:link_action action="download_folder" p:id="&Folder/id;">
+									<i class="icon-download-alt icon-large"></i>
+									<span class="action-labels"> Download</span>
+								</epic:link_action>
+							</span>
+						</epic:if>
+						<!-- 
+						<span class="action-btn"> 
+							<epic:link_action action="move_folder" p:id="&Folder/id;">
+								<i class="icon-move icon-large"></i>
+								<span class="action-labels"> Move</span>
+							</epic:link_action>
+						</span>
+						 -->
+					</div>
+				</div>
+			</div>
+		</epic:if>
+		<epic:if set="&Folder/activity_open;">
+			<div class="col drawer span12">
+				<epic:page_part part="folder_activity_drawer" />
+			</div>
+		</epic:if>
+		<epic:if set="&Folder/users_open;">
+			<div class="col drawer span12">
+				<epic:page_part part="folder_users_drawer" />
+			</div>
+		</epic:if>
+	</div>
+</epic:if>

@@ -1,0 +1,162 @@
+<!-- <p></p> -->
+<div class="row file-row&File/pending#..pending-upload;&File/drawer_open#..open-drawer-parent;">
+	<div class="col span9 clearfix">
+		<epic:if set="&File/pending;&File/uploading;">
+			<h5 class="item-name&File/has_error#..red;">
+				<a href="#" class="file" onclick="return false;">
+					&File/name;
+					<epic:if set="&File/has_error;">
+						<span class="red">(&File/code;) &File/error;</span>
+					</epic:if>
+				</a>
+			</h5>
+		</epic:if>
+		<epic:if not_set="&File/pending;&File/uploading;">
+			<h5 class="item-name data-drag data-drop" 
+			data-drag-type="file" 
+			data-drag-data='{"from":&File/id;, "at":&File/folder_id;}'
+			data-drop-data='{"to":&File/id;, "callback_class":"ProgressSample2"}' 
+			data-drop-Files="os_upload_drop_version"
+			> 
+				<epic:if set="&File/edit;">
+					<form class="form-inline">
+						<div class="icon-&File/icon_ext; ipm-icon ipm-icon-doc"></div>
+						<epic:form_part form="File" part="fist_inline" />
+						<epic:form_action action="save_rename_file" value="Save" class="btn btn-primary save-btn" />
+						<epic:form_action action="cancel_rename_file" value="Cancel" class="btn" />
+					</form>
+				</epic:if>
+				<epic:if not_set="&File/edit;">
+					<div class="icon-&File/icon_ext; ipm-icon ipm-icon-doc"></div>										
+					<epic:if val="&File/icon_ext;" in_list="png,jpg,gif,jpeg">
+						<epic:link_action action="go_open_s3_file" p:id="&File/id;"> &File/name; </epic:link_action>
+					</epic:if>
+					<epic:if val="&File/icon_ext;" not_in_list="png,jpg,gif,jpeg">
+						<a href="#" class="file" onclick="S3Open(&Directory/Options/active_project;,&File/id;,true);return false;"> &File/name; </a>
+					</epic:if>
+				</epic:if>
+				<epic:if set="&File/can_edit;">
+					<epic:if set="&File/has_versions;">
+						<div class="version-pane annotation-pane active">
+							<ul class="nav nav-pills drawer-handles">
+								<li class="&File/versions_open#..active;">
+									<epic:link_action action="toggle" p:type="versions" p:id="&File/id;">
+										<i class="icon-copy icon-large"></i>
+									</epic:link_action>
+								</li>
+							</ul>
+						</div>
+					</epic:if>
+				</epic:if>
+				<epic:if table_is_not_empty="File/Annot">
+					<div class="annotation-pane active">
+						<ul class="nav nav-pills drawer-handles">
+							<li class="&File/annot_open#..active;">
+								<epic:link_action action="toggle" p:type="annot" p:id="&File/id;">
+									<i class="icon-edit icon-large"></i>
+								</epic:link_action>
+							</li>
+						</ul>
+					</div>
+				</epic:if>
+				<div class="action-pane&File/actions_open#..active;&File/activity_open#..active;">
+					<ul class="nav nav-pills drawer-handles">
+						<!-- 
+						<li class="&File/activity_open#..active;">
+							<epic:link_action action="toggle" p:type="activity" p:id="&File/id;">
+								<i class="icon-rss icon-large"></i>
+							</epic:link_action>
+						</li>
+						-->
+						<li class="&File/actions_open#..active;">
+							<epic:link_action action="toggle" p:type="actions" p:id="&File/id;">
+								<i class="icon-cog icon-large"></i>
+							</epic:link_action>
+						</li>
+					</ul>
+				</div>
+			</h5>
+		</epic:if>
+	</div>
+	<div class="col span1">
+		<div class="size-col">&File/size#bytes;</div>
+	</div>
+	<div class="col span2">
+		<div class="modified-col">			
+			<epic:if set="&File/pending;&File/uploading;">
+					Uploaded: &File/as_percent;
+			</epic:if>
+			<epic:if not_set="&File/pending;&File/uploading;">
+				<time class="timeago" dateTime="&File/modified;"> &File/modified; </time>
+			</epic:if>
+		</div>
+	</div>
+</div>
+<div class="row file-row drawer-row&File/drawer_open#..open-drawer-child;">
+	<epic:if set="&File/versions_open;">
+		<div class="col drawer span12">
+			<div class="tab-content box-shadow span12">
+				<div class="drawer-inner">
+					<epic:foreach table="File/Version">
+						<epic:page_part part="version_row" />
+					</epic:foreach>
+				</div>
+			</div>
+		</div>
+	</epic:if>
+	<epic:if set="&File/annot_open;">
+		<div class="col drawer span12">
+			<div class="tab-content box-shadow span12">
+				<div class="drawer-inner">
+					<epic:foreach table="File/Annot">
+						<epic:page_part part="annotation_row" />
+					</epic:foreach>
+				</div>
+			</div>
+		</div>
+	</epic:if>
+	<epic:if set="&File/actions_open;">
+		<div class="col drawer span12">
+			<div class="tab-content box-shadow span12">
+				<div class="drawer-inner action-drawer">
+					<epic:if set="&File/can_edit;">
+						<span class="action-btn"> 
+							<epic:link_action action="rename_file" p:id="&File/id;">
+								<i class="icon-pencil icon-large"></i>
+								<span class="action-labels"> Rename</span>
+							</epic:link_action>
+						</span> 
+						<span class="action-btn"> 
+							<epic:link_action action="delete_file" p:id="&File/id;">
+								<i class="icon-trash icon-large"></i>
+								<span class="action-labels"> Delete</span>
+							</epic:link_action>
+						</span> 
+						<span class="action-btn"> 
+							<epic:link_action action="file_to_clip" p:from="&File/id;">
+								<i class="icon-move icon-large"></i>
+								<span class="action-labels"> Move</span>
+							</epic:link_action>
+						</span>
+					</epic:if>
+					<span class="action-btn"> 
+						<a title="download" "btn-mini" href="#" onclick="S3Open(&Directory/Options/active_project;,&File/id;,false);return false">
+							<i class="icon-download-alt"></i> 
+							<span class="action-labels"> Download</span>
+						</a>
+					</span> 
+				</div>
+			</div>
+		</div>
+	</epic:if>
+	<epic:if set="&File/activity_open;">
+		<div class="col drawer span12">
+			<epic:page_part part="folder_activity_drawer" />
+		</div>
+	</epic:if>
+	<epic:if set="&File/users_open;">
+		<div class="col drawer span12">
+			<epic:page_part part="folder_users_drawer" />
+		</div>
+	</epic:if>
+</div>

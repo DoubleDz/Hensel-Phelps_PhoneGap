@@ -1,0 +1,12 @@
+<ul class="breadcrumb">
+	<epic:foreach table="Directory/Crumb">		
+		<epic:if not_set="&Crumb/_LAST;">
+			<li>
+				<epic:link_action action="choose_folder" p:id="&Crumb/id;">&Crumb/name;</epic:link_action>
+			</li>
+		</epic:if>
+		<epic:if set="&Crumb/_LAST;">
+			<li class="active">&Crumb/name;</li>
+		</epic:if>
+	</epic:foreach>
+</ul>

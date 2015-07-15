@@ -1,0 +1,20 @@
+<epic:defer name="timeago_setup">
+	$("time.timeago").timeago();
+</epic:defer>
+<epic:defer name="breadcrumb">
+    $(".breadcrumbs-container").jBreadCrumb({ 
+    	home_icon : '<i class="icon-home breadcrumb-home ipm-orange"></i>'
+    });
+</epic:defer>
+<epic:defer name="saving_spinner">
+	setup_spinner(".save-btn", "saving");    
+</epic:defer>
+<epic:defer name="file_folder_rollovers">
+	$('.row.public-row,.row.private-row,.row.file-row').hover(function() {
+		$(".action-pane", this).addClass('active'); 
+	}, function() {
+		if (!$(this).find('li.active').length) {
+			$(".action-pane", this).removeClass('active');
+		}	
+	});
+</epic:defer>

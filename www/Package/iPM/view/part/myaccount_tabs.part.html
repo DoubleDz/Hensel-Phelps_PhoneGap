@@ -1,0 +1,129 @@
+<style>
+.my-account-tabs li.active a, div.tabbable div.tab-content {
+	color:#666;
+	background: #FFFFFF;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#FCFCFC');
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#FCFCFC) );
+	background: -moz-linear-gradient(top, #FFFFFF, #FCFCFC);
+	-moz-box-shadow: -2px 2px 2px #CCC;
+	-webkit-box-shadow: -2px 2px 2px #CCC;
+	box-shadow: -2px 2px 2px #CCC;
+	border-top: 1px solid #DDD;
+	border-right: 1px solid #DDD;
+}
+
+.my-account-tabs li.active a:hover {
+	color: #000;
+}
+
+.my-account-tabs li a {
+	padding: 15px;
+}
+</style>
+<div class="tabbable">
+	<table width="100%" cellspacing="0" cellpadding="0">
+		<tr>
+			<td valign="top" style="vertical-align: top;" class="noprint top" width="250">
+				<div class="nav-header">My Account</div>
+				<div class="bottom-gradient between-rows" style="margin-right: 20px;"></div>				
+				<ul class="nav nav-pills nav-stacked my-account-tabs" style="margin-right: 20px;">
+					<li class="&Pageflow/V/is_subscription#.active;">
+						<epic:link_action action="go_subscription">
+							<b style="font-size: 110%;">Subscription</b>
+						</epic:link_action>
+					</li>
+					<li class="&Pageflow/V/is_profile#.active;">
+						<epic:link_action action="go_profile">
+							<b style="font-size: 110%;">Profile</b>
+						</epic:link_action>
+					</li>
+					<li class="&Pageflow/V/is_password#.active;">
+						<epic:link_action action="go_password">
+							<b style="font-size: 110%;">Password</b>
+						</epic:link_action>
+					</li>
+					<li class="&Pageflow/V/is_contact#.active;">
+						<epic:link_action action="go_contact">
+							<b style="font-size: 110%;">Contact Information</b>
+						</epic:link_action>
+					</li>
+					<li class="&Pageflow/V/is_privacy#.active;">
+						<epic:link_action action="go_privacy_tab">
+							<b style="font-size: 110%;">Privacy</b>
+						</epic:link_action>
+					</li>
+					<epic:if val="&User/Me/bill_system;" in_list="1,2">
+						<epic:comment>This omits Team Members, Team Managers, and Team Creators</epic:comment>
+						<epic:if val="&User/Me/level;" not_in_list="7,8,9">
+							<li class="&Pageflow/V/is_billing#.active;">	
+								<epic:link_action action="go_billing">
+									<b style="font-size: 110%;">Billing</b>
+								</epic:link_action>
+							</li>
+						</epic:if>
+					</epic:if>
+				</ul>
+				<epic:if set="&User/Me/is_team_owner;&User/Me/is_team_admin;&User/Me/is_team_accountant;&User/Me/has_spships;">
+					<br>
+					<div class="nav-header">Team Account</div>
+					<div class="bottom-gradient between-rows" style="margin-right: 20px;"></div>				
+					<ul class="nav nav-pills nav-stacked my-account-tabs" style="margin-right: 20px;">
+						<epic:if set="&User/Me/is_team_owner;&User/Me/is_team_admin;">
+							<li class="&Pageflow/V/is_projects#.active;">
+								<epic:link_action action="go_projects">
+									<b style="font-size: 110%;">Projects</b>
+								</epic:link_action>
+							</li>
+						</epic:if>
+						<li class="&Pageflow/V/is_sponsor#.active;">
+							<epic:link_action action="go_sponsor">
+								<b style="font-size: 110%;">Users</b>
+							</epic:link_action>
+						</li>
+					</ul>
+				</epic:if>				
+			</td>
+			<td valign="top" style="vertical-align: top;" class="top">
+				<div class="tab-content folder-box box-shadow" style="min-height: 333px;">
+					<div style="padding: 2% 4%;">
+						<div class="slim-closer-container pull-right" style="margin-top:-2%;margin-right:-4%;">
+							<epic:link_action action="go_home">
+								<div class="slim-closer"></div>
+							</epic:link_action>
+						</div>
+						<epic:page_part part="issues" dynamic="div"/>
+						<epic:page />
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<style>
+div.tabbable div.tab-content {
+	background-color: #FFF;
+	margin: 2px auto 0 0;
+	padding: 20px;
+}
+
+.table th,.table td {
+	vertical-align: middle;
+}
+
+.team-users-table th,.team-users-table td {
+	padding: 0 8px;
+}
+
+.cents {
+	font-size: 11px;
+}
+
+.bill-home {
+	color: orange;
+}
+
+.bill-table tr td:first-child {
+	text-align: right;
+	font-weight: bold;
+}
+</style>

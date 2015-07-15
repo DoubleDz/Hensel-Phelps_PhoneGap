@@ -1,0 +1,15 @@
+<div class="team-widget-company">The email entered is not registered with iProjectMobile.</div>
+<form class="form-horizontal">
+	<div style="margin: 10px 0;">
+		<epic:if set="&User/Me/adam_flag;">
+			<epic:form_part form="UserInviteProjectAdam" part="fist_inline" />
+		</epic:if>
+		<epic:if not_set="&User/Me/adam_flag;">
+			<epic:if set="&User/Me/is_team_owner;&User/Me/is_team_admin;">
+				<epic:form_part form="UserInviteProject" part="fist_inline" />
+			</epic:if>
+		</epic:if>
+	</div>
+	<epic:form_action class="btn btn-mini btn-primary" action="create" value="Invite Them to Join" />
+	<epic:form_action class="btn btn-mini" action="add_team_close" value="Cancel" />
+</form>

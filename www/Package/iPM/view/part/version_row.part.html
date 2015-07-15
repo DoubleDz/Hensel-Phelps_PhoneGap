@@ -1,0 +1,42 @@
+<div class="row file-row">
+	<div class="col span8">
+		<h5 class="item-name">
+			<!-- div class="icon-&Version/icon_ext; ipm-icon"></div> -->
+			<a href="#" class="file" onclick="S3Open(&Directory/Options/active_project;,&Version/id;,true,true);return false;"> 
+				<epic:if val="&Version/name;" eq="&Version/version_name;">
+					&Version/name;
+				</epic:if>
+				<epic:if val="&Version/name;" ne="&Version/version_name;">
+					&Version/version_name; &rarr; &Version/name; 
+				</epic:if>
+			</a>
+			<br>
+			<epic:if not_set="&Version/is_active;">
+				<span style="margin-left: 10px; font-size: 12px;">
+					&Version/first_name; &Version/last_name; modified this version 
+					<time class="timeago" dateTime="&Version/modified;"> &Version/modified; </time>
+				</span>
+			</epic:if>
+		</h5>
+	</div>
+	<div class="col span2 right" style="margin-top: 10px;">
+		<a title="download" "btn-mini" href="#" onclick="S3Open(&Directory/Options/active_project;,&Version/id;,false,true);return false">
+			<i class="icon-download-alt"></i>
+			<span class="action-labels"> Download</span>
+		</a>
+	</div>
+	<div class="col span2 right" style="margin-top: 10px;">
+		<epic:if set="&Version/is_active;"> (Current)</epic:if>
+		<epic:if not_set="&Version/is_active;">
+			<epic:link_action action="activate_version" p:id="&Version/id;" p:current="&File/id;">
+				<i class="icon-upload"></i>
+				<span class="action-labels"> Make Current</span>
+			</epic:link_action>
+		</epic:if>
+		<!--
+				<epic:link_action action="delete_version" p:id="&Version/id;" p:current="&File/id;">
+					<i class="icon-remove"></i> <span class="action-labels">Delete</span>
+				</epic:link_action>
+				-->
+	</div>
+</div>

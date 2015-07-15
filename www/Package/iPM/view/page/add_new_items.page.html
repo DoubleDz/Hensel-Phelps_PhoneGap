@@ -1,0 +1,28 @@
+<div style="margin:7% 0 0 5%;">
+<epic:if not_set="&Directory/Options/is_upload_FORMS;">
+	<label>
+		<h4 onclick="$('#folder-add-form').show();" style="cursor: pointer;">
+			<div class="icon-closed-folder ipm-icon"></div>
+			&nbsp;&nbsp; Add a new folder
+		</h4>
+	</label>
+	<br />
+</epic:if>
+<form id="folder-add-form" class="form-inline" style="display: none;">
+	<epic:dyno_form form="Folder" />
+	<br>
+	<epic:form_action action="save_folder_name" value="Create" class="btn btn-primary" />
+	<epic:form_action action="cancel" value="Cancel" class="btn" />
+	<br />
+</form>
+<label>
+	<h4>
+		<div class="icon-file icon-2x ipm-icon ipm-orange"></div>
+		&nbsp;&nbsp; Upload file(s)
+	</h4> <epic:if set="&Directory/Options/is_upload_FORMS;">
+		<input style="opacity:0;height:0;" class="modal-os-upload" multiple name="file" type="file" accept="application/pdf" onchange="window.EpicMvc.Epic.makeClick(false,'add_os_dialog',{input_obj:this,callback_class:'ProgressSample2'},true)" />
+	</epic:if> <epic:if not_set="&Directory/Options/is_upload_FORMS;">
+		<input style="opacity:0;height:0;" class="modal-os-upload" multiple name="file" type="file" onchange="window.EpicMvc.Epic.makeClick(false,'add_os_dialog',{input_obj:this,callback_class:'ProgressSample2'},true)" />
+	</epic:if>
+</label>
+</div>

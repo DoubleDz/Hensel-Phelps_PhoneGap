@@ -1,0 +1,107 @@
+<epic:defer name="upload_proceed_spinner">
+	setup_spinner("a.upload-proceed", "uploading");	
+</epic:defer>
+<h4>Upload Files and Folders</h4>
+<epic:foreach table="Uploads/Open">
+	<epic:if set="&Open/total_folders;">
+		<div>
+			Creating <b>&Open/total_folders;</b> Folders
+		</div>
+	</epic:if>
+	<div class="upload-list-item">
+		<div>
+			Processed <b>&Open/files;</b> of <b>&Open/total_files;</b> files
+		</div>
+		<div>Total size of upload is &Open/total_bytes#bytes;</div>
+		<br>
+		<div>
+			<b>Overall Progress: <span class="progress-value">&Open/total_percent;</span></b><br><br>			
+			<div class="row-fluid">
+  				<div class="span12">
+					<div class="span10 overall-progress-container">
+						<progress value="&Open/bytes;" max="&Open/total_bytes;" class="overall-progress" />
+					</div>
+					<div class="span2">
+						<epic:if val="&Open/step;" ne="FINISH">
+							<epic:link_action action="abort" class="btn btn-mini btn-warning abort-upload-btn">Abort</epic:link_action>		
+						</epic:if>
+						<epic:if val="&Open/step;" eq="FINISH">
+							<a href="#" onclick="return false;" class="btn btn-mini abort-upload-btn disabled">Abort</a>		
+						</epic:if>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<epic:if val="&Open/step;" eq="UPLOAD_FILES">
+		<br>
+		<div class="tabbable fancy-tab-container">
+			<ul class="nav nav-tabs fancy one-tab">
+				<li class="active">
+					<a href="#tab1" data-toggle="tab">Current Uploads</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab1">
+					<epic:foreach table="Open/File">
+						<epic:if val="&File/subevent;" not_in_list="START,END">
+							<div class="file-progress-row">
+								<progress value="&File/sofar;" max="&File/total;" class="pull-right"/>
+								<div class="clearfix"></div>
+								<div class="muted file-name-uploading file-progress-uploading pull-left">File Progress: &File/as_percent;</div>
+								<div class="muted file-name-uploading pull-right"><i class="icon-file-alt ipm-orange"></i> &File/name;: &File/sofar#bytes;</div>
+								<div class="clearfix"></div>
+							</div>
+						</epic:if>
+					</epic:foreach>
+				</div>
+			</div>
+		</div>
+	</epic:if>
+	<epic:if val="&Open/step;" eq="FINISH">
+		<br>
+		<div class="tabbable fancy-tab-container">
+			<ul class="nav nav-tabs fancy two-tabs">
+				<li class="&Open/has_error#?.?active;">
+					<a href="#tab1" data-toggle="tab">Successful Uploads</a>
+				</li>
+				<li class="&Open/has_error#?.active?;">
+					<a href="#tab2" data-toggle="tab">Failed Uploads</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane &Open/has_error#?.?active;" id="tab1">
+					<epic:foreach table="Open/File">
+						<epic:if val="&File/subevent;" eq="END">
+							<epic:if not_set="&File/has_error;">
+								<div class="file-name-uploading"><i class="icon-file-alt ipm-orange"></i> &File/name;: &File/sofar#bytes;</div>
+							</epic:if>
+						</epic:if>
+					</epic:foreach>
+				</div>
+				<div class="tab-pane &Open/has_error#?.active?;" id="tab2">
+					<epic:if set="&Open/has_error;">
+						<epic:link_action action="reload_error_files" p:callback_class="ProgressSample2", class="pull-right"><i class="icon-refresh icon-large"></i> Re-Attempt All Files</epic:link_action>
+					</epic:if>
+					<epic:if not_set="&Open/has_error;">
+						<div style="margin-bottom:10px;">No failed uploads! Folders and files uploaded successfully.</div>  
+					</epic:if>
+					<epic:foreach table="Open/File">
+						<epic:if val="&File/subevent;" eq="END">
+							<epic:if set="&File/has_error;">
+								<div class="file-name-uploading red"><i class="icon-file-alt ipm-orange"></i> &File/name;: &File/sofar#bytes;</div>
+							</epic:if>
+						</epic:if>
+					</epic:foreach>
+				</div>
+			</div>
+		</div>
+	</epic:if>
+	<epic:if val="&Open/step;" eq="CONFIRM">	
+		<hr>
+		<br>
+		Proceed with upload?
+		<a href="#" onclick="EpicMvc.Epic.makeClick(false,'confirm_continue',{},false);return false;" class="btn btn-active btn-primary upload-proceed">Yes</a>
+		<epic:link_action action="confirm_cancel" class="btn">No</epic:link_action>
+	</epic:if>
+</epic:foreach>

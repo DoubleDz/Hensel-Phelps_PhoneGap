@@ -1,0 +1,48 @@
+<epic:foreach table="Tag/Field">
+	<td>
+		<div class="row-fluid controls controls-row" style="padding-top: 10px;">
+			<epic:foreach table="Field/FirstName">
+				<input class="span5" style="margin-bottom:0;" type="&FirstName/type#lc;" name="&FirstName/name;" autofocus value="&FirstName/value;" placeholder="&FirstName/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+			</epic:foreach>
+			<epic:foreach table="Field/LastName">
+				<input class="span7" style="margin-bottom:0;" type="&LastName/type#lc;" name="&LastName/name;" autofocus value="&LastName/value;" placeholder="&LastName/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+			</epic:foreach>
+		</div>
+		<div class="row-fluid controls controls-row" style="padding-top: 10px;">
+			<epic:foreach table="Field/FirstName">
+				<epic:if set="&FirstName/issue;">
+					<div class="span5">
+						<span class="help-inline field-error">&FirstName/issue;</span>
+					</div>
+				</epic:if>
+			</epic:foreach>
+			<epic:foreach table="Field/LastName">
+				<epic:if set="&LastName/issue;">
+					<div class="span7">
+						<span class="help-inline field-error">&LastName/issue;</span>
+					</div>
+				</epic:if>
+			</epic:foreach>
+		</div>
+	</td>
+	<td>
+		<div class="row-fluid controls controls-row" style="padding-top: 10px;">
+			<epic:foreach table="Field/TeamEmail">
+				<input class="span8" style="margin-bottom:0;" type="&TeamEmail/type#lc;" name="&TeamEmail/name;" autofocus value="&TeamEmail/value;" placeholder="&TeamEmail/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+			</epic:foreach>
+			<div class="span4">
+				<epic:form_action action="save_modify_team_user" class="btn btn-primary save-btn" value="Send" />
+				<epic:form_action action="cancel_modify_team_user" class="btn" value="Cancel" />
+			</div>
+		</div>
+		<div class="row-fluid controls controls-row" style="padding-top: 10px;">
+			<epic:foreach table="Field/TeamEmail">
+				<epic:if set="&TeamEmail/issue;">
+					<div class="span12">
+						<span class="help-inline field-error">&TeamEmail/issue;</span>
+					</div>
+				</epic:if>
+			</epic:foreach>
+		</div>
+	</td>
+</epic:foreach>

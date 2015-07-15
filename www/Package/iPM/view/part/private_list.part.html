@@ -1,0 +1,115 @@
+<epic:if set="&Directory/Options/cache_pending;&Directory/Options/cache_pending_project;">
+	<img src="Package/iPM/images/loading.gif" /> &nbsp; Private Loading...
+</epic:if>
+<epic:if not_set="&Directory/Options/cache_pending;&Directory/Options/cache_pending_project;">
+<epic:page_part part="file_folder_js" />
+<div id="ipm-private-folders" class="table table-condensed table-hover">
+	<div class="row">
+		<epic:if set="&Directory/Options/can_upload;">	
+			<epic:if set="&Directory/Options/is_root;">
+				<div class="header col add-new-item add-new-item-private">
+					<h4 class="muted data-drop"
+					onclick="window.EpicMvc.Epic.makeClick(false,'go_add_new_item',{id:'&Directory/PRIVATE/active_folder;'},true)"
+					data-drop-data='{"to":&Directory/PRIVATE/active_folder;,"callback_class":"ProgressSample2"}'
+					data-drop-Files="os_upload_drop"
+					data-drop-file="move_file"
+					data-drop-folder="move_folder"
+					data-drop-undofile="recover_file_to"
+					data-drop-undofolder="recover_folder_to"
+					data-drop-clip-file="move_file"
+					data-drop-clip-folder="move_folder">
+					<i class="icon-plus icon-large"></i> &nbsp; Add New Item</h4>
+				</div>
+			</epic:if>
+			<epic:if set="&Directory/Options/is_private;">
+				<div class="header col add-new-item add-new-item-private">
+					<h4 class="muted data-drop" 
+					onclick="window.EpicMvc.Epic.makeClick(false,'go_add_new_item',{id:'&Directory/Options/active_folder;'},true)"
+					data-drop-data='{"to":&Directory/Options/active_folder;,"callback_class":"ProgressSample2"}'
+					data-drop-Files="os_upload_drop"
+					data-drop-file="move_file"
+					data-drop-folder="move_folder"
+					data-drop-undofile="recover_file_to"
+					data-drop-undofolder="recover_folder_to"
+					data-drop-clip-file="move_file"
+					data-drop-clip-folder="move_folder">
+					<i class="icon-plus icon-large"></i> &nbsp; Add New Item</h4>
+				</div>
+			</epic:if>
+			<div class="header col private-toggler">
+				<h4 class="muted folders-label">
+<epic:if set="&Directory/Options/is_root;">
+					<epic:link_action action="open_close" p:folder="PRIVATE" p:type="toggle">
+						<i class="section-icon icon-lock"></i> <span class="section-text">Private</span>
+						<i class="icon-caret-&Directory/Options/hide_PRIVATE#?.left?down; prv-expander"></i>
+					</epic:link_action>
+</epic:if>
+<epic:if not_set="&Directory/Options/is_root;">
+					<i class="section-icon icon-lock"></i> <span class="section-text">Private</span>
+					<i class="icon-caret-down prv-expander"></i>
+</epic:if>
+				</h4>
+			</div>
+		</epic:if>
+		<epic:if not_set="&Directory/Options/can_upload;">
+			<div class="span12 header col">
+				<h4 class="muted folders-label">
+<epic:if set="&Directory/Options/is_root;">
+					<epic:link_action action="open_close" p:folder="PRIVATE" p:type="toggle">
+						<i class="section-icon icon-lock"></i> <span class="section-text">Private</span>
+						<i class="icon-caret-&Directory/Options/hide_PRIVATE#?.left?down; prv-expander"></i>
+					</epic:link_action>
+</epic:if>
+<epic:if not_set="&Directory/Options/is_root;">
+					<i class="section-icon icon-lock"></i> <span class="section-text">Private</span>
+					<i class="icon-caret-down prv-expander"></i>
+</epic:if>
+				</h4>
+			</div>
+		</epic:if>	
+	</div>
+	<div class="private-folders-files">
+		<!--  PRIVATE FOLDERS INSERTED HERE -->
+		<epic:if set="&Directory/Options/is_root;">
+			<epic:if not_set="&Directory/Options/hide_PRIVATE;">	
+				<epic:foreach table="Directory/PRIVATE">
+					<epic:if table_is_empty="PRIVATE/File">
+						<epic:if table_is_empty="PRIVATE/Folder">
+							<div class="row file-row">
+								<div class="col span12">
+									<h5 class="item-name muted">There are no folders or files in the Private Section.</h5>
+								</div>
+							</div>
+						</epic:if>
+					</epic:if>
+				</epic:foreach>
+			</epic:if>
+			<epic:foreach table="Directory/PRIVATE">
+				<epic:foreach table="PRIVATE/Folder">
+					<epic:page_part part="private_folder_row" />
+				</epic:foreach>
+				<epic:foreach table="PRIVATE/File">
+					<epic:page_part part="file_row" />
+				</epic:foreach>
+			</epic:foreach>
+		</epic:if>
+		<epic:if set="&Directory/Options/is_private;">
+			<epic:foreach table="Directory/Folder">
+				<epic:page_part part="private_folder_row" />
+			</epic:foreach>
+			<epic:foreach table="Directory/File">
+				<epic:page_part part="file_row" />
+			</epic:foreach>
+			<epic:if table_is_empty="Directory/Folder">
+				<epic:if table_is_empty="Directory/File">
+					<div class="row file-row">
+						<div class="col span12">
+							<h5 class="item-name muted">There are no folders or files here.</h5>
+						</div>
+					</div>
+				</epic:if>
+			</epic:if>
+		</epic:if>
+	</div>
+</div>
+</epic:if>

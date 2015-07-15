@@ -1,0 +1,34 @@
+<epic:foreach table="Tag/Field">
+	<div class="controls controls-row">
+		<epic:foreach table="Field/FirstName">
+			<input class="span5" type="&FirstName/type#lc;" name="&FirstName/name;" autofocus value="&FirstName/value;" placeholder="&FirstName/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+		</epic:foreach>
+		<epic:foreach table="Field/LastName">
+			<input class="span7" type="&LastName/type#lc;" name="&LastName/name;" autofocus value="&LastName/value;" placeholder="&LastName/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+		</epic:foreach>
+	</div>
+	<div class="controls controls-row">
+		<epic:foreach table="Field/FirstName">
+			<epic:if set="&FirstName/issue;">
+				<div class="span5">
+					<span class="help-inline field-error">&FirstName/issue;</span>
+				</div>
+			</epic:if>
+		</epic:foreach>
+		<epic:foreach table="Field/LastName">
+			<epic:if set="&LastName/issue;">
+				<div class="span7">
+					<span class="help-inline field-error">&LastName/issue;</span>
+				</div>
+			</epic:if>
+		</epic:foreach>
+	</div>
+	<div class="controls controls-row">
+		<epic:foreach table="Field/Email">
+			<input class="span12" type="&Email/type#lc;" name="&Email/name;" autofocus value="&Email/value;" placeholder="&Email/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+			<epic:if set="&Email/issue;">
+				<span class="help-inline field-error">&Email/issue;</span>
+			</epic:if>
+		</epic:foreach>
+	</div>
+</epic:foreach>				

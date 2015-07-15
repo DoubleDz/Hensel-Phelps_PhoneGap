@@ -1,0 +1,24 @@
+<epic:defer name="modal_height">
+	if ("&Directory/Options/file_signed_url;" != "") {
+		// S3 Doc viewer
+		$('.modal-body').attr('style', 'max-height: ' + (Math.floor($(window).height())) + 'px');
+	} else {
+		$('.modal-body').attr('style', 'max-height: ' + (Math.floor($(window).height() * 0.8)) + 'px');
+	}
+</epic:defer>
+
+<div class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+	<div class="pull-right">
+		<epic:link_action action="close_modal" class="close modal-close-x" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></epic:link_action>
+	</div>
+	<div id="modal-body" class="modal-body">
+		<epic:page_part part="issues" />
+		<epic:page />
+	</div>
+	<div class="modal-footer">
+		<epic:link_action action="close_modal" class="btn" data-dismiss="modal" aria-hidden="true">Close</epic:link_action>
+	</div>
+</div>
+<epic:defer name="modal_autofocus">
+	setTimeout( function(){ $('[autofocus]', '.modal-body').focus(); }, 500); // After fade-in
+</epic:defer>

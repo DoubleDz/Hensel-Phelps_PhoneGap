@@ -1,0 +1,28 @@
+<h4>Invite a New User to Register</h4>
+<p>An "invite email" will be sent, based on the information you enter here.</p>
+<form class="form-horizontal">
+	<div class="control-group">
+		<label for="Name" class="control-label">Name</label>
+		<div class="controls">
+			<input type="text" name="Name" value="&User/InviteDisplay/name;" disabled>
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="Email" class="control-label">Email</label>
+		<div class="controls">
+			<input type="text" name="Email" value="&User/InviteDisplay/email;" disabled>
+		</div>
+	</div>
+	<epic:if set="&User/Me/adam_flag;">
+		<epic:form_part form="UserInviteAdamLtd" />
+	</epic:if>
+	<epic:if not_set="&User/Me/adam_flag;">
+		<epic:form_part form="UserInviteTeam" />
+	</epic:if>
+	<br>
+	<div style="margin-left:180px;">
+		<epic:form_action class="btn btn-primary" action="create" value="Send" style="width:145px;" />
+		<epic:form_action class="btn" action="cancel" value="Cancel" />
+	</div>
+</form>
+<br>

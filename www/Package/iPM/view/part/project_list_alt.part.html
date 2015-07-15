@@ -1,0 +1,121 @@
+<style>
+.options-toggler {
+	margin-top: 9px;
+	cursor: pointer;
+}
+
+.options-toggler:hover {
+	color: #000;
+}
+
+ul.options-toggler-drawer li a {
+	margin-left: 20px;
+}
+
+.in-active-toggler {
+	margin-right: 12px;
+}
+
+.active-project-alt {
+	padding-bottom: 0;
+}
+
+ul.options-toggler-drawer.dropdown-menu  {
+	position: relative;
+}
+ul.options-toggler-drawer.dropdown-menu li a {
+	margin: 0;
+	padding-left: 12px;
+}
+
+.ipm-projects-alt {
+	padding: 0;
+	margin-bottom: 0 !important;
+}
+
+.project-drawer-alt {
+	display:none;
+	margin-left: 5px;
+}
+</style>
+<script type="text/javascript">
+	function toggle_projects_alt() {		
+		if ($('div.project-drawer-alt').is(':visible')) {
+			$('.logged-in-mobile-nav').height($('div.logged-in-mobile-nav').height() - $('div.project-drawer-alt').height());
+		} else {
+			$('div.logged-in-mobile-nav').height($('div.logged-in-mobile-nav').height() + $('div.project-drawer-alt').height());
+		}
+		$('.project-drawer-alt').slideToggle();
+	} 
+</script>
+<div class="project-drawer-alt">
+	<epic:if table_is_empty="Directory/Member">
+		<li>(No projects)</li>
+	</epic:if>
+	<epic:foreach table="Directory/Member">
+		<epic:if set="&Member/active;">
+			<li class="active box-shadow project-li">
+				<div class="active-project active-project-alt">
+					<ul class="nav">
+						<epic:if set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+							<li class="dropdown pull-right">
+								<div class="options-toggler dropdown-toggle pull-right" data-toggle="dropdown">
+									<i class="icon-cog icon-large"></i>
+								</div>
+								<epic:link_action action="choose_folder" p:id="0" style="padding-left: 0;">
+									<i class="icon-open-folder ipm-icon"></i>&Member/name;
+								</epic:link_action>
+								<ul class="options-toggler-drawer dropdown-menu " role="menu" aria-labelledby="dLabel">
+									<li>
+										<epic:link_action action="rename_project" p:id="&Member/project_id;"><i class="icon-edit"></i> Rename</epic:link_action>
+									</li>
+									<li>
+										<epic:link_action action="delete_project" p:id="&Member/project_id;"><i class="icon-trash"></i> Delete</epic:link_action>
+									</li>
+								</ul>
+							</li>
+						</epic:if>
+						<epic:if not_set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+							<li>
+								<epic:link_action action="choose_folder" p:id="0">
+									<i class="icon-open-folder ipm-icon"></i>&Member/name;
+								</epic:link_action>
+							</li>
+						</epic:if>
+					</ul>
+				</div>
+			</li>
+		</epic:if>
+		<epic:if not_set="&Member/active;">
+			<li class="project-li">
+				<ul class="nav">
+					<epic:if set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+					<li class="dropdown pull-right">
+						<div class="options-toggler in-active-toggler dropdown-toggle pull-right" data-toggle="dropdown">
+							<i class="icon-cog icon-large"></i>
+						</div>
+						<epic:link_action action="choose_project" p:id="&Member/project_id;">
+							<i class="icon-open-folder ipm-icon"></i>&Member/name;
+						</epic:link_action>
+						<ul class="options-toggler-drawer dropdown-menu" role="menu" aria-labelledby="dLabel">
+							<li>
+								<epic:link_action action="rename_project" p:id="&Member/project_id;"><i class="icon-edit"></i> Rename</epic:link_action>
+							</li>
+							<li>
+								<epic:link_action action="delete_project" p:id="&Member/project_id;"><i class="icon-trash"></i> Delete</epic:link_action>
+							</li>
+						</ul>
+					</li>
+					</epic:if>
+					<epic:if not_set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+						<li>
+							<epic:link_action action="choose_project" p:id="&Member/project_id;">
+								<i class="icon-open-folder ipm-icon"></i>&Member/name;
+							</epic:link_action>
+						</li>
+					</epic:if>
+				</ul>
+			</li>
+		</epic:if>
+	</epic:foreach>
+</div>

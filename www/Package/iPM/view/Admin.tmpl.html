@@ -1,0 +1,52 @@
+<div class="navbar navbar-fixed-top">
+	<epic:page_part part="head_admin" />
+</div>
+<a name="top"></a>
+<div id="ipm-page-container">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="slim-closer-container">
+					<epic:link_action action="go_home"><div class="slim-closer"></div></epic:link_action>
+				</div>
+				<div style="margin-right: 47px;">
+					<epic:page_part part="issues"/>
+				</div>
+				<!--Body content-->
+				<div class="tabbable">
+					<ul class="nav nav-tabs">
+						<li>
+							<epic:link_action action="go_admin_users">
+								<i class="icon-user"></i> All Active Users</epic:link_action>
+						</li>
+<!-- 						<li> -->
+<!-- 							<epic:link_action action="go_admin_prereg"> -->
+<!-- 								<i class="icon-user"></i> Pre-Registered Users</epic:link_action> -->
+<!-- 						</li> -->
+						<li>
+							<epic:link_action action="go_admin_projects">
+								<i class="icon-plus"></i> All Projects</epic:link_action>
+						</li>
+						<li>
+							<epic:link_action action="go_admin_bankcheck">
+								<i class="icon-money"></i> Pay by Check</epic:link_action>
+						</li>
+						<li>
+							<epic:link_action action="go_admin_test">
+								<i class="icon-envelope"></i> Email Testing</epic:link_action>
+						</li>
+						<li>
+							<epic:link_action action="go_admin_pstats">
+								<i class="icon-dashboard"></i> User Stats</epic:link_action>
+						</li>
+					</ul>
+				</div>
+				<epic:page />
+				<div class="clearfix"></div>
+				<footer class="site-footer row-fluid">
+					<epic:page_part part="foot" />
+				</footer>
+			</div>
+		</div>
+	</div>
+</div>

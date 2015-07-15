@@ -1,0 +1,25 @@
+<!--Body content-->
+<epic:if not_set="&Directory/Options/active_project;">
+	<div class="alert">Choose a &Directory/Options/type; from the left panel</div>
+</epic:if>
+<epic:if set="&Directory/Options/active_project;">
+	<div id="ipm-content-header" class="span12">
+		<epic:page_part part="breadcrumb" dynamic="div" class="col span9 breadcrumbs-container module"/>
+		<div class="col span3 hidden-phone">
+			<div id="ipm-size" class="span4 size-col-header">Size</div>
+			<div id="ipm-mod-time" class="span8 modified-col-header">Modified</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<epic:if set="&Directory/Options/is_root;&Directory/Options/is_public">
+		<epic:page_part part="public_list" dynamic="div" class="folder-box box-shadow" />
+	</epic:if>
+	<epic:if set="&Directory/Options/is_root;&Directory/Options/is_private">
+		<epic:page_part part="private_list" dynamic="div" class="folder-box box-shadow" />
+	</epic:if>
+	<epic:if set="&Directory/Options/is_root;">
+		<epic:if set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+			<epic:page_part part="forms_list" dynamic="div" class="folder-box box-shadow" />
+		</epic:if>
+	</epic:if>
+</epic:if>

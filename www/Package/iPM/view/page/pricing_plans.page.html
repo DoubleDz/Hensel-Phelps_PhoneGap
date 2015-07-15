@@ -1,0 +1,253 @@
+<style>
+legend {
+	margin: 20px 0 50px;
+}
+
+.table  tr td {
+	vertical-align: middle;
+}
+
+tr.headers td {
+	font-size: 24px;
+	height: 60px;
+}
+
+td.first {
+	color: #666;
+}
+
+.col1 {
+	background-color: #F5FAFF;
+}
+
+.col2 {
+	background-color: #F0F8FF;
+}
+
+.col3 {
+	background-color: #F5F5F5;
+}
+
+.col4 {
+	background-color: #F0F0F0;
+}
+
+.col5 {
+	background-color: #FFF5D5;
+}
+
+.note {
+	color: #666;
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+
+.price {
+	color: #666;
+	font-size: 18px;
+	margin-top: 7px;
+}
+
+.plan-name {
+	font-size: 24px;
+	line-height: 28px;
+}
+
+.plan-price {
+	color: #666;
+	font-size: 18px;
+	line-height: 28px;
+}
+
+.plan-box {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 5px solid #CCC;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.go-back-link {
+	margin: 20px 0;
+}
+
+legend {
+	margin-bottom: 10px;
+}
+
+@media ( max-width : 767px) {
+	.go-back-link {
+		text-align: center;
+	}
+}
+</style>
+<div id="plans_top"></div>
+<div class="full-screen-page row-fluid">
+	<div class="span10 offset1">
+		<div class="section-sub-heading">
+			<h1 class="ipm-dark-gray center">Pricing</h1>
+			<h4 align="center">Plans available for purchase.</h4>
+			<div class="go-back-link">
+				<epic:link_action action="go_home_pricing" class="ipm-orange" style="font-size: 20px;">&larr; Go Back</epic:link_action>
+			</div>
+		</div>
+		<table class="table table-bordered hidden-phone">
+			<tr class="headers">
+				<td width="25%" class="center first">&nbsp;</td>
+				<td width="15%" class="center col1">
+					Free<br>
+					<div class="price">$0 monthly</div>
+				</td>
+				<td width="15%" class="center col2">
+					Starter<br>
+					<div class="price">$15 monthly</div>
+				</td>
+				<td width="15%" class="center col3">
+					Standard<br>
+					<div class="price">$25 monthly</div>
+				</td>
+				<td width="15%" class="center col4">
+					Professional<br>
+					<div class="price">$35 monthly</div>
+				</td>
+				<td width="15%" class="center col5">
+					Team<br>
+					<div class="price">$100 monthly</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="first">&nbsp;</td>
+				<td class="center col1"><epic:link_action action="go_signup" class="btn">Start Trial</epic:link_action></td>
+				<td class="center col2"><epic:link_action action="go_signup" class="btn">Start Trial</epic:link_action></td>
+				<td class="center col3"><epic:link_action action="go_signup" class="btn">Start Trial</epic:link_action></td>
+				<td class="center col4"><epic:link_action action="go_signup" class="btn">Start Trial</epic:link_action></td>
+				<td class="center col5"><epic:link_action action="go_signup" class="btn">Start Trial</epic:link_action></td>
+			</tr>
+			<tr>
+				<td class="first">User Accounts</td>
+				<td class="center col1">1</td>
+				<td class="center col2">1</td>
+				<td class="center col3">1</td>
+				<td class="center col4">1</td>
+				<td class="center col5">5 *</td>
+			</tr>
+			<tr>
+				<td class="first">Mobile Sync</td>
+				<td class="center col1">Yes</td>
+				<td class="center col2">Yes</td>
+				<td class="center col3">Yes</td>
+				<td class="center col4">Yes</td>
+				<td class="center col5">Yes</td>
+			</tr>
+			<tr>
+				<td class="first">Join Projects</td>
+				<td class="center col1">3</td>
+				<td class="center col2">Unlimited</td>
+				<td class="center col3">Unlimited</td>
+				<td class="center col4">Unlimited</td>
+				<td class="center col5">Unlimited</td>
+			</tr>
+			<tr>
+				<td class="first">Create Projects</td>
+				<td class="center col1">---</td>
+				<td class="center col2">---</td>
+				<td class="center col3">10</td>
+				<td class="center col4">Unlimited</td>
+				<td class="center col5">Unlimited</td>
+			</tr>
+			<tr>
+				<td class="first">Manage Projects</td>
+				<td class="center col1">---</td>
+				<td class="center col2">---</td>
+				<td class="center col3">Yes</td>
+				<td class="center col4">Yes</td>
+				<td class="center col5">Yes</td>
+			</tr>
+			<tr>
+				<td colspan="6">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="first">
+					Starting Storage Space
+				</td>
+				<td class="center col1">---</td>
+				<td class="center col2">---</td>
+				<td class="center col3">250GB **</td>
+				<td class="center col4">500GB **</td>
+				<td class="center col5">1TB **</td>
+			</tr>
+			<tr>
+				<td colspan="6">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="first">
+					Sponsor Team Users
+				</td>
+				<td class="center col1">---</td>
+				<td class="center col2">---</td>
+				<td class="center col3">---</td>
+				<td class="center col4">---</td>
+				<td class="center col5">Yes *</td>
+			</tr>
+			<tr>
+				<td class="first">Administrative View</td>
+				<td class="center col1">---</td>
+				<td class="center col2">---</td>
+				<td class="center col3">---</td>
+				<td class="center col4">---</td>
+				<td class="center col5">Yes</td>
+			</tr>
+		</table>
+		<div class="row-fluid visible-phone" style="width: 90%; margin-left: 5%; text-align: center;">
+			<div class="plan-box" style="text-align: center;">
+				<div class="plan-name">Free</div>
+				<div class="plan-price">$0 monthly</div>
+				<div>
+					1 User Account<br>Mobile Sync<br>Join 3 Projects
+				</div>
+			</div>
+			<div class="plan-box" style="text-align: center;">
+				<div class="plan-name">Starter</div>
+				<div class="plan-price">$15 monthly</div>
+				<div>
+					1 User Account<br>Mobile Sync<br>Join Unlimited Projects
+				</div>
+			</div>
+			<div class="plan-box" style="text-align: center;">
+				<div class="plan-name">Standard</div>
+				<div class="plan-price">$25 monthly</div>
+				<div>
+					1 User Account<br>Mobile Sync<br>Join Unlimited Projects<br>Create/Own Up to 10 Projects<br>Manage Unlimited Projects<br>100GB of Storage Space
+				</div>
+			</div>
+			<div class="plan-box" style="text-align: center;">
+				<div class="plan-name">Professional</div>
+				<div class="plan-price">$35 monthly</div>
+				<div>
+					1 User Account<br>Mobile Sync<br>Join Unlimited Projects<br>Create/Own Unlimited Projects<br>Manage Unlimited Projects<br>250GB of Storage Space
+				</div>
+			</div>
+			<div class="plan-box" style="text-align: center;">
+				<div class="plan-name">Team</div>
+				<div class="plan-price">$100 monthly</div>
+				<div>
+					5+ User Accounts<br>Mobile Sync<br>Join Unlimited Projects<br>Create/Own Unlimited Projects<br>Manage Unlimited Projects<br>250GB of Storage Space<br>Manage and Pay for All Team Users
+				</div>
+			</div>
+		</div>
+		
+		<div style="width: 90%; margin-left: 5%;">
+			<div class="note">* Additional team users can be purchased one at a time or in batches for $15 each.</div>
+			<div class="note">** Additional storage can be purchased in 50GB increments. Each 50GB increment costs an additional $5/month.</div>
+			<fieldset>
+				<legend>Free Trial</legend>Our free trial grants you full access to all the functionality we offer any user type. Explore the capabilities of the software risk free for 30 days. By the end of the trial period we will automatically help you select the plan that makes the most sense for your needs based on how you use the software during the trial period. You can always upgrade / downgrade / cancel at any time.
+			</fieldset>
+		</div>
+		<br>
+		<div class="center">
+			<epic:link_action action="go_signup" class="btn btn-large btn-primary">Start My Free Trial Now</epic:link_action>
+		</div>
+		<br><br><br><br>
+	</div>
+</div>

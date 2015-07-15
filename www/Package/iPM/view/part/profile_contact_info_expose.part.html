@@ -1,0 +1,19 @@
+<legend>Manage Privacy Settings</legend>
+<div>
+	<form>
+		<b>Toggle which projects you wish to expose your personal info on below.</b>  <br><br>Making yourself visible on a project means that other project team members could click on you to see who you are and what options there are to contact you.<br><br>
+		<epic:foreach table="Directory/MemberExtended" alias="Member">
+			<div class="controls controls-row">
+				<label class="checkbox control-sublabel">
+					<div class="onoffswitch">
+						<input type="checkbox" name="onoffswitch_orig__&Member/project_id;" id="myonoffswitch_orig-&Member/project_id;" &Member/is_exposed#.checked; style="display: none;">
+						<input type="checkbox" name="onoffswitch__&Member/project_id;" id="myonoffswitch-&Member/project_id;"&Member/is_exposed#.checked;>
+					</div>&Member/name;
+				</label>
+			</div>
+		</epic:foreach>
+		<br>
+		<epic:form_action class="btn btn-primary" action="change_expose" value="Save" />
+		<epic:form_action class="btn" action="cancel" value="Cancel" />
+	</form>
+</div>

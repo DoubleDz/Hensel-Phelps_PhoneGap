@@ -1,0 +1,68 @@
+<epic:foreach table="Tag/Control">
+	<epic:if val="&Control/type#lc;" eq="hidden">
+		<input type="&Control/type#lc;" name="&Control/name;" value="&Control/value;">
+	</epic:if>
+	<epic:if val="&Control/type#lc;" ne="hidden">
+		<epic:if name="req" set="&Tag/Form/show_req;">
+			<epic:if name="req" set="&Control/req;" />
+		</epic:if>
+		<div class="control-group&Control/issue#..error;">
+			<epic:if val="&Control/type#lc;" ne="yesno">
+				<label for="&Control/id;" class="control-label">
+					<epic:if_true name="req"><span class="form-req">* </span></epic:if_true>&Control/label;
+				</label>
+			</epic:if>
+			<div class="controls">
+
+				<!-- Send To Options and Member List -->
+				<epic:if val="&Control/type;" eq="radio">
+					<epic:foreach table="Control/Choice">
+						<label for="&Control/id;-&Choice/option;" class="radio control-sublabel"> <input type="radio" name="&Control/name;" id="&Control/id;-&Choice/option;" value="&Choice/value#esc;"&Choice/selected#..checked;> &Choice/option;
+						</label>
+					</epic:foreach>
+					<epic:if val="&Control/label;" eq="Send to:">
+						<table class="table table-bordered table-hover ipm-scroll" id="mail_to_list" style="max-height:300px; display: none;">
+							<tr>
+								<th width="10">&nbsp;</th>
+								<th>Name</th>
+								<th>Company</th>
+								<th>Project Member Role</th>
+							</tr>
+							<epic:foreach table="Directory/Team" alias="Member">
+								<epic:if val="&Member/status;" eq="1">
+									<tr>
+										<td><div class="onoffswitch"><input type="checkbox" name="user_list__&Member/user_id;" id="user_list-&Member/user_id;"  style="margin-top:0;"></div></td>
+										<td>&Member/first_name; &Member/last_name;</td>
+										<td>&Member/company;</td>
+										<td>&Member/invited_as_nice;</td>
+									</tr>
+								</epic:if>
+							</epic:foreach>
+						</table>
+					</epic:if>
+				</epic:if>
+
+				<!-- Message Body -->
+				<epic:if val="&Control/type;" eq="textarea">
+					<textarea name="&Control/name;" id="&Control/id;" &Control/attrs; &Tag/If/req#.required="";>&Control/value#esc;</textarea>
+				</epic:if>
+
+				<!-- Include Project Link Checkbox -->
+				<epic:if val="&Control/type#lc;" eq="yesno">
+					<label for="&Control/id;" class="checkbox control-sublabel">
+						<input type="checkbox" name="&Control/name;" id="&Control/id;" value="&Control/yes_val;"&Control/selected#..checked;>
+						<epic:if_true name="req"><span class="form-req">* </span></epic:if_true>&Control/label;
+					</label>
+				</epic:if>
+
+				<epic:if set="&Control/issue;">
+					<span class="help-inline field-error">&Control/issue;</span>
+				</epic:if>
+
+			</div>
+			<!-- .controls -->
+		</div>
+		<!-- .control-group -->
+	</epic:if>
+	<!-- not hidden -->
+</epic:foreach>

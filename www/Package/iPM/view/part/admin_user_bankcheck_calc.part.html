@@ -1,0 +1,42 @@
+<epic:if not_set="&Admin/BcCalc/is_valid">
+Calculater will go here, when you select a plan and start to fill in some details.
+</epic:if>
+<epic:if set="&Admin/BcCalc/is_valid">
+<table><tr><td class="em-colunn-right">
+Base price/mo:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&Admin/BcCalc/base_spships; users
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&Admin/BcCalc/base_gigs; GB of storage
+</td><td class="em-money">
+$&Admin/BcCalc/base_price##cents;
+</td></tr><tr><td>
+Extra sponsorships: &Admin/BcCalc/extra_spships;
+</td><td class="em-money">
+$&Admin/BcCalc/total_spships##cents;
+</td></tr><tr><td>
+Extra storage units: &Admin/BcCalc/extra_gblocks;
+</td><td class="em-money">
+$&Admin/BcCalc/total_gblock##cents;
+</td></tr><tr><td>
+&nbsp;
+</td><td class="em-money">
+==========
+</td></tr><tr><td>
+Total per month price:
+</td><td class="em-money">
+$&Admin/BcCalc/total_month##cents;
+</td></tr><tr><td>
+&nbsp;
+</td><td class="em-money">
+&nbsp;
+</td></tr><tr><td>
+Number of months: &Admin/BcCalc/months; x $&Admin/BcCalc/total_month##cents;
+</td><td class="em-money">
+$&Admin/BcCalc/total_total##cents;
+</td></tr><tr><td>
+Discount: ($&Admin/BcCalc/total_total##cents; - $&Admin/BcCalc/check_total##cents;)
+</td><td class="em-money">
+$&Admin/BcCalc/total_discount##cents;
+</td><td>
+(&Admin/BcCalc/discount_pct;%)
+</td></tr></table>
+</epic:if>

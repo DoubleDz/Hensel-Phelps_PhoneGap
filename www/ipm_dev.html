@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>iProjectMobile</title>
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<!-- Phonegap -->
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<!-- * -->
+<!-- ICONS -->
+<link rel="apple-touch-icon" href="Package/iPM/icons/icon.png"> 
+<link rel="icon" href="Package/iPM/icons/favicon.png">
+<!--[if IE]><link rel="shortcut icon" href="Package/iPM/icons/favicon.ico"><![endif]-->
+<meta name="msapplication-TileColor" content="#FFFFFF">
+<meta name="msapplication-TileImage" content="Package/iPM/icons/tileicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="Package/iPM/icons/icon-152.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="Package/iPM/icons/icon-120.png">
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="Package/iPM/icons/icon-76.png">
+<!-- CDN CSS -->
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="//assets.zendesk.com/external/zenbox/v2.6/zenbox.css" media="screen, projection" />
+<!-- Local CSS -->
+<link rel="stylesheet" type="text/css" href="Package/Base/css.css" />
+<link rel="stylesheet" type="text/css" href="Package/BaseDevl/css.css" />
+<link rel="stylesheet" type="text/css" href="Package/iPM/css/_global.css" />
+<link rel="stylesheet" type="text/css" href="Package/iPM/css/_web_app.css" />
+<link rel="stylesheet" type="text/css" href="Package/iPM/css/_breadcrumb.css" />
+<!-- CDN JS -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- EpicMvc JS -->
+<script src="EpicMvc/Epic.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/util.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/AppConf.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/ClickAction.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/ConfExe.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/Issue.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/ModelJS.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/Request.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/ViewExe.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/FistGroupCache.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/Fist.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/FistFilt.js" type="text/javascript" charset="utf-8"></script>
+<script src="EpicMvc/parse.js" type="text/javascript" charset="utf-8"></script>
+<!-- EpicMVC Packages JS (bootstrap, Base, BaseDevl) -->
+<script src="Package/bootstrap/Extras/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/Base/js/jquery-dnd-events.js" type="text/javascript"></script>
+<script src="Package/Base/Extras/GlobalDrag.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/Base/Model/Pageflow.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/Base/Model/NoSecurity.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/Base/Model/TagExe.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/Base/app.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/BaseDevl/Extras/LoadStrategy.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/BaseDevl/Model/ModelJS.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/BaseDevl/Model/Tag.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/BaseDevl/Model/Devl.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/BaseDevl/app.js" type="text/javascript" charset="utf-8"></script>
+<!-- Environment config -->
+<script src="config.js" type="text/javascript" charset="utf-8"></script>
+<!-- iPM Packages JS -->
+<script src="Package/iPM/js/jquery.timeago.js" type="text/javascript"></script>
+<script src="Package/iPM/js/jquery.ajax-progress.js" type="text/javascript"></script>
+<script src="Package/iPM/js/json3.min.js" type="text/javascript"></script>
+<script src="Package/iPM/js/jquery.scrollTo.js" type="text/javascript"></script>
+<script src="Package/iPM/js/jquery.lazyYT.js" type="text/javascript"></script>
+<script src="Package/iPM/js/jquery.breadcrumb.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/js/jquery.horizlider.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/js/jquery.tooltips.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/js/web_app.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/js/braintree-1.3.6.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Extras/LocalCache.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Extras/Cache.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Extras/Zip.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Extras/ZipUtil.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Extras/Util.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Extras/Drop.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Extras/S3Open.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Extras/Websock.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Extras/Rest.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Model/Billing.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Model/Sponsor.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Model/Downloads.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Model/Uploads.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Model/External.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Model/User.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Model/Admin.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/Model/Folder.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/app.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/ipm.fist.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iPM/issues.js" type="text/javascript" charset="utf-8"></script>
+<!-- iBeacon packages -->
+<link rel="stylesheet" type="text/css" href="Package/iBeacon/css/menu_elastic.css" />
+<link rel="stylesheet" type="text/css" href="Package/iBeacon/css/ibeacon.css" />
+<script src="Package/iBeacon/js/snap.svg-min.js" type="text/javascript"></script>
+<script src="Package/iBeacon/app.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iBeacon/Model/FolderExt.js" type="text/javascript" charset="utf-8"></script>
+<script src="Package/iBeacon/js/classie.js" type="text/javascript"></script>
+
+<!-- PhoneGap -->
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<!-- -->
+</head>
+<body id="ipm-body">
+	<script type="text/javascript">
+		preload_images([ 
+			"Package/iPM/images/iprojectmobile-web-logo-large.png", 
+			"Package/iPM/images/bg_bottom.png",
+			"Package/iPM/images/contact_us.png", 
+			"Package/iPM/images/iprojectmobile-web-icon.png",
+			"Package/iPM/images/iprojectmobile-web-logo.png", 
+			"Package/iPM/images/main-icons-sprite.png",
+			"Package/iPM/images/features-access.png",
+			"Package/iPM/images/features-collaborate.png",
+			"Package/iPM/images/features-control.png",
+			"Package/iPM/images/features-distribute.png",
+			"Package/iPM/images/pricing-join-create.png",
+			"Package/iPM/images/support-us.png",
+			"Package/iPM/images/support-you.png",
+			"Package/iPM/images/team_sprite.png"
+		]);
+		window._log = window._log2 = window._log3 = function() {};
+		window._log = window.Function.prototype.bind.call(window.console.log, window.console);
+		window._log2 = window.Function.prototype.bind.call(window.console.log, window.console);
+		//window._log3 = window.Function.prototype.bind.call(window.console.log, window.console);
+		window.jQuery.support.cors = true; // IE needs this
+		window.EpicMvc.Extras.localCache= new window.EpicMvc.Extras.LocalCache();
+		function pre_flight_check(action, vals) {
+			_log3('pre_flight_check', action, vals.to, vals.at, vals.from);
+			$('.the-clipboard').slideDown();
+			return (vals.to !== vals.at && vals.to !== vals.from);
+		}
+		var drop = new window.EpicMvc.Extras.GlobalDrag(pre_flight_check);
+		window.EpicMvc.Epic.run([ 'Base', 'bootstrap', 'BaseDevl','iPM','iBeacon'], 'LoadStrategy$BaseDevl', 'bootstrap$bootstrap', [ drop.update, ipm_content_update ], {
+			click_warning_text : "The previous request did not complete.\n\n" + "If this problem persists, please contact support@iprojectmobile.com\n\n" + "Reference error 907."
+		});
+
+		(function() {
+			$.getScript('//assets.zendesk.com/external/zenbox/v2.6/zenbox.js', function() {
+				if (typeof (Zenbox) !== "undefined") {
+					Zenbox.init({
+						dropboxID : "20238728",
+						url : "https://iprojectmobile.zendesk.com",
+						tabTooltip : "Help",
+						tabImageURL : "https://assets.zendesk.com/external/zenbox/images/tab_help_right.png",
+						tabColor : "#F58522",
+						tabPosition : "Right",
+						hide_tab : "true"
+					});
+				}
+			});
+		})();
+		(function($){
+			$(document).ready(function(){
+				$("[title]").style_my_tooltips();
+			});
+		})(jQuery);
+	</script>
+	 <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+</body>
+</html>

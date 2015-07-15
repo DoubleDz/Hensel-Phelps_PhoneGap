@@ -1,0 +1,461 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=320, target-densitydpi=device-dpi">
+<style type="text/css">
+/* Mobile-specific Styles */
+@media only screen and (max-width: 640px) {
+	table.w0,td.w0,td.w20 {
+		width: 0 !important;
+	}
+	table.w30,td.w30,img.w30 {
+		width: 10px !important;
+	}
+	table.w60,td.w60,img.w60 {
+		width: 50px !important;
+	}
+	table.w580,td.w580,img.w580 {
+		width: 280px !important;
+	}
+	table.w640,td.w640,img.w640 {
+		width: 300px !important;
+	}
+	table.h0,td.h0 {
+		height: 0 !important;
+	}
+	.below-footer-content,.below-footer-content a {
+		font-size: 11px !important;
+	}
+	.article-content,#left-sidebar {
+		-webkit-text-size-adjust: 90% !important;
+		-ms-text-size-adjust: 90% !important;
+	}
+	.header-content,.below-footer-content {
+		-webkit-text-size-adjust: 80% !important;
+		-ms-text-size-adjust: 80% !important;
+	}
+	img {
+		height: auto;
+		line-height: 100%;
+	}
+	.mobile {
+		display: block !important;
+		width: auto !important;
+		overflow: visible !important;
+		float: none !important;
+	}
+	.desktop {
+		display: none !important;
+	}
+}
+/* Client-specific Styles */
+#outlook a {
+	padding: 0;
+} /* Force Outlook to provide a "view in browser" button. */
+body {
+	width: 100% !important;
+}
+
+.ReadMsgBody {
+	width: 100%;
+}
+
+.ExternalClass {
+	width: 100%;
+	display: block !important;
+} /* Force Hotmail to display emails at full width */
+/* Reset Styles */
+/* Add 100px so mobile switch bar does not cover street address. */
+body {
+	background-color: #eeeeee;
+	margin: 0;
+	padding: 0;
+}
+
+img {
+	outline: none;
+	text-decoration: none;
+	display: block;
+}
+
+br,strong br,b br,em br,i br {
+	line-height: 100%;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	line-height: 100% !important;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1 a,h2 a,h3 a,h4 a,h5 a,h6 a {
+	color: blue !important;
+}
+
+h1 a:active,h2 a:active,h3 a:active,h4 a:active,h5 a:active,h6 a:active {
+	color: red !important;
+}
+/* Preferably not the same color as the normal header link color.  There is limited support for psuedo classes in email clients, this was added just for good measure. */
+h1 a:visited,h2 a:visited,h3 a:visited,h4 a:visited,h5 a:visited,h6 a:visited {
+	color: purple !important;
+}
+/* Preferably not the same color as the normal header link color. There is limited support for psuedo classes in email clients, this was added just for good measure. */
+table td,table tr {
+	border-collapse: collapse;
+}
+
+.yshortcuts,.yshortcuts a,.yshortcuts a:link,.yshortcuts a:visited,.yshortcuts a:hover,.yshortcuts a span {
+	color: black;
+	text-decoration: none !important;
+	border-bottom: none !important;
+	background: none !important;
+}
+/* Body text color for the New Yahoo.  This example sets the font of Yahoo Shortcuts to black. */
+
+#background-table {
+	background-color: #eeeeee;
+}
+/* Webkit Elements */
+.below-footer-content {
+	-webkit-font-smoothing: antialiased;
+}
+/* Fonts and Content */
+body,td,div,p {
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.header-content,.below-footer-content {
+	-webkit-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+}
+/* Prevent Webkit and Windows Mobile platforms from changing default font sizes on header and footer. */
+.header-content {
+	font-size: 12px;
+	color: #ededed;
+}
+
+.header-content a {
+	font-weight: bold;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.article-title {
+	font-size: 22px;
+	line-height: 24px;
+	color: #666666;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.article-title a {
+	color: #b0b0b0;
+	text-decoration: none;
+}
+
+.article-title.with-meta {
+	margin-bottom: 0;
+}
+
+.article-meta {
+	font-size: 13px;
+	line-height: 20px;
+	color: #ccc;
+	font-weight: bold;
+	margin-top: 0;
+}
+
+.article-content {
+	font-size: 16px;
+	line-height: 24px;
+	color: #444444;
+	margin-top: 0;
+	margin-bottom: 10px;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.article-content a {
+	color: #2f82de;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.article-content img {
+	max-width: 100%
+}
+
+.article-content p {
+	margin-bottom: 15px;
+}
+
+.below-footer-content,.below-footer-content a {
+	font-size: 14px;
+	line-height: 16px;
+	color: #666666;
+	text-decoration: none;
+}
+
+.ipm-link:hover {
+	border: 5px solid #000;
+}
+
+.below-footer-content a {
+	color: #0084B2;
+}
+</style>
+</head>
+<body>
+	<table width="100%" cellpadding="0" cellspacing="0" border="0" id="background-table">
+		<tbody>
+			<tr>
+				<td align="center" bgcolor="#eeeeee">
+					<table class="w640" width="640" cellpadding="0" cellspacing="0" border="0">
+						<tbody>
+							<tr>
+								<td class="w640" width="640" height="75" valign="middle">
+									<table class="w640" width="640" cellpadding="0" cellspacing="0" border="0">
+										<tbody>
+											<tr>
+												<td class="w20" width="20"></td>
+												<td class="w600" width="600">
+													<div class="header-left" style="float: left;">
+														<img class="desktop" src="https://ipm-www.s3.amazonaws.com/iprojectmobile-web-logo.png" align="left" alt="iProjectmobile">
+														<img class="mobile" src="https://ipm-www.s3.amazonaws.com/iprojectmobile-web-icon.png" align="left" style="width:0; overflow:hidden;float:left; display:none; border: 1px solid #CCC; -moz-box-shadow: 0px 4px 5px -3px #CCC !important; -webkit-box-shadow: 0px 4px 5px -3px #CCC !important; box-shadow: 0px 4px 5px -3px #CCC !important;" alt="iProjectmobile">
+													</div>
+													<div class="header-right" align="right" style="float: right; font-size: 25px; line-height: 50px; color: #666666;">Registration</div>
+												</td>
+												<td class="w20" width="20"></td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="w640" width="640">
+									<table class="w640" width="640" cellpadding="0" cellspacing="0" style="border: 1px solid #CCC; border-bottom: 0 none; box-shadow: 0px 4px 5px -2px #666;">
+										<tbody>
+											<tr>
+												<td class="w640" width="640" height="10" bgcolor="#ffffff"></td>
+											</tr>
+											<tr id="simple-content-row">
+												<td class="w640" width="640" bgcolor="#ffffff">
+													<table class="w640" width="640" cellpadding="0" cellspacing="0" border="0">
+														<tbody>
+															<tr>
+																<td class="w30" width="30"></td>
+																<td class="w580" width="580">
+																	<table class="w580" width="580" cellpadding="0" cellspacing="0" border="0">
+																		<tbody>
+																			<tr>
+																				<td class="w580" width="580" height="10"></td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580">
+																					<div align="left" class="article-content">Dear %u_first_name%,</div>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580" height="20"></td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580">
+																					<p align="center" style="font-size: 28px; color: #F58521; line-height: 40px;">
+																						<singleline label="Title">Welcome to iProjectMobile.<br>
+																						Your registration is complete!</singleline>
+																					</p>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580" height="20"></td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580">
+																					<div align="left" class="article-content">
+																						<singleline label="Description">We have lots of resources to get you started:</singleline>
+																					</div>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580" height="20"></td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580">
+																					<table class="w580" width="580" cellpadding="0" cellspacing="0" border="0">
+																						<tbody>
+																							<tr>
+																								<td class="w580" width="580">
+																									<table cellpadding="0" cellspacing="0" border="0" align="left">
+																										<tbody>
+																											<tr>
+																												<td class="w60" width="60">
+																													<img src="https://ipm-www.s3.amazonaws.com/email_reg_complete_1.png" class="w60" border="0">
+																												</td>
+																												<td width="10"></td>
+																											</tr>
+																										</tbody>
+																									</table>
+																									<div align="left" class="article-content">
+																										<multiline label="Description">
+																										<div class="article-title">Video Tutorials</div>
+																										<div>
+																											We have a growing library of video tutorials that cover everything from the basics of iProjectMobile to advanced tips and tricks that will help you and your project teams become more organized and efficient.
+																											<a href="//iprojectmobile.com/#support">View our video tutorials.</a>
+																										</div>
+																										</multiline>
+																									</div>
+																								</td>
+																							</tr>
+																							<tr>
+																								<td class="w580" width="580" height="10"></td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580" height="20"></td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580">
+																					<table class="w580" width="580" cellpadding="0" cellspacing="0" border="0">
+																						<tbody>
+																							<tr>
+																								<td class="w580" width="580">
+																									<table cellpadding="0" cellspacing="0" border="0" align="left">
+																										<tbody>
+																											<tr>
+																												<td class="w60" width="60">
+																													<img src="https://ipm-www.s3.amazonaws.com/email_reg_complete_2.png" class="w60" border="0">
+																												</td>
+																												<td width="10"></td>
+																											</tr>
+																										</tbody>
+																									</table>
+																									<div align="left" class="article-content">
+																										<multiline label="Description">
+																										<div class="article-title">Live Training</div>
+																										<div>
+																											Want to get the most that you can out of iProjectMobile? Our training staff can help you get set up, answer your questions, and maybe even teach you something new. We host live workshops in our Denver showroom and
+																											schedule webinars and site visits upon request.
+																											<a href="//iprojectmobile.com/#support">Request live training.</a>
+																										</div>
+																										</multiline>
+																									</div>
+																								</td>
+																							</tr>
+																							<tr>
+																								<td class="w580" width="580" height="10"></td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580" height="20"></td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580">
+																					<table class="w580" width="580" cellpadding="0" cellspacing="0" border="0">
+																						<tbody>
+																							<tr>
+																								<td class="w580" width="580">
+																									<table cellpadding="0" cellspacing="0" border="0" align="left">
+																										<tbody>
+																											<tr>
+																												<td class="w60" width="60">
+																													<img src="https://ipm-www.s3.amazonaws.com/email_reg_complete_3.png" class="w60" border="0">
+																												</td>
+																												<td width="10"></td>
+																											</tr>
+																										</tbody>
+																									</table>
+																									<div align="left" class="article-content">
+																										<multiline label="Description">
+																										<div class="article-title">Support</div>
+																										<div>
+																											If you have an issue that you would like help resolving then send us an email or give us a quick call. Our sales and support staff our very knowledgeable and we will do our best to help you get back on your feet
+																											as quickly as possible.
+																											<a href="//iprojectmobile.com/#support">Visit support.</a>
+																										</div>
+																										</multiline>
+																									</div>
+																								</td>
+																							</tr>
+																							<tr>
+																								<td class="w580" width="580" height="10"></td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580" height="30"></td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580">
+																					<p align="left" class="article-title">
+																						<singleline label="Title">Your free trial:</singleline>
+																					</p>
+																				</td>
+																			<tr>
+																				<td class="w580" width="580">
+																					<div align="left" class="article-content">
+																						<multiline label="Description">For 30 days you will be given access to all the features that iProjectMobile has to offer. Create and join projects, share with your teams, and gain access to all of your
+																						project documentation from anywhere! during your trial we will track your usage and show you exactly what it will cost to continue using iProjectMobile in the way that you want to use it. You may purchase your
+																						subscription at any time during the trial by logging in to iProjectMobile.com and pressing the buy now button in the upper right corner.</multiline>
+																					</div>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580" height="30"></td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580">
+																					<div align="center" class="article-content">
+																						<multiline label="Description">For more information on iProjectMobile, visit us at:<br>
+																						<a href="//iprojectmobile.com">www.iprojectmobile.com</a></multiline>
+																					</div>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td class="w580" width="580" height="15"></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</td>
+																<td class="w30" width="30"></td>
+															</tr>
+															<tr>
+																<td colspan="5" align="right" class="w640 desktop w0" width="640" style="border-bottom: 4px solid black;">
+																	<img src="https://ipm-www.s3.amazonaws.com/email_denver_skyline.png" align="right" style="display: block;">
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td valign="bottom" class="w640" width="640" height="40">
+									<div align="center" class="below-footer-content">iProjectMobile &nbsp; | &nbsp; 601 South Broadway &nbsp; | &nbsp; Denver &nbsp; | &nbsp; 80209</div>
+								</td>
+							</tr>
+							<tr>
+								<td valign="middle" class="w640" width="640" height="50">
+									<div align="center" class="below-footer-content">
+										Questions? Contact us:
+										<a href="mailto:support@iprojectmobile.com">support@iprojectmobile.com</a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

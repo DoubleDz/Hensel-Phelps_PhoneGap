@@ -1,0 +1,160 @@
+<style>
+table.thin .restricted { background-color: pink !important; }
+table.thin .demoted { background-color: cyan !important; }
+table.thin th, table.thin td { padding: 0; }
+.col-filter { font-size: .5em; }
+.strike { text-decoration: line-through; }
+.col-mem { display:none; }
+</style>
+<div class="row-fluid">
+	<h2>
+		<span class="span8">All Active Users:
+			&nbsp;<span class="col-filter" onclick="$('.col-inv').toggle();$(this).toggleClass('strike');">Invites</span>
+			&nbsp;<span class="col-filter" onclick="$('.col-team').toggle();$(this).toggleClass('strike');">Team</span>
+			&nbsp;<span class="col-filter strike" onclick="$('.col-mem').toggle();$(this).toggleClass('strike');">Memberships</span>
+			&nbsp;<span class="col-filter" onclick="$('.col-bill').toggle();$(this).toggleClass('strike');">Billing</span>
+		</span>
+		<input class="span4" type="text" name="filter" onkeyup="window.char_filter( $(this).val())" placeholder="Filter users by typing here...">
+	</h2>
+</div>
+<div class="row-fluid">
+	<table class="table table-hover table-striped table-bordered thin">
+		<epic:foreach table="Admin/User" break_fixed="35">
+			<epic:if set="&User/_FIRST;&User/_BREAK;">
+				<tr class="&User/_BREAK#.char-filter;" data-chars="~">
+					<th>ID</th>
+					<th>Email</th>
+					<th>Level</th>
+					<th class="col-inv" title="User-id of person who invited this person">inv</th>
+					<th class="col-inv" title="Number of succesfull invites">#inv</th>
+					<th class="col-team" title="Owner-id who owns this team member">own</th>
+					<th class="col-team" title="Subordanent count for this team-owner">sub</th>
+					<th title="Projects owned and affecting mbytes_quota">#p</th>
+					<th class="col-mem" title="Watcher">W</th>
+					<th class="col-mem demoted" title="Watcher demoted">W-</th>
+					<th class="col-mem restricted" title="Watcher restricted">w</th>
+					<th class="col-mem" title="Owner">O</th>
+					<th class="col-mem demoted" title="Owner demoted">O-</th>
+					<th class="col-mem restricted" title="Owner restricted">o</th>
+					<th class="col-mem" title="Manager">G</th>
+					<th class="col-mem demoted" title="Manager demoted">G-</th>
+					<th class="col-mem restricted" title="Manager restricted">g</th>
+					<th class="col-mem" title="Member Plus">M+</th>
+					<th class="col-mem" title="Member">M</th>
+					<th class="col-mem restricted" title="Member restricted">m</th>
+					<th class="col-bill">Bill State</th>
+					<th class="col-bill" title="Expires-days: Days until billing expires">Exp</th>
+					<th class="col-bill" title="Bill-system: 0=iPM, 1=Braintree, 2=BankCheck">BS</th>
+					<th>St,City</th>
+				</tr>
+			</epic:if>
+			<epic:if name="more_invites" val="&User/inv_cnt;" gt="2"></epic:if>
+			<epic:if name="more_projects" val="&User/cnt_projects_owned;" gt="3"></epic:if>
+			<epic:if name="more_subs" val="&User/sub_cnt_children;" gt="5"></epic:if>
+			<epic:if name="demoted" set="&User/cnt_watch_demoted;&User/cnt_owner_demoted;&User/cnt_manager_demoted;" ></epic:if>
+			<epic:if name="restricted"
+				set="&User/cnt_watch_restricted;&User/cnt_owner_restricted;&User/cnt_manager_restricted;&User/cnt_member_restricted;" ></epic:if>
+			<tr class="char-filter&User/is_pending#..pending;"
+				data-chars="~&User/id;~bs&User/bill_system;~&User/bill_state;~&User/email;~&User/level_nice;~&User/inv_who;~&User/sub_parent#.own;~&User/sub_cnt_children#.sub;~&Tag/If/demoted#.demoted;~&Tag/If/restricted#.restricted;~&User/sub_parent;~&User/sub_children;~&Tag/If/more_invites#.xi;~&Tag/If/more_subs#.xs;~&Tag/If/more_projects#.xp;~&User/state;,&User/city;~">
+				<td title ="~&User/id;~bs&User/bill_system;~&User/bill_state;~&User/email;~&User/level_nice;~&User/inv_who;~&User/sub_parent#.own;~&User/sub_cnt_children#.sub;~&Tag/If/demoted#.demoted;~&Tag/If/restricted#.restricted;~&User/sub_parent;~&User/sub_children;~&Tag/If/more_invites#.xi;~&Tag/If/more_subs#.xs;~&Tag/If/more_projects#.xp;~&User/state;,&User/city;~">
+					&User/id;
+				</td>
+				<td>&User/email;</td>
+				<td>&User/level_nice;</td>
+				<td class="col-inv">&User/inv_who;</td>
+				<td class="col-inv"><epic:if set="&User/inv_cnt;">&User/inv_cnt;</epic:if></td>
+				<td class="col-team">&User/sub_parent;</td>
+				<td class="col-team" title="&User/sub_children;">&User/sub_cnt_children;</td>
+				<td>&User/cnt_projects_owned;</td>
+				<td class="col-mem">&User/cnt_watch;</td>
+				<td class="col-mem &User/cnt_watch_demoted#.demoted;">&User/cnt_watch_demoted;</td>
+				<td class="col-mem &User/cnt_watch_restricted#.restricted;">&User/cnt_watch_restricted;</td>
+				<td class="col-mem">&User/cnt_owner;</td>
+				<td class="col-mem &User/cnt_owner_demoted#.demoted;">&User/cnt_owner_demoted;</td>
+				<td class="col-mem &User/cnt_owner_restricted#.restricted;">&User/cnt_owner_restricted;</td>
+				<td class="col-mem">&User/cnt_manager;</td>
+				<td class="col-mem &User/cnt_manager_demoted#.demoted;">&User/cnt_manager_demoted;</td>
+				<td class="col-mem &User/cnt_manager_restricted#.restricted;">&User/cnt_manager_restricted;</td>
+				<td class="col-mem">&User/cnt_member_plus;</td>
+				<td class="col-mem">&User/cnt_member;</td>
+				<td class="col-mem &User/cnt_member_restricted#.restricted;">&User/cnt_member_restricted;</td>
+				<td class="col-bill">
+				<epic:if val="&User/bill_state;" eq="null">
+					<span class="ipm-orange">iPM Employee / Exception</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" not_in_list="null,BT-TRIAL-ACTIVE,BT-TRIAL-EXPIRED,BT-FREE-ACTIVE,BC-TEAM-ACTIVE,BC-TEAM-EXPIRED,BC-TEAM-CANCELED,BT-TEAM-ACTIVE,BT-TEAM-EXPIRED,BT-TEAM-CANCELED,BT-STD-ACTIVE,BT-STD-EXPIRED,BT-STD-CANCELED,BT-STR-ACTIVE,BT-STR-EXPIRED,BT-STR-CANCELED,BT-PRO-ACTIVE,BT-PRO-EXPIRED,BT-PRO-CANCELED">
+					&User/bill_state;</td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-TRIAL-ACTIVE">
+					Trial User <span class="ipm-green">(active)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-TRIAL-EXPIRED">
+					Trial User <span class="red">(expired)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-FREE-ACTIVE">
+					Free User <span class="ipm-green">(active)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BC-TEAM-ACTIVE">
+					Team Account [check] <span class="ipm-green">(active)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BC-TEAM-EXPIRED">
+					Team Account [check] <span class="red">(expired)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BC-TEAM-CANCELED">
+					Team Account [check] <b>(canceled)</b>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-TEAM-ACTIVE">
+					Team Account <span class="ipm-green">(active)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-TEAM-EXPIRED">
+					Team Account <span class="red">(expired)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-TEAM-CANCELED">
+					Team Account <b>(canceled)</b>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STD-ACTIVE">
+					Standard User <span class="ipm-green">(active)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STD-EXPIRED">
+					Standard User <span class="red">(expired)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STD-CANCELED">
+					Standard User <b>(canceled)</b>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STR-ACTIVE">
+					Starter User <span class="ipm-green">(active)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STR-EXPIRED">
+					Starter User <span class="red">(expired)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STR-CANCELED">
+					Starter User <b>(canceled)</b>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-PRO-ACTIVE">
+					Pro User <span class="ipm-green">(active)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-PRO-EXPIRED">
+					Pro User <span class="red">(expired)</span>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-PRO-CANCELED">
+					Pro User <b>(canceled)</b>
+				</epic:if>
+				<td class="col-bill">
+				<epic:if val="&User/expires_days;" not_in_list="null,NaN">
+					<epic:if set="&User/expires_days;">
+						&User/expires_days;
+					</epic:if>
+					<epic:if not_set="&User/expires_days;">
+						---
+					</epic:if>
+				</epic:if>
+				<epic:if val="&User/expires_days;" in_list="null,NaN">
+					---
+				</epic:if>
+				</td>
+				<td class="col-bill">&User/bill_system;</td>
+				<td>&User/state;<epic:if set="&User/state;&User/city;">,</epic:if>&User/city;</td>
+			</tr>
+		</epic:foreach>
+	</table>
+</div>

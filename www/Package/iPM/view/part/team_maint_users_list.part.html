@@ -1,0 +1,30 @@
+<epic:foreach table="Directory/User">
+	<epic:if not_set="&User/on_team;">
+		<li class="uf_item">
+			<i class="icon-user icon-2x pull-left icon-border"></i>
+			<epic:if set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+				<div class="dropdown pull-right">
+					<!-- Link or button to toggle dropdown -->
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="icon-plus"></i> Add <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li>
+							<epic:link_action action="add_as_member" p:id="&User/id;">As Member</epic:link_action>
+						</li>
+						<li>
+							<epic:link_action action="add_as_manager" p:id="&User/id;">As Manager</epic:link_action>
+						</li>
+						<li>
+							<epic:link_action action="add_as_owner" p:id="&User/id;">As Owner</epic:link_action>
+						</li>
+					</ul>
+				</div>
+			</epic:if>
+			<div class="line1">&User/first_name; &User/last_name;</div>
+			<div class="line2 muted">
+				<small>&User/trade_skill;</small>
+			</div>
+		</li>
+	</epic:if>
+</epic:foreach>

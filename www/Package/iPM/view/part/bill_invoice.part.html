@@ -1,0 +1,199 @@
+<script type="text/javascript">
+	space_subtotal= 0;
+	users_subtotal= 0;
+</script>
+<epic:if set="&Billing/SelectedInvoice/has_moreSpace;">
+	<script type="text/javascript">
+		space_subtotal= (&Billing/SelectedInvoice/moreSpace_quantity; * &Billing/SelectedInvoice/moreSpace_amount;);
+	</script>
+</epic:if>
+<epic:if set="&Billing/SelectedInvoice/has_moreUsers;">
+	<script type="text/javascript">
+		users_subtotal= (&Billing/SelectedInvoice/moreUsers_quantity; * &Billing/SelectedInvoice/moreUsers_amount;);
+	</script>
+</epic:if>
+<epic:defer name="subtotal_calculations">
+	var addons_subtotal= space_subtotal + users_subtotal;
+	$('.addon_subtotal').html(addons_subtotal + ".00");
+</epic:defer>
+<legend class="noprint">
+	<epic:link_action action="go_overview">Overview</epic:link_action>
+	&nbsp;&gt;&nbsp; Invoice
+</legend>
+<div id="invoice" class="paid">
+	<div class="this-is">
+		<strong>Invoice</strong>
+	</div>
+	<!-- invoice headline -->
+	<header id="header">
+		<div class="invoice-intro">
+			<h1 class="ipm-orange">iProjectMobile</h1>
+			<p>Simple and secure. Mobile collaboration for the construction industry.</p>
+		</div>
+		<dl class="invoice-meta">
+			<dt class="invoice-number">Invoice #</dt>
+			<dd>&Billing/SelectedInvoice/id##to_upper;</dd>
+			<dt class="invoice-date">Date of Invoice</dt>
+			<dd>&Billing/SelectedInvoice/subscription_billingPeriodStartDate;</dd>
+<!-- 			<dt class="invoice-due">Date of Next Invoice</dt> -->
+<!-- 			<dd>&Billing/SelectedInvoice/subscription_billingPeriodEndDate;</dd> -->
+		</dl>
+	</header>
+	<!-- e: invoice header -->
+	<section id="parties">
+		<div class="invoice-to">
+			<h2>Invoice To:</h2>
+			<div class="vcard">
+				&User/Me/first_name; &User/Me/last_name;
+				<div class="org">&User/Me/company;</div>
+				<a class="email" href="mailto:&User/Me/email;">&User/Me/email;</a>
+				<epic:if val="&User/Me/street1;" ne="null">
+					<div class="adr">
+						<div class="street-address">
+							<epic:if val="&User/Me/street1;" ne="null">
+							&User/Me/street1;
+						</epic:if>
+							<epic:if val="&User/Me/street2;" ne="null">
+							&User/Me/street2;
+						</epic:if>
+						</div>
+						<span class="locality">
+							<epic:if val="&User/Me/city" ne="null">
+							&User/Me/city;, 
+						</epic:if>
+							<epic:if val="&User/Me/state;" ne="null">
+							&User/Me/state; 
+						</epic:if>
+							<epic:if val="&User/Me/postal_code;" ne="null">
+							&User/Me/postal_code;
+						</epic:if>
+						</span>
+						<epic:if val="&User/Me/street2;" ne="null">
+							<span class="country-name">&User/Me/country;</span>
+						</epic:if>
+					</div>
+				</epic:if>
+				<epic:if val="&User/Me/mobile;" ne="null">
+					<div class="tel">&User/Me/mobile;</div>
+				</epic:if>
+				<epic:if val="&User/Me/office;" ne="null">
+					<div class="tel">&User/Me/office;</div>
+				</epic:if>
+			</div>
+			<!-- e: vcard -->
+		</div>
+		<!-- e invoice-to -->
+		<div class="invoice-from">
+			<h2>Invoice From:</h2>
+			<div class="vcard">
+				<a class="url org" href="//iprojectmobile.com">iProjectMobile, LLC</a>
+				<a class="email" href="mailto:support@iprojectmobile.com">support@iprojectmobile.com</a>
+				<div class="adr">
+					<div class="street-address">601 South Broadway, Suite D</div>
+					<span class="locality">Denver, CO 80209</span>
+					<span class="country-name">United States</span>
+				</div>
+				<div class="tel">303.731.2285</div>
+			</div>
+			<!-- e: vcard -->
+		</div>
+		<!-- e invoice-from -->
+		<div class="invoice-status">
+			<h3>Invoice Status</h3>
+			<strong>Invoice is <em>Paid</em></strong>
+		</div>
+		<!-- e: invoice-status -->
+	</section>
+	<!-- e: invoice partis -->
+	<section class="invoice-financials">
+		<div class="invoice-items">
+			<table>
+				<caption>Current Plan</caption>
+				<thead>
+					<tr>
+						<th>Plan</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>&Billing/SelectedInvoice/plan_plan_name;</th>
+						<td>$&Billing/SelectedInvoice/plan_base_price##cents;</td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+				<table>
+					<caption>Plan Additions</caption>
+					<thead>
+						<tr>
+							<th>Item</th>
+							<th align="center">Quantity</th>
+							<th>Price</th>
+						</tr>
+					</thead>
+					<tbody>
+						<epic:if set="&Billing/SelectedInvoice/has_moreSpace;">
+							<tr>
+								<th>50GB of Storage</th>
+								<td align="center">&Billing/SelectedInvoice/moreSpace_quantity;</td>
+								<td>$&Billing/SelectedInvoice/moreSpace_amount;</td>
+							</tr>
+						</epic:if>
+						<epic:if set="&Billing/SelectedInvoice/has_moreUsers;">
+							<tr>
+								<th>Team User</th>
+								<td align="center">&Billing/SelectedInvoice/moreUsers_quantity;</td>
+								<td>$&Billing/SelectedInvoice/moreUsers_amount;</td>
+							</tr>
+						</epic:if>
+						<tr>
+							<th colspan="3"></th>
+						</tr>
+						<tr>
+							<th colspan="2">Additions Subtotal:</th>
+							<td>
+								$<span class="addon_subtotal">0.00</span>
+							</td>
+						</tr>
+						<tr>
+							<th colspan="3"></th>
+						</tr>
+						<tr style="font-size: 14px;">
+							<th colspan="2">Total Cost of Plan:</th>
+							<td>$&Billing/SelectedInvoice/total_amount##cents;</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+			<div class="invoice-totals">
+				<legend style="font-size: 16px; font-weight: bold;">
+					Payment
+					<epic:if set="&Billing/SelectedInvoice/is_prorated;">
+						<span class="prorated"> (prorated amount)</span>
+					</epic:if>
+					:
+					<div class="pull-right">$&Billing/SelectedInvoice/amount;</div>
+				</legend>
+			</div>
+		</div>
+		<!-- e: invoice totals -->
+		<div class="invoice-notes">
+			<h6>Payment Information:</h6>
+			<div>
+				<epic:if set="&Billing/SelectedInvoice/creditCard;">
+					<div class="pull-left cc-icons cc-&Billing/SelectedInvoice/creditCard_cardType##clean_to_lower;"></div>Credit Card ending in<div class="pull-right" style="border: 1px solid #999; padding: 10px;">
+						<b style="margin-right: 20px;">Recurring Monthly Amount:</b> $&Billing/SelectedInvoice/total_amount##cents;
+					</div>
+					<div style="margin-left: 56px;">**** **** **** &Billing/SelectedInvoice/creditCard_last4;
+				</epic:if>
+			</div>
+		</div>
+		<!-- e: invoice-notes -->
+	</section>
+	<!-- e: invoice financials -->
+	<footer id="footer">
+		<p align="center">Thank you for your business.</p>
+	</footer>
+</div>
+<!-- e: invoice -->

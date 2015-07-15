@@ -1,0 +1,87 @@
+<style>
+div.field-error {
+	margin-top: -10px;
+	margin-bottom: 15px;
+	float: left;
+}
+
+div.cc-form-container {
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+:focus::-webkit-input-placeholder {
+	color: transparent;
+}
+</style>
+<div class="cc-form-container">
+	<epic:foreach table="Tag/Field">
+		<div class="row-fluid controls controls-row">
+			<epic:foreach table="Field/CcName">
+				<input class="span12" type="&CcName/type#lc;" name="&CcName/name;" autofocus value="&CcName/value;" size="&CcName/width;" placeholder="&CcName/label;" &Tag/If/req#.required="" .title="Cannot be blank" ; />
+				<epic:if set="&CcName/issue;">
+					<div class="clearfix"></div>
+					<div class="field-error">&CcName/issue;</div>
+				</epic:if>
+			</epic:foreach>
+		</div>
+		<div class="row-fluid controls controls-row">
+			<epic:foreach table="Field/CcNum">
+				<epic:if set="&Billing/MyCard/is_card;">
+					<input class="span10" type="&CcNum/type#lc;" name="&CcNum/name;" value="" size="&CcNum/width;" placeholder="**** **** **** &Billing/MyCard/last4;" &Tag/If/req#.required="" .title="Cannot be blank" ; />
+				</epic:if>
+				<epic:if not_set="&Billing/MyCard/is_card;">
+					<input class="span10" type="&CcNum/type#lc;" name="&CcNum/name;" value="&CcNum/value;" size="&CcNum/width;" placeholder="&CcNum/label;" &Tag/If/req#.required="" .title="Cannot be blank" ; />
+				</epic:if>				
+				<epic:if set="&CcNum/issue;">
+					<div class="clearfix"></div>
+					<div class="field-error">&CcNum/issue;</div>
+				</epic:if>
+			</epic:foreach>
+		</div>
+		<div class="row-fluid controls controls-row">
+			<epic:foreach table="Field/CcMonth">
+				<!-- FIST: CcMonth -->
+				<select style="width: 80px;" name="&CcMonth/name;" &CcMonth/size#..size="%"; >
+					<epic:foreach table="CcMonth/Choice">
+						<option value="&Choice/value#esc;"&Choice/selected#..selected;>&Choice/option;</option>
+					</epic:foreach>
+				</select>
+				<epic:if set="&CcMonth/issue;">
+					<div class="field-error">&CcMonth/issue;</div>
+				</epic:if>
+			</epic:foreach>
+			<span style="font-size: 24px;"> / </span>
+			<epic:foreach table="Field/CcYear">
+				<!-- FIST: CcYear -->
+				<select style="width: 80px;" name="&CcYear/name;" &CcYear/size#..size="%"; >
+					<epic:foreach table="CcYear/Choice">
+						<option value="&Choice/value#esc;"&Choice/selected#..selected;>&Choice/option;</option>
+					</epic:foreach>
+				</select>
+				<epic:if set="&CcYear/issue;">
+					<div class="clearfix"></div>
+					<div class="field-error">&CcYear/issue;</div>
+				</epic:if>
+			</epic:foreach>
+		</div>
+		<div class="row-fluid controls controls-row">
+			<epic:foreach table="Field/CcCvv">
+				<input class="span3" type="&CcCvv/type#lc;" name="&CcCvv/name;" value="&CcCvv/value;" size="&CcCvv/width;" placeholder="&CcCvv/label;" &Tag/If/req#.required="" .title="Cannot be blank" ; />
+				<epic:if set="&CcCvv/issue;">
+					<div class="clearfix"></div>
+					<div class="field-error">&CcCvv/issue;</div>
+				</epic:if>
+			</epic:foreach>
+		</div>
+		<div class="row-fluid controls controls-row">
+			<epic:foreach table="Field/CcZip">
+				<input style="width: 120px;" type="&CcZip/type#lc;" name="&CcZip/name;" value="&CcZip/value;" size="&CcZip/width;" placeholder="&CcZip/label;" &Tag/If/req#.required="" .title="Cannot be blank" ; />
+				<epic:if set="&CcZip/issue;">
+					<div class="clearfix"></div>
+					<div class="field-error">&CcZip/issue;</div>
+				</epic:if>
+			</epic:foreach>
+		</div>
+	</epic:foreach>
+</div>

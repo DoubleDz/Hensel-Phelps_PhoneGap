@@ -1,0 +1,19 @@
+<epic:defer>
+$('[name=SendToChoice]').on('change',
+	function (e){
+		if (e.target.value === 'list') {
+			$('#mail_to_list').show()
+		} else {
+			$('#mail_to_list').hide()
+		}
+	})
+</epic:defer>
+
+<h2 style="margin-top: -5px;">Notify Team Members of project updates.</h2>
+<p style="margin-top: -15px;">The Team Members you select will be notified with an email from iProjectMobile.</p>
+<form>
+	<epic:form_part form="ComposeNotify" part="fist_compose_notify"/>
+	<br>
+	<epic:form_action action="send" class="btn" value="Send"/>
+	<epic:form_action action="cancel" class="btn" value="Cancel"/>
+</form>

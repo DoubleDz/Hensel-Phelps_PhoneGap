@@ -1,0 +1,133 @@
+<style>
+.project_restriction { text-decoration: line-through; color: red; }
+.manager_restriction { text-decoration: line-through; }
+</style>
+<div id="team"></div>
+<epic:if set="&Directory/Options/active_project;">
+	<h2 style="padding-bottom: 5px">
+		Members
+		<!-- <span class="manage-team pull-right"><epic:link_action action="go_manage_team">Show All</epic:link_action></span> -->
+		<div class="pull-right" style="margin-top: -5px;">
+			<div style="position: relative;">
+				<input type="text" class="filter-textbox" id="filter_team_textbox" placeholder="Filter Members..." onkeyup="filter_team_text=$(this).val();input_filter( filter_team_text, '.team-filter-container', '~', true);return false;">
+				<i style="color: #CCC;" class="icon-remove links clear-text" onclick="$('#filter_team_textbox').val('').keyup().focus();return false;"></i>
+			</div>
+		</div>
+	</h2>
+	<div class="ipm-widget box-shadow" style="clear: both;">
+		<epic:if set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+			<div class="widget-header">
+				<epic:if not_set="&Directory/TeamAdd/open;">
+					<div class="team-widget-placeholder">
+						<epic:link_action action="add_team_open">
+							<i class="icon-plus icon-large"></i> &nbsp; Add New Member
+						</epic:link_action>
+					</div>
+				</epic:if>
+				<epic:if set="&Directory/TeamAdd/open;">
+					<form id="add-team-member-form" class="form-inline add-team-email">
+						<epic:if not_set="&Directory/TeamAdd/issue;">
+							<epic:form_part form="TeamAddEmail" part="fist_inline" />
+						</epic:if>
+						<epic:if set="&Directory/TeamAdd/issue;">
+							<div class="team-widget-company">The email entered is not registered with iProjectMobile.</div>
+							<div style="margin: 10px 0;">
+								<epic:form_part form="UserInviteProject" part="fist_inline" />
+							</div>							
+							<epic:form_action class="btn btn-mini btn-primary" action="invite_project_team_add" p_project_id="&Directory/Options/active_project;" value="Invite Them to Join" />
+							<epic:form_action class="btn btn-mini" action="add_team_close" value="Cancel" />
+						</epic:if>
+						<epic:if not_set="&Directory/TeamAdd/issue;">
+							<div style="margin-top: 10px;">
+								<epic:form_action action="add_team_email" class="btn" value="Add New Member"></epic:form_action>
+								<epic:link_action action="add_team_close" class="btn">Cancel</epic:link_action>
+							</div>
+						</epic:if>
+					</form>
+				</epic:if>
+			</div>
+		</epic:if>
+		<ul class="team-list ipm-scroll">
+			<epic:foreach table="Directory/Team">
+				<li class="team-filter-container" data-filter="&Team/first_name;~&Team/last_name;~&Team/first_name; &Team/last_name;~&Team/last_name; &Team/first_name;~&Team/company;~">
+					<!-- 
+					<epic:if set="&Team/email;">
+					<a href="mailto:&Team/email#uriencode;?cc=&User/Me/email#uriencode;&subject=Join Us on project &Directory/Project/name#uriencode;&body=Click on &Directory/Project/url#uriencode;">
+						<i class="icon-user icon-large"></i> &Team/first_name; &Team/last_name;
+					</a>
+					</epic:if>
+					<epic:if not_set="&Team/email;">
+						<i class="icon-user icon-large"></i> &Team/first_name; &Team/last_name;
+					</epic:if>
+					 -->
+					<div class="team-widget-name">
+						<epic:if val="&Team/is_me;-&Directory/Me/is_owner;" ne="yes-yes">
+							<epic:if set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+								<epic:if val="&Team/company;" eq="null">
+									<ul class="team-manage pull-right">
+										<li>
+											<epic:link_action class="btn btn-mini pull-right" action="remove_member" p:id="&Team/user_id;" style="margin-left:5px;" title="Remove this pending user from this project."><i class="icon-remove red"></i></epic:link_action>
+											<epic:link_action class="btn btn-mini btn-warning pull-right" action="resend_invite" p:id="&Team/user_id;">Resend Invitation</epic:link_action>
+										</li>
+									</ul>
+								</epic:if>
+								<epic:if val="&Team/company;" ne="null">
+									<ul class="nav team-manage pull-right">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="get_my_position($(this).next(), -117, -100);">
+												<span class="&Team/is_project_restricted#.project_restriction;&Team/is_manager_restricted#..manager_restriction;">&Team/invited_as_nice; </span><b class="caret"></b>
+											</a>
+											<ul class="dropdown-menu">
+												<li>
+													<epic:link_action action="set_as_member" p:id="&Team/user_id;">Member</epic:link_action>
+												</li>
+												<li>
+													<epic:link_action action="set_as_manager" p:id="&Team/user_id;">Manager</epic:link_action>
+												</li>
+												<li>
+													<epic:link_action action="set_as_owner" p:id="&Team/user_id;">Owner</epic:link_action>
+												</li>
+												<li>
+													<epic:link_action action="remove_member" p:id="&Team/user_id;"><i class="icon-remove red"></i> Remove</epic:link_action>
+												</li>
+											</ul>												
+<!-- 											<epic:if set="&Team/is_manager_restricted;"> -->
+<!-- 												<epic:if val="&Team/is_me;" ne="yes"> -->
+<!-- 													<ul class="team-manage pull-right"> -->
+<!-- 														<li> -->
+<!-- 															<epic:link_action class="btn btn-mini btn-warning" action="ping_manager" p:id="&Team/user_id;" p:as="&Team/invited_as_token;"><i class="icon-message"></i></epic:link_action> -->
+<!-- 														</li> -->
+<!-- 													</ul> -->
+<!-- 												</epic:if> -->
+<!-- 											</epic:if> -->
+										</li>
+									</ul>
+								</epic:if>
+								&Team/first_name; &Team/last_name;
+							</epic:if>
+							<epic:if not_set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">&Team/first_name; &Team/last_name; <span class="team-widget-role pull-right &Team/is_project_restricted#.project_restriction;&Team/is_manager_restricted#..manager_restriction;">&Team/invited_as_nice;</span></epic:if>
+						</epic:if>
+						<epic:if set="&Team/is_me;">
+							<epic:if set="&Directory/Me/is_owner;">&Team/first_name; &Team/last_name; <span class="team-widget-role pull-right">&Team/invited_as_nice;</span></epic:if>
+						</epic:if>
+					</div>
+					<epic:if val="&Team/company;" ne="null">
+						<div class="team-widget-company muted">&Team/company;</div>
+					</epic:if>
+					<epic:if val="&Team/company;" eq="null">
+						<epic:if set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+							<div class="team-widget-company muted">Pending Registration</div>
+						</epic:if>
+					</epic:if>
+				</li>
+				<!-- <tr><td></td><td>&Team/trade_skill;</td><td></td><td>&Team/company;</td></tr> -->
+			</epic:foreach>
+		</ul>
+	</div>
+	<epic:defer name="team_scroll_setup">
+		$(".team-list").css("max-height", Math.floor(($(window).height()/2) - 166) + "px");
+		if (typeof filter_team_text!== 'undefined') {
+			$('#filter_team_textbox').val( filter_team_text).keyup();
+		}
+	</epic:defer>
+</epic:if>

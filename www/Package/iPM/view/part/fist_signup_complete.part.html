@@ -1,0 +1,112 @@
+<epic:foreach table="Tag/Control">
+	<epic:if val="&Control/type#lc;" eq="hidden">
+		<input tabindex="1" type="&Control/type#lc;" name="&Control/name;" value="&Control/value;">
+	</epic:if>
+</epic:foreach>
+<epic:foreach table="Tag/Field">
+	<div class="controls controls-row">
+		<epic:foreach table="Field/AuthEmail">
+			<input tabindex="1" class="span12" type="&AuthEmail/type#lc;" name="&AuthEmail/name;" value="&AuthEmail/value;" placeholder="&AuthEmail/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+			<epic:if set="&AuthEmail/issue;">
+				<span class="help-inline field-error">&AuthEmail/issue;</span>
+			</epic:if>
+		</epic:foreach>
+	</div>
+	<div class="controls controls-row">
+		<epic:foreach table="Field/FirstName">
+			<input tabindex="1" class="span5" type="&FirstName/type#lc;" name="&FirstName/name;" value="&FirstName/value;" placeholder="&FirstName/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+		</epic:foreach>
+		<epic:foreach table="Field/LastName">
+			<input tabindex="1" class="span7" type="&LastName/type#lc;" name="&LastName/name;" value="&LastName/value;" placeholder="&LastName/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+		</epic:foreach>
+	</div>
+	<div class="controls controls-row">
+		<epic:foreach table="Field/FirstName">
+			<epic:if set="&FirstName/issue;">
+				<div class="span5">
+					<span class="help-inline field-error">&FirstName/issue;</span>
+				</div>
+			</epic:if>
+		</epic:foreach>
+		<epic:foreach table="Field/LastName">
+			<epic:if set="&LastName/issue;">
+				<div class="span7">
+					<span class="help-inline field-error">&LastName/issue;</span>
+				</div>
+			</epic:if>
+		</epic:foreach>
+	</div>
+	<div class="controls controls-row">
+		<epic:foreach table="Field/Company">
+			<input tabindex="1" class="span12" type="&Company/type#lc;" name="&Company/name;" autofocus value="&Company/value;" placeholder="&Company/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+			<epic:if set="&Company/issue;">
+				<span class="help-inline field-error">&Company/issue;</span>
+			</epic:if>
+		</epic:foreach>
+	</div>
+	<div class="controls controls-row">
+		<epic:foreach table="Field/AuthPass">
+			<input tabindex="1" class="span12" type="&AuthPass/type#lc;" name="&AuthPass/name;" value="&AuthPass/value;" size="&AuthPass/width;" placeholder="&AuthPass/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+			<epic:if set="&AuthPass/issue;">
+				<span class="help-inline field-error">&AuthPass/issue;</span>
+			</epic:if>
+		</epic:foreach>
+	</div>
+	<div class="controls controls-row">
+		<epic:foreach table="Field/ConfirmPass">
+			<input tabindex="1" class="span12" type="&ConfirmPass/type#lc;" name="&ConfirmPass/name;" value="&ConfirmPass/value;" size="&ConfirmPass/width;" placeholder="&ConfirmPass/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+			<epic:if set="&ConfirmPass/issue;">
+				<span class="help-inline field-error">&ConfirmPass/issue;</span>
+			</epic:if>
+		</epic:foreach>
+	</div>
+	<div class="controls controls-row">
+		<epic:foreach table="Field/City">
+			<div class="span6">
+				<input tabindex="1" class="span12" type="&City/type#lc;" name="&City/name;" value="&City/value;" placeholder="&City/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+				<epic:if set="&City/issue;">
+					<span class="help-inline field-error">&City/issue;</span>
+				</epic:if>
+			</div>
+		</epic:foreach>
+		<epic:foreach table="Field/StateReq">
+			<div class="span6">
+				<select tabindex="1" class="span12" name="&StateReq/name;" &StateReq/size#..size="%";>
+					<epic:foreach table="StateReq/Choice">
+						<option value="&Choice/value#esc;"&Choice/selected#..selected;>&Choice/option;</option>
+					</epic:foreach>
+				</select>
+			</div>
+		</epic:foreach>
+	</div>
+	<div class="controls controls-row">
+		<epic:foreach table="Field/Phone">
+			<input tabindex="1" class="span12" type="&Phone/type#lc;" name="&Phone/name;" value="&Phone/value;" placeholder="&Phone/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+			<epic:if set="&Phone/issue;">
+				<span class="help-inline field-error">&Phone/issue;</span>
+			</epic:if>
+		</epic:foreach>
+	</div>
+	<div class="controls controls-row">
+		<epic:foreach table="Field/TermsConfirm">
+			<label for="&TermsConfirm/id;" class="checkbox control-sublabel"> 
+				<input tabindex="1" type="checkbox" name="&TermsConfirm/name;" id="&TermsConfirm/id;" value="&TermsConfirm/yes_val;"&TermsConfirm/selected#..checked;> 
+				By checking this box you agree to our <epic:link_action action="go_terms" tabindex="2" class="ipm-blue">Terms of Use</epic:link_action>.
+			</label>
+			<epic:if set="&TermsConfirm/issue;">
+				<div class="help-inline field-error" style="margin-top: 0; margin-left: 25px;">* Terms of Use acceptance is required to complete registration.</div>
+			</epic:if>
+		</epic:foreach>
+	</div>
+	<div class="controls controls-row">
+		<epic:foreach table="Field/PrivacyConfirm">
+			<label for="&PrivacyConfirm/id;" class="checkbox control-sublabel"> 
+				<input tabindex="1" type="checkbox" name="&PrivacyConfirm/name;" id="&PrivacyConfirm/id;" value="&PrivacyConfirm/yes_val;"&PrivacyConfirm/selected#..checked;> 
+				By checking this box you agree to our <epic:link_action action="go_privacy" tabindex="2" class="ipm-blue">Privacy Policy</epic:link_action>.
+			</label>
+			<epic:if set="&PrivacyConfirm/issue;">
+				<div class="help-inline field-error" style="margin-top: 0; margin-left: 25px;">* Privacy Policy acceptance is required to complete registration.</div>
+			</epic:if>
+		</epic:foreach>
+	</div>
+</epic:foreach>

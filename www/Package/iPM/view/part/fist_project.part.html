@@ -1,0 +1,66 @@
+<epic:foreach table="Tag/Control">
+	<epic:if name="req" set="&Tag/Form/show_req;">
+		<epic:if name="req" set="&Control/req;" />
+	</epic:if>
+	<div class="control-group&Control/issue#..error;">
+		<epic:if val="&Control/type#lc;" ne="yesno">
+			<label for="&Control/name;" class="control-label"> <epic:if_true name="req">
+					<span class="form-req">*</span>
+				</epic:if_true> &Control/label;
+			</label>
+		</epic:if>
+		<div class="controls">
+			<epic:if val="&Control/type;" eq="textarea">
+				<textarea&Control/attrs;>&Control/val#esc;</textarea>
+			</epic:if>
+			<epic:if val="&Control/type#lc;" eq="text">
+				<input type="&Control/type#lc;" name="&Control/name;" &Control/is_first#.autofocus; value="&Control/value;" size="&Control/width;" &Tag/If/req#.required="";>
+			</epic:if>
+			<epic:if val="&Control/type#lc;" eq="password">
+				<input type="&Control/type#lc;" name="&Control/name;" value="&Control/value;" size="&Control/width;" &Tag/If/req#.required="";>
+			</epic:if>
+			<epic:if val="&Control/type#lc;" eq="yesno">
+				<label for="&Control/id;" class="control-label"> <input type="checkbox" name="&Control/name;" id="&Control/id;" value="1"&Control/selected#..checked;> <epic:if_true name="req">
+						<span class="form-req">*</span>
+					</epic:if_true>&Control/label;
+				</label>
+			</epic:if>
+			<epic:if val="&Control/type;" eq="radio">
+				<epic:foreach table="Control/Choice">
+					<epic:if val="&Choice/_COUNT;" lt="3">
+						<label for="&Control/id;-&Choice/option;" class="radio control-sublabel"> <input type="radio" name="&Control/name;" id="&Control/id;-&Choice/option;" value="&Choice/value#esc;"&Choice/selected#..checked;> &Choice/option;
+						</label>
+					</epic:if>
+					<epic:if val="&Choice/_COUNT;" eq="3">
+						<a href="#" onclick="window.form_control_more(this,'&Control/name;-more');return false;">more...</a>
+						<script type="text/javascript">
+							window.form_control_more = function(self, sel_class) {
+								$(self).hide();
+								$('.' + sel_class).each(function() {
+									$(this).show();
+								});
+								return false;
+							}
+						</script>
+					</epic:if>
+					<epic:if val="&Choice/_COUNT;" ge="3">
+						<label for="&Control/id;-&Choice/option;" class="&Control/name;-more radio control-sublabel" style="display: none;"> <input type="radio" name="&Control/name;" id="&Control/id;-&Choice/option;" value="&Choice/value#esc;"&Choice/selected#..checked;> &Choice/option;
+						</label>
+					</epic:if>
+				</epic:foreach>
+			</epic:if>
+			<epic:if val="&Control/type;" eq="pulldown">
+				<select name="&Control/name;">
+					<epic:foreach table="Control/Choice">
+						<option value="&Choice/value#esc;"&Choice/selected#..selected;>&Choice/option;</option>
+					</epic:foreach>
+				</select>
+			</epic:if>
+			<epic:if set="&Control/issue;">
+				<span class="help-inline field-error">&Control/issue;</span>
+			</epic:if>
+		</div>
+		<!-- .controls -->
+	</div>
+	<!-- .control-group -->
+</epic:foreach>

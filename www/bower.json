@@ -1,0 +1,8 @@
+{
+  "name": "Hensel-Phelps_iBeacon-Demo",
+  "version": "0.0.1",
+  "dependencies": {
+    "epicmvc": "https://github.com/epicguy/epicmvc-proto.git",
+    "bootstrap": "~3.3.4"
+  }
+}

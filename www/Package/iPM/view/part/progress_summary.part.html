@@ -1,0 +1,38 @@
+<epic:if table_is_not_empty="Uploads/Loader">
+	<div class="ipm-widget ipm-scroll box-shadow">
+		<ul class="nav nav-list upload-widget">
+			<li class="nav-header">Uploads</li>
+			<epic:foreach table="Uploads/Loader">
+				<epic:if name="FINISH" val="&Loader/step;" eq="FINISH" />
+				<epic:if_true name="FINISH">				
+						<epic:link_action action="close_a_loader" p:id="&Loader/id;" class="pull-right closer"><i class="icon-remove"></i></epic:link_action>
+				</epic:if_true>
+				<epic:link_action action="show_progress" p:id="&Loader/id;" class="pull-right details-pop"><i class="icon-external-link"></i></epic:link_action>
+				<li class="upload-list-item">					
+					<div>Processed <b>&Loader/files;</b> of <b>&Loader/total_files;</b> files</div>
+					<b>Progress:</b> &Loader/total_percent;
+					<div>
+						<progress value="&Loader/bytes;" max="&Loader/total_bytes;" class="progress-done" />
+					</div>					
+				</li>			
+			</epic:foreach>
+		</ul>
+	</div>
+	<br>
+</epic:if>
+<epic:if table_is_not_empty="Downloads/Loader">
+	<div class="ipm-widget ipm-scroll box-shadow">
+		<ul class="nav nav-list upload-widget">
+			<li class="nav-header">Downloads</li>
+			<epic:foreach table="Downloads/Loader">
+				<epic:if name="FINISH" val="&Loader/step;" eq="FINISH" />
+				<epic:link_action action="&Tag/If/FINISH#?.close?abort;_a_download" p:id="&Loader/id;" class="pull-right closer"><i class="icon-remove"></i></epic:link_action>
+				<li class="upload-list-item">					
+					<div>Downloaded <b>&Loader/files;</b> of <b>&Loader/total_files;</b> files</div>
+					<div>Progress: <progress value="&Loader/bytes;" max="&Loader/total_bytes;" class="progress-done" /></div>				
+				</li>			
+			</epic:foreach>
+		</ul>
+	</div>
+	<br>
+</epic:if>

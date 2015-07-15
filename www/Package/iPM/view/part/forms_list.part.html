@@ -1,0 +1,41 @@
+<epic:if set="&Directory/Options/cache_pending;&Directory/Options/cache_pending_project;">
+	<img src="Package/iPM/images/loading.gif" /> &nbsp; Forms Loading...
+</epic:if>
+<epic:if not_set="&Directory/Options/cache_pending;&Directory/Options/cache_pending_project;">
+	<epic:page_part part="file_folder_js" />
+	<div id="ipm-forms" class="table table-condensed table-hover">
+		<div class="row">
+			<div class="header col add-new-item add-new-item-public">
+				<h4 class="muted data-drop" onclick="window.EpicMvc.Epic.makeClick(false,'go_add_new_item',{id:'&Directory/FORMS/active_folder;'},true)" data-drop-data='{"to":&Directory/FORMS/active_folder;,"callback_class":"ProgressSample2"}' data-drop-Files="os_upload_drop" data-drop-file="move_file" data-drop-clip-file="move_file">
+					<i class="icon-plus icon-large"></i> &nbsp; Add New Form
+				</h4>
+			</div>
+			<div class="header col public-toggler">
+				<h4 class="muted folders-label">
+					<epic:link_action action="open_close" p:folder="FORMS" p:type="toggle">
+						<i class="section-icon"></i>
+						<span class="section-text"> Forms</span>
+						<i class="icon-caret-&Directory/Options/hide_FORMS#?.left?down; forms-expander"></i>
+					</epic:link_action>
+				</h4>
+			</div>
+		</div>
+		<div class="forms-folders-files">
+			<epic:if not_set="&Directory/Options/hide_FORMS;">
+				<!--  FORMS FILES INSERTED HERE -->
+				<epic:foreach table="Directory/FORMS">
+					<epic:if table_is_empty="FORMS/File">
+						<div class="row file-row">
+							<div class="col span12">
+								<h5 class="item-name muted">There are no forms in this project.</h5>
+							</div>
+						</div>
+					</epic:if>
+					<epic:foreach table="FORMS/File">
+						<epic:page_part part="file_row" />
+					</epic:foreach>
+				</epic:foreach>
+			</epic:if>
+		</div>
+	</div>
+</epic:if>

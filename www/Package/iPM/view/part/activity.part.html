@@ -1,0 +1,39 @@
+<a name="activity"></a>
+<epic:if table_is_empty="Directory/Activity">
+No activity
+</epic:if>
+<epic:if table_is_not_empty="Directory/Activity">
+	<h2>
+		Activity
+		<!--  <span class="pull-right"> <epic:link_action action="show_all_activity">Show All</epic:link_action></span>  -->
+		<div class="pull-right" style="margin-top: -5px;">
+			<div style="position: relative;">
+				<input type="text" class="filter-textbox" id="filter_activity_textbox" placeholder="Filter Activities..." onkeyup="filter_activity_text=$(this).val();input_filter( filter_activity_text, '.activity-filter-container', '~', true);return false;">
+				<i style="color:#CCC;" class="icon-remove links clear-text" onclick="$('#filter_activity_textbox').val('').keyup().focus();return false;"></i>
+			</div>
+		</div>
+	</h2>
+	<div class="ipm-widget box-shadow" style="clear: both;">
+		<epic:if set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+			<div class="widget-header">
+				<div class="team-widget-placeholder">
+					<epic:link_action action="project_notify">
+						<i class="icon-envelope icon-large"></i> &nbsp;Notify Team Members
+					</epic:link_action>
+				</div>
+			</div>
+		</epic:if>
+		<ul class="activity-list ipm-scroll">
+			<div style="overflow-y: auto;">
+				<epic:page_part part="activity_lines" Xdynamic="div" delay="10" />
+			</div>
+		</ul>
+	</div>
+	<epic:defer name="activity_scroll_setup">
+		$(".activity-list").css("max-height", Math.floor(($(window).height()/2) - 125) + "px");
+		if (typeof filter_activity_text!== 'undefined') {
+			$('#filter_activity_textbox').val( filter_activity_text).keyup();
+		}
+	</epic:defer>
+</epic:if>
+

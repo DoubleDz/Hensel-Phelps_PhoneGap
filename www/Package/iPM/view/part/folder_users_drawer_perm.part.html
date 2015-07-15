@@ -1,0 +1,11 @@
+<li class="dropdown &Tag/Part/active#.active;">
+	<a href="#" class="dropdown-toggle avatar-toggle" data-toggle="dropdown" onclick="get_my_position($(this).next(), 30);">&Tag/Part/label;</a>
+	<ul class="dropdown-menu team-perms-submenu">
+		<li>
+			<epic:link_action action="choose_permission" p:descend="no"  p:id="&Team/id;" p:folder="&Folder/id;" p:perm="&Tag/Part/perm;">Just this folder</epic:link_action>
+		</li>
+		<li>
+			<epic:link_action action="choose_permission" p:descend="yes" p:id="&Team/id;" p:folder="&Folder/id;" p:perm="&Tag/Part/perm;">All sub-folders</epic:link_action>
+		</li>
+	</ul>
+</li>

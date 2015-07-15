@@ -1,0 +1,35 @@
+<div class="row-fluid">
+	<div class="login-box">
+		<div>
+			<h1 class="ipm-orange center" style="font-weight: normal; font-size: 50px; letter-spacing: 5px; line-height: 50px;">Registration</h1>
+			<h4 align="center" style="font-weight: normal; color: #AAA; font-size: 14px;">Finish your registration by providing a few more personal details.</h4>
+			<br>
+		</div>
+		<div class="row-fluid">
+			<div class="form-container span10 offset1">
+				<div class="form-container">
+					<epic:if not_set="&External/Browser/is_chrome;&External/Browser/is_mobile;">
+						<br>
+						<div class="alert alert-info">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							iProjectMobile has been optimized for Chrome. <a href="https://www.google.com/intl/en/chrome/browser/" target="_blank" class="ipm-orange">Download it here</a> or switch to Chrome for full functionality.
+						</div>
+					</epic:if>
+					<epic:page_part part="issues" />
+					<div class="form-container">
+						<div class="form-container">
+							<form>
+								<epic:dyno_form form="UserRegister" part="fist_signup_complete" />
+								<br>
+								<div class="center">
+									<epic:form_action tabindex="1" class="btn btn-primary btn-large" action="save" value="Save" />
+									<epic:form_action tabindex="1" class="btn btn-large" action="cancel" value="Cancel" />
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

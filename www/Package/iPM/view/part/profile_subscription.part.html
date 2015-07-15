@@ -1,0 +1,43 @@
+<legend>Subscription Details</legend>
+<epic:if set="&User/Me/adam_flag;">
+	You do not have a subscription.  You are a super user.
+</epic:if>
+<epic:if not_set="&User/Me/adam_flag;">
+	<div>
+		<div class="progress" style="margin-top: 5px; min-height: 0; border: 1px solid #CCC;">
+			<div class="bar usage-indicator" style="min-width: 0.5%;"></div>
+			<div class="clearfix"></div>
+			<div style="position: absolute; font-size: 10px;">
+				Storage Capacity: &User/DynaInfo/bytes_used#bytes; of &User/Me/bytes_quota#bytes;
+				<epic:if val="&User/Me/bytes_quota;" gt="0">
+					<span class="hidden-phone">
+						(
+						<span class="storage-perc"></span>
+						)
+					</span>
+				</epic:if>
+			</div>
+		</div>
+		<br>
+		<p>
+			<b>Subscription Level:</b> &User/Me/level_nice;
+			<epic:if val="&User/Me/bill_state;" eq="BT-TRIAL-ACTIVE">
+				<b><span class="ipm-orange"> (Free Trial)</span></b>
+			</epic:if>
+			<epic:if val="&User/Me/bill_state;" eq="BT-TRIAL-EXPIRED">
+				<b><span class="red"> (Expired)</span></b>
+			</epic:if>
+			<span style="display: none;">&User/Me/level;</span>
+		</p>
+		<p>
+			<b>Storage Capacity:</b> &User/Me/bytes_quota#bytes;
+		</p>
+		<p>
+			<b>Storage Used:</b> &User/DynaInfo/bytes_used#bytes;
+		</p>
+	</div>
+	<script type="text/javascript">
+		$('.usage-indicator').width((&User/DynaInfo/mbytes_used; / &User/Me/mbytes_quota;)*100 + '%');
+		$('.storage-perc').text((&User/DynaInfo/mbytes_used; / &User/Me/mbytes_quota;)*100 + '%');
+	</script>
+</epic:if>

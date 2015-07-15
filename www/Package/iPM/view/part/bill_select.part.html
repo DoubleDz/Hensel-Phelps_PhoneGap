@@ -1,0 +1,133 @@
+<style>
+/* John: assimulate! */
+.plan_selected {
+	background-color: orange;
+	color: white;
+}
+
+.plan_selected:hover {
+	background-color: white;
+	color: orange;
+}
+
+.plan-row:hover {
+	background-color: white;
+	color: orange;
+	cursor: pointer;
+}
+
+table.table {
+	border: 1px solid #dddddd;
+	border-collapse: separate;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border-top: 0 none;
+}
+
+table.center td,table.center th {
+	text-align: center;
+}
+
+table th {
+	border-top: 0 none;
+}
+</style>
+<legend>
+	<epic:link_action action="go_overview">Overview</epic:link_action>
+	&nbsp;&gt;&nbsp; Select Plan
+</legend>
+<epic:if val="&User/Me/bill_state;" in_list="BT-TRIAL-ACTIVE,BT-TRIAL-EXPIRED">
+	<p>
+		<epic:foreach table="User/Me"><epic:foreach table="Me/Plan"><epic:foreach table="Me/Stats">
+			<!-- Only one row, but this cuts down on typing -->
+			<epic:if val="&User/Me/bill_state;" eq="BT-TRIAL-ACTIVE">
+				<p>Your <b>Free Trial</b> is still <b class="ipm-green"> active</b>. However, if you are ready to go ahead and get started, we recommend buying the <b>&Plan/plan_name; Plan</b> for <b>$&Plan/estimated_price##cents;/month</b> to maintain your current level of service.</p>
+			</epic:if>
+			<epic:if val="&User/Me/bill_state;" eq="BT-TRIAL-EXPIRED">
+				<p>Your <b>Free Trial</b> has <b class="red"> expired</b> so we recommend buying the <b>&Plan/plan_name; Plan</b> for <b>$&Plan/estimated_price##cents;/month</b> to maintain your current level of service.</p>
+			</epic:if>
+			<p>Recommendation is based on the following usage: Joined projects: &Stats/projects_on;; Created/Owned projects: &Stats/projects_owned;; Storage used: &Stats/mbytes_used; MB; Sponsored users: &Stats/sponsorships;; <br><br></p>
+		</epic:foreach></epic:foreach></epic:foreach>
+	</p>
+</epic:if>
+<h4>Select one of the following plans:</h4>
+<table class="table center table-hover">
+	<tr>
+		<th title="The name of the plan.">Plan Name</th>
+		<th title="How many projects this user can join.">Join</th>
+		<th title="How many projects this user can create.">Create</th>
+		<th title="Whether or not this user can manage projects.">Manage</th>
+		<th title="How much storage capacity this user has available.">Storage</th>
+		<th title="The number of user accounts this user pays for and manages.">Users</th>
+		<th title="The price of the plan.">Price</th>
+	</tr>
+	<epic:foreach table="Billing/Plan">
+		<epic:if name="is_selected" left="&Plan/prefix;" right="&Billing/SelectedPlan/prefix;" op="eq"></epic:if>
+		<tr class="plan-row &Plan/is_current#.current_plan;&Tag/If/is_selected#..plan_selected;" onclick="EpicMvc.Epic.makeClick(false,'select_plan',{prefix:'&Plan/prefix;'},false)" title="Click here to select this plan.">
+			<td>&Plan/plan_name;</td>
+			<td>
+				<epic:if set="&Plan/is_join_unlimited;">Unlimited</epic:if>
+				<epic:if not_set="&Plan/is_join_unlimited;">
+					<epic:if not_set="&Plan/join;">
+						<i class="icon-remove-sign"></i>
+					</epic:if>
+					<epic:if set="&Plan/join;">&Plan/join;</epic:if>
+				</epic:if>
+			</td>
+			<td>
+				<epic:if set="&Plan/is_create_unlimited;">Unlimited</epic:if>
+				<epic:if not_set="&Plan/is_create_unlimited;">
+					<epic:if not_set="&Plan/create;">
+						<i class="icon-remove-sign"></i>
+					</epic:if>
+					<epic:if set="&Plan/create;">&Plan/create;</epic:if>
+				</epic:if>
+			</td>
+			<td>
+				<epic:if val="&Plan/manage;" eq="Unlimited">Yes</epic:if>
+				<epic:if val="&Plan/manage;" ne="Unlimited">No</epic:if>
+			</td>
+			<td>
+				<epic:if not_set="&Plan/base_gigs;">
+					<i class="icon-remove-sign"></i>
+				</epic:if>
+				<epic:if set="&Plan/base_gigs;">
+					<epic:if val="&Plan/base_gigs;" eq="1024">
+						1 TB*
+					</epic:if>
+					<epic:if val="&Plan/base_gigs;" ne="1024">
+						&Plan/base_gigs; GB*
+					</epic:if>
+				</epic:if>
+			</td>
+			<td>&Plan/users;</td>
+			<td>$&Plan/base_price##dollars;/Mo</td>
+		</tr>
+	</epic:foreach>
+</table>
+<epic:if set="&Billing/SelectedPlan/is_selected;">
+	<legend>
+		<h4>Choose Add-ons:</h4>
+	</legend>
+	<form id="profile-addon-special">
+		<epic:form_part form="ProfileAddon" part="fist_profile_addon" />
+		<legend>
+			<h4 class="pull-left">Subtotal:</h4>
+			<h4 class="pull-right">$&Billing/SelectedPlan/total##cents; /month</h4>
+			<div class="clearfix"></div>
+		</legend>
+		<div class="text-center" style="font-size: 18px; line-height: 40px; margin-top: 20px;">
+			<epic:link_action action="back" class="ipm-blue">Back</epic:link_action>
+			&nbsp;&nbsp;
+			<epic:link_action action="next" class="btn btn-large">Next</epic:link_action>
+		</div>
+	</form>
+	<epic:defer name="profile-addon-special">
+		 $( '#profile-addon-special').on('change',{ fist: 'ProfileAddon'}, function(e){
+		    window.EpicMvc.Epic.makeClick( false, 'onchange_'+ e.data.fist, $.extend( {}, e.data, {
+		        field: e.target.name, value: e.target.value, target: e.target, event: e
+		    }),false);
+		});
+	</epic:defer>
+</epic:if>

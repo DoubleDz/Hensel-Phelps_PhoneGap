@@ -1,0 +1,38 @@
+<epic:defer name="em_special">
+$( '#em-special').on( 'input change',{ fist: 'AdminUserEditBankcheck'}, function(e){
+	//alert('yep');
+	window.EpicMvc.Epic.makeClick( false, 'onchange_'+ e.data.fist, $.extend( {}, e.data, {
+		field: e.target.name, value: e.target.value, target: e.target, event: e
+	}),false);
+});
+</epic:defer>
+<style>
+.em-money { text-align: right; }
+table.em-table-top tr { vertical-align: top; }
+td.em-column-right { text-align: right; }
+</style>
+<h2>Edit User: &Admin/UserEdit/email;</h2>
+<form class="form-horizontal" id="em-special">
+<table class="em-table-top"><tr><td width="30%">
+<epic:form_part form="AdminUserEditBankcheck" />
+<p>Current file upload  use: &Admin/UserEdit/mbytes_used; (&Admin/UserEdit/bytes_used#bytes;)</p>
+</td><td width="40%">
+<ul>
+<epic:foreach table="Admin/Bankcheck">
+<li>
+&Bankcheck/plan_name; 
+<br>
+&Bankcheck/prefix; ($&Bankcheck/base_price##cents;, <i class="icon-user"></i> x &Bankcheck/base_spships;, &Bankcheck/base_gigs;GB)
+<br>
+(1 x <i class="icon-user"></i> = $&Bankcheck/spship_price##cents;, 50GB = $&Bankcheck/gblock_price##cents;)
+</li>
+<br>
+</epic:foreach>
+</ul>
+</td>
+<epic:page_part part="admin_user_bankcheck_calc" dynamic="td" />
+</tr></table>
+<epic:form_action action="save" value="Save" class="btn btn-primary"/>
+<epic:form_action action="cancel" value="Cancel" class="btn"/>
+
+</form>

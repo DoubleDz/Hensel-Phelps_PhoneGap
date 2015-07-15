@@ -1,0 +1,53 @@
+<style>
+.profile-addon {
+	margin-left: 30%;
+}
+
+.profile-addon input {
+	width: 2em;
+}
+
+.profile-addon.disabled,.profile-addon.disabled input,.profile-addon.disabled a {
+	color: #CCC;
+}
+
+.up-down-btn {
+	width: 15px;
+	height: 15px;
+	padding: 0;
+	line-height: 15px;
+}
+</style>
+<epic:if name="has_capacity" set="&Billing/SelectedPlan/base_gigs;" />
+<epic:if name="has_users" val="&Billing/SelectedPlan/base_spships;" gt="0" />
+<epic:foreach table="Tag/Field">
+	<div class="profile-addon &Tag/If/has_capacity#?.?.disabled;">
+		<epic:foreach table="Field/ExtraGBlocks" alias="F">
+			Extra storage capacity ($&Billing/SelectedPlan/gblock_price##cents;/mo per 50 GB)
+			<input type="&F/type#lc;" name="&F/name;" value="&F/value;" size="&F/width;">
+			<div style="height: 30px; vertical-align: text-bottom; display: inline-block;">
+				<epic:link_action action="&Tag/If/has_capacity#?.?.disabled;capacity_plus" class="btn btn-mini pull-left up-down-btn &Tag/If/has_capacity#?.?.disabled;">+</epic:link_action>
+				<br>
+				<epic:link_action action="&Tag/If/has_capacity#?.?.disabled;capacity_minus" class="btn btn-mini pull-left up-down-btn &Tag/If/has_capacity#?.?.disabled;">-</epic:link_action>
+			</div>
+			<epic:if set="&F/issue;">
+				<span class="help-inline field-error">&F/issue;</span>
+			</epic:if>
+		</epic:foreach>
+	</div>
+	<div class="profile-addon &Tag/If/has_users#?.?.disabled;">
+		<epic:foreach table="Field/ExtraUsers" alias="F">
+			Extra Users ($&Billing/SelectedPlan/spship_price##cents;/mo per user)
+            <input type="&F/type#lc;" name="&F/name;" value="&F/value;" size="&F/width;">
+			<div style="height: 30px; vertical-align: text-bottom; display: inline-block;">
+				<epic:link_action action="&Tag/If/has_users#?.?.disabled;user_plus" class="btn btn-mini pull-left up-down-btn &Tag/If/has_users#?.?.disabled;" &Tag/If/has_users#?.?.disabled;>+</epic:link_action>
+				<br>
+				<epic:link_action action="&Tag/If/has_users#?.?.disabled;user_minus" class="btn btn-mini pull-left up-down-btn &Tag/If/has_users#?.?.disabled;">-</epic:link_action>
+			</div>
+			<epic:if set="&F/issue;">
+				<span class="help-inline field-error">&F/issue;</span>
+			</epic:if>
+		</epic:foreach>
+	</div>
+	<div class="clearfix"></div>
+</epic:foreach>

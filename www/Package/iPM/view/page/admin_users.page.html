@@ -1,0 +1,150 @@
+<div class="row-fluid">
+	<h2>
+		<span class="span8">All Active Users:</span>
+		<input class="span4" type="text" name="filter" onkeyup="window.char_filter( $(this).val())" placeholder="Filter users by typing here...">
+	</h2>
+</div>
+<div class="row-fluid">
+	<table class="table table-hover table-striped table-bordered">
+		<tr>
+			<th colspan="4" style="text-align: center;">Actions</th>
+			<th>ID</th>
+			<th>Last Name</th>
+			<th>First Name</th>
+			<th>Email</th>
+			<th>Joined</th>
+			<th>Prj #</th>
+			<th>Inv #</th>
+			<th>Invited By</th>
+			<th>Company</th>
+			<th>Level</th>
+			<th>City</th>
+			<th>State</th>
+			<th>Bill State</th>
+			<th>Exprires</th>
+		</tr>
+		<epic:foreach table="Admin/User">
+			<tr class="char-filter&User/is_pending#..pending;" data-chars="&User/first_name;~&User/last_name;~&User/email;~&User/city;~&User/state;~&User/company;~&User/inv_who_email;">
+				<td style="background-color: #DDD;">
+				<epic:if val="&User/level_token;" eq="team_owner">
+					<epic:link_action action="admin_user_sponsors" p:id="&User/id;">
+						<i class="icon-sitemap" title="Manage sponsored users"></i>
+					</epic:link_action>
+				</epic:if>
+				</td>
+				<td style="background-color: #DDD;">
+					<epic:link_action action="admin_user_edit" p:id="&User/id;">
+						<i class="icon-pencil" title="Edit user account"></i>
+					</epic:link_action>
+				</td>
+				<td style="background-color: #DDD;">
+					<epic:link_action action="admin_user_edit_level" p:id="&User/id;">
+						<i class="icon-bar-chart" title="Edit user levels"></i>
+					</epic:link_action>
+				</td>
+				<td style="background-color: #DDD;">
+					<epic:link_action action="admin_user_disable" p:id="&User/id;">
+						<i class="icon-&User/disposal#?.plus.green?remove.red;" title="Disable this user"></i>
+					</epic:link_action>
+				</td>
+				<td>&User/id;</td>
+				<td>&User/last_name;</td>
+				<td>&User/first_name;</td>
+				<td>&User/email;</td>
+				<td style="white-space:nowrap;">&User/created_nice;</td>
+				<td>&User/cnt_projects_owned;</td>
+				<td>&User/inv_cnt;</td>
+				<td>&User/inv_who_email;</td>
+				<epic:if val="&User/company;" eq="null">
+					<td>&nbsp;</td>
+				</epic:if>
+				<epic:if val="&User/company;" ne="null">
+					<td>&User/company;</td>
+				</epic:if>				<td>&User/level_nice;</td>
+				<epic:if val="&User/city;" eq="null">
+					<td>&nbsp;</td>
+				</epic:if>
+				<epic:if val="&User/city;" ne="null">
+					<td>&User/city;</td>
+				</epic:if>
+				<epic:if val="&User/state;" eq="null">
+					<td>&nbsp;</td>
+				</epic:if>
+				<epic:if val="&User/state;" ne="null">
+					<td>&User/state;</td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="null">
+					<td class="ipm-orange">iPM Employee / Exception</td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" not_in_list="null,BT-TRIAL-ACTIVE,BT-TRIAL-EXPIRED,BT-FREE-ACTIVE,BC-TEAM-ACTIVE,BC-TEAM-EXPIRED,BC-TEAM-CANCELED,BT-TEAM-ACTIVE,BT-TEAM-EXPIRED,BT-TEAM-CANCELED,BT-STD-ACTIVE,BT-STD-EXPIRED,BT-STD-CANCELED,BT-STR-ACTIVE,BT-STR-EXPIRED,BT-STR-CANCELED,BT-PRO-ACTIVE,BT-PRO-EXPIRED,BT-PRO-CANCELED">
+					<td>&User/bill_state;</td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-TRIAL-ACTIVE">
+					<td>Trial User <span class="ipm-green">(active)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-TRIAL-EXPIRED">
+					<td>Trial User <span class="red">(expired)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-FREE-ACTIVE">
+					<td>Free User <span class="ipm-green">(active)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BC-TEAM-ACTIVE">
+					<td>Team Account [check] <span class="ipm-green">(active)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BC-TEAM-EXPIRED">
+					<td>Team Account [check] <span class="red">(expired)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BC-TEAM-CANCELED">
+					<td>Team Account [check] <b>(canceled)</b></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-TEAM-ACTIVE">
+					<td>Team Account <span class="ipm-green">(active)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-TEAM-EXPIRED">
+					<td>Team Account <span class="red">(expired)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-TEAM-CANCELED">
+					<td>Team Account <b>(canceled)</b></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STD-ACTIVE">
+					<td>Standard User <span class="ipm-green">(active)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STD-EXPIRED">
+					<td>Standard User <span class="red">(expired)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STD-CANCELED">
+					<td>Standard User <b>(canceled)</b></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STR-ACTIVE">
+					<td>Starter User <span class="ipm-green">(active)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STR-EXPIRED">
+					<td>Starter User <span class="red">(expired)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-STR-CANCELED">
+					<td>Starter User <b>(canceled)</b></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-PRO-ACTIVE">
+					<td>Pro User <span class="ipm-green">(active)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-PRO-EXPIRED">
+					<td>Pro User <span class="red">(expired)</span></td>
+				</epic:if>
+				<epic:if val="&User/bill_state;" eq="BT-PRO-CANCELED">
+					<td>Pro User <b>(canceled)</b></td>
+				</epic:if>
+				<epic:if val="&User/expires_days;" not_in_list="null,NaN">
+					<epic:if set="&User/expires_days;">
+						<td>&User/expires_days;</td>
+					</epic:if>
+					<epic:if not_set="&User/expires_days;">
+						<td>---</td>
+					</epic:if>
+				</epic:if>
+				<epic:if val="&User/expires_days;" in_list="null,NaN">
+					<td>---</td>
+				</epic:if>
+			</tr>
+		</epic:foreach>
+	</table>
+</div>

@@ -1,0 +1,18 @@
+<epic:foreach table="Tag/Field">
+	<div>
+		<epic:foreach table="Field/AuthEmail">
+			<input class="span12" type="&AuthEmail/type#lc;" name="&AuthEmail/name;" autofocus value="&AuthEmail/value;" size="&AuthEmail/width;" placeholder="&AuthEmail/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+			<epic:if set="&AuthEmail/issue;">
+				<span class="help-inline field-error">&AuthEmail/issue;</span>
+			</epic:if>
+		</epic:foreach>
+	</div>
+	<div>
+		<epic:foreach table="Field/LoginPass">
+			<input class="span12" type="&LoginPass/type#lc;" name="&LoginPass/name;" value="&LoginPass/value;" size="&LoginPass/width;" placeholder="&LoginPass/label;" &Tag/If/req#.required="" .title="Cannot be blank";>
+			<epic:if set="&LoginPass/issue;">
+				<span class="help-inline field-error">&LoginPass/issue;</span>
+			</epic:if>
+		</epic:foreach>
+	</div>
+</epic:foreach>

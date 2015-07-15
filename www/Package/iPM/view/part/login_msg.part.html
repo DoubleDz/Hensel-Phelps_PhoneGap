@@ -1,0 +1,22 @@
+<epic:if table_is_not_empty="User/LoginMsg">
+	<div class="web-client-update-message" style="display:none;">
+		<div class="alert" style="margin-top:-10px; links" onclick="window.EpicMvc.Epic.makeClick(false,'clear_login_msg',{},true);" title="Click to close this alert.">
+			<epic:link_action action="clear_login_msg" class="close links btn btn-mini">&times;</epic:link_action>
+			<epic:comment>
+			<b>Thank you for using iProjectMobile! You have &User/LoginMsg/expires_days; day(s) left in your free trial.</b>
+			<br>
+			<b>Based on your current usage, we recommend buying the &User/LoginMsg/plan_name; Plan for $&User/LoginMsg/plan_price##cents; per month.</b>
+			<epic:link_action action="recommend_plan">Details.</epic:link_action>
+			
+			<pre>
+				projects join: &User/LoginMsg/projects_on;
+				projects owned: &User/LoginMsg/projects_owned;
+				data used: &User/LoginMsg/mbytes_used;
+				team users: &User/LoginMsg/sponsorships; (sponsorships)
+				trial days left: &User/LoginMsg/expires_days;
+			</pre>
+			<b>NOTICE:</b> Thank you for using iProjectMobile and being a valued customer through out our initial releases.  As of Jan. 1, 2014, all users are officially in a Free Trial.  Once your Free Trial expires, payment will be required for continued use. We will notify you of your precise trial expiration and payment options when they become available. 
+			</epic:comment>
+		</div>
+	</div>
+</epic:if>

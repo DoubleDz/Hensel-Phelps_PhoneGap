@@ -1,0 +1,58 @@
+<div class="row file-row">
+	<div class="col span8 clearfix">
+		<h5 class="item-name">
+			<epic:if set="&Annot/edit;">
+				<form class="form-inline">
+					<div class="icon-&Annot/icon_ext; ipm-icon"></div>
+					<epic:form_part form="File" part="fist_inline"/>
+					<epic:form_action action="save_rename_file" value="Save" class="btn btn-primary save-btn" />
+					<epic:form_action action="cancel_rename_file" value="Cancel" class="btn" />
+				</form>
+			</epic:if>
+			<epic:if not_set="&Annot/edit;">
+				<div class="icon-&Annot/icon_ext; ipm-icon"></div>
+				<a href="#" class="file" onclick="S3Open(&Directory/Options/active_project;,&Annot/id;,true);return false;"> &Annot/name; </a>
+				<div class="annotation-action-pane">
+					<ul class="nav annotation-options">
+						<li class="dropdown">
+							<!-- John, make this always visible, not just roll-over -->
+							<a href="#" class="dropdown-toggle avatar-toggle" data-toggle="dropdown" onclick="get_my_position($(this).next(), 28);">
+								<i class="icon-cog"></i>
+							</a>
+							<!-- dropdown -->
+							<ul class="dropdown-menu annotation-options-submenu">
+								<epic:if set="&Annot/can_edit;">
+									<li>
+										<epic:link_action action="rename_file" p:id="&Annot/id;">
+											<i class="icon-pencil"></i>
+											<span class="action-labels"> Rename</span>
+										</epic:link_action>
+									</li>
+									<li>
+										<epic:link_action action="delete_file" p:id="&Annot/id;">
+											<i class="icon-trash"></i>
+											<span class="action-labels"> Delete</span>
+										</epic:link_action>
+									</li>
+								</epic:if>
+								<li>
+									<a title="download" "btn-mini" href="#" onclick="S3Open(&Directory/Options/active_project;,&Annot/id;,false);return false">
+										<i class="icon-download-alt"></i> <span class="action-labels"> Download</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</epic:if>
+		</h5>
+	</div>
+	<div class="col span2">
+		<div class="size-col">&Annot/first_name; &Annot/last_name;</div>
+	</div>
+	<div class="col span2">
+		<div class="modified-col">
+			<time class="timeago" dateTime="&Annot/modified;"> &Annot/modified; </time>
+		</div>
+	</div>
+</div>

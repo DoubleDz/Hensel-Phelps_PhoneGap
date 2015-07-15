@@ -1,0 +1,118 @@
+<legend>Manage Team Users</legend>
+<div>
+	<div class="widget-header">
+		<epic:if set="&User/Me/is_team_owner;&User/Me/is_team_admin;&User/Me/is_team_accountant;">
+			<div id="add-sponsor-member-placeholder">
+				<epic:link_action action="add_sponsor_open" class="btn">
+					<i class="icon-plus icon-large"></i> &nbsp; Add New Team User
+				</epic:link_action>
+			</div>
+		</epic:if>
+		<br>
+		<epic:if table_is_not_empty="Sponsor/SponsorAddRows">
+			<form class="form-inline" style="margin-bottom: 0;">
+				<table class="table table-hover table-striped table-bordered team-users-table">
+					<tr>
+						<th width="30%">Name</th>
+						<th width="40%">Email</th>
+						<th class="center" width="20%" class="right">Level</th>
+						<th width="10%">&nbsp;</th>
+					</tr>
+					<epic:foreach table="Sponsor/SponsorAddRows">
+						<tr>
+							<epic:form_part form="AddNewTeamUser" part="fist_add_team_member_row" row="&SponsorAddRows/id;"/>
+							<td valign="top" style="vertical-align: top;" class="center">
+								<div class="row-fluid controls controls-row" style="padding-top: 10px;">
+									<epic:link_action action="remove_team_user_row" p:id="&SponsorAddRows/id;">
+										<i class="icon-remove red"></i> Remove
+									</epic:link_action>
+								</div>
+							</td>
+						</tr>
+					</epic:foreach>
+				</table>
+				<div class="pull-right">
+					<epic:form_action action="send_team_invites" class="btn btn-primary save-btn" value="Send" />
+					<epic:form_action action="cancel_team_invites" class="btn" value="Cancel" />
+				</div>
+				<div class="clearfix"></div>
+				<hr>
+			</form>
+		</epic:if>
+	</div>
+	<table class="table table-hover table-striped table-bordered team-users-table">
+		<tr>
+			<th width="30%">Name</th>
+			<th width="40%">Email</th>
+			<th width="15%" class="right">Level</th>
+			<th width="15%" class="center">Action</th>
+		</tr>
+		<epic:foreach table="Sponsor/Sponsor">
+			<tr>
+				<epic:if not_set="&Sponsor/is_edit;">
+					<td>&Sponsor/first_name; &Sponsor/last_name;</td>
+				</epic:if>
+				<epic:if set="&Sponsor/status;">
+					<td>&Sponsor/email;</td>
+				</epic:if>
+				<epic:if not_set="&Sponsor/status;">
+					<epic:if set="&Sponsor/is_edit;">
+						<form class="form-inline" style="margin-bottom: 0;">
+							<epic:form_part form="ModifyTeamUser" part="fist_edit_team_member" />
+						</form>
+					</epic:if>
+					<epic:if not_set="&Sponsor/is_edit;">
+						<td>&Sponsor/email;</td>
+					</epic:if>
+				</epic:if>
+				<td>
+					<ul class="nav pull-right" style="margin: 10px 0;">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="get_my_position($(this).next(), -120, -60);">
+								&Sponsor/level_nice; <b class="caret" style="border-width: 6px; margin-top: 6px;"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<epic:if val="&Sponsor/level_token" ne="team_member">
+									<li>
+										<epic:link_action action="set_as_team_member" p:id="&Sponsor/id;">Member <i class="icon-question-sign icon-large" title="Team Members can view projects they are added to."></i></epic:link_action>
+									</li>
+								</epic:if>
+								<epic:if val="&Sponsor/level_token" ne="team_manager">
+									<li>
+										<epic:link_action action="set_as_team_manager" p:id="&Sponsor/id;">Project Manager <i class="icon-question-sign icon-large" title="Team Project Managers can only view and/or edit projects they are added to."></i></epic:link_action>
+									</li>
+								</epic:if>
+								<epic:if val="&Sponsor/level_token" ne="team_creator">
+									<li>
+										<epic:link_action action="set_as_team_creator" p:id="&Sponsor/id;">Creator <i class="icon-question-sign icon-large" title="Team Project Creators can create/own, manage, view, and/or edit projects they create or are added to."></i></epic:link_action>
+									</li>
+								</epic:if>
+								<epic:if val="&Sponsor/level_token" ne="team_accountant">
+									<li>
+										<epic:link_action action="set_as_team_accountant" p:id="&Sponsor/id;">Account Manager <i class="icon-question-sign icon-large" title="Team Account can do anything associated with billing, team projects, and users...except they cannot view all of the owners's projects."></i></epic:link_action>
+									</li>
+								</epic:if>
+								<epic:if val="&Sponsor/level_token" ne="team_admin">
+									<li>
+										<epic:link_action action="set_as_team_admin" p:id="&Sponsor/id;">Administrator <i class="icon-question-sign icon-large" title="Team Administrators can do anything associated with team projects and users - just like an owner."></i></epic:link_action>
+									</li>
+								</epic:if>
+								<li>
+									<epic:link_action action="sponsor_del" p:id="&Sponsor/id;">Remove
+															<i class="icon-remove red"></i>
+									</epic:link_action>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</td>
+				<td class="center">
+					<epic:if not_set="&Sponsor/status;">
+						<epic:link_action class="btn btn-mini btn-warning" action="resend_invite" p:id="&Sponsor/id;">Resend Invite</epic:link_action>
+						<epic:link_action class="btn btn-mini" action="modify_team_user" p:id="&Sponsor/id;">Modify</epic:link_action>
+					</epic:if>
+				</td>
+			</tr>
+		</epic:foreach>
+	</table>
+</div>

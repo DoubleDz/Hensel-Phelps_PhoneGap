@@ -1,0 +1,15 @@
+<epic:foreach table="Directory/Activity">
+	<epic:if name="FOLDER" val="&Activity/table;" eq="folder"></epic:if>
+	<li class="activity-filter-container" data-filter="&Activity/description;~&Activity/user_name;~&Activity/verb;">
+		<table class="activity-feed-item">
+			<tr class="activity-row">
+				<td class="activity-icon-container"><i class="ipm-icon ipm-icon-action icon-&Activity/table;-&Activity/verb;"></i></td>
+				<td class="activity-item">
+					<div class="activity-line1">&Activity/description;</div>
+					<div class="activity-line2">&Activity/user_name; <b>&Activity/verb;</b> a &Activity/table;<epic:if set="&Activity/destination;"> to &Activity/destination;</epic:if>.</div>
+					<div class="activity-line2">&Activity/date; at &Activity/time; <epic:if set="&Activity/is_recoverable;">&nbsp;<b>[<epic:link_action action="undo_&Activity/table;" p:id="&Activity/id;" class="ipm-blue">Recover</epic:link_action>]</b></epic:if></div>
+				</td>
+			</tr>
+		</table>
+	</li>
+</epic:foreach>

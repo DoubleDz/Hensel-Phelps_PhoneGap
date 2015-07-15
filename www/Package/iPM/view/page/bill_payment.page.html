@@ -1,0 +1,25 @@
+<legend>
+	<epic:link_action action="go_overview">Overview</epic:link_action>
+	&nbsp;&gt;&nbsp;
+	<epic:link_action action="go_select">Select Plan</epic:link_action>
+	&nbsp;&gt;&nbsp; Payment
+</legend>
+<h4>Credit Card on File:</h4>
+<form>
+	<div align="center" style="margin-bottom: 20px;">
+		Payments will be charged to this credit card account:
+	</div>
+	<div align="center">
+		<div style="width: 200px; text-align:left;">
+		<div class="pull-left cc-icons cc-&Billing/MyCard/cardType##clean_to_lower;"></div><b>&Billing/MyCard/cardholderName;</b>
+		<div style="margin-left:56px;">**** **** **** &Billing/MyCard/last4;</div>
+		<div style="margin-left:56px;font-size:12px;"><epic:link_action action="change" class="ipm-blue">Update Credit Card</epic:link_action></div>
+		</div>
+	</div>
+	<hr>
+	<div class="text-center" style="font-size: 18px; line-height: 40px; margin-top: 20px;">
+		<epic:link_action action="go_select" class="ipm-blue">Back</epic:link_action>
+		&nbsp;&nbsp;
+		<epic:link_action action="next" class="btn btn-large">Next</epic:link_action>
+	</div>
+</form>

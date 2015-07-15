@@ -1,0 +1,104 @@
+<style>
+.clipboard-showhide-up, .clipboard-showhide-down {
+	position: absolute;
+	left: 50%;
+	z-index: 9999;
+	background-color: #FFF;
+	width: 23px;
+	text-align: center;
+	padding: 0 4px;
+	border-radius: 3px;
+	border-top-left-radius: 0; 
+	border-top-right-radius: 0;
+	border: 1px solid #A2A2A2;
+	border-top: 0 none;
+	cursor: pointer; 
+}
+</style>
+<epic:defer name="position-hideshow">
+	var clip_height = 0;
+	function position_showhide() {
+		clip_height = $('.the-clipboard').height() - 3;
+		$('.clipboard-showhide-down').css("top", clip_height);
+		
+	}
+	position_showhide();
+	window.onresize = function(event) {
+		position_showhide();
+	}
+	$('.clipboard-showhide-down').click(function(){
+		$('.the-clipboard').slideUp();
+		$('.clipboard-showhide-up,.clipboard-showhide-down').animate({top:-6},400).fadeOut(function(){$('.clipboard-showhide-up').show();});
+		
+	});
+	$('.clipboard-showhide-up').click(function(){
+		$('.the-clipboard').slideDown();
+		$('.clipboard-showhide-up,.clipboard-showhide-down').animate({top:clip_height},400).fadeOut(function(){$('.clipboard-showhide-down').show();});	
+	});
+</epic:defer>
+<epic:if not_set="&Directory/Clipboard/is_empty;">
+	<div class="the-clipboard folder-box box-shadow data-drop" data-drop-folder="folder_to_clip" data-drop-file="file_to_clip">
+		<epic:link_action action="clip_clear" class="clear-all-clipboard">
+			<i class="icon-remove icon-large red"></i>
+		</epic:link_action>
+		<div class="clipboard-header">Holding Area</div>
+		<epic:foreach table="Directory/Clipboard">
+			<epic:foreach table="Clipboard/Folder">
+				<div class="folder-row clipboard-item data-drag" data-drag-type="folder" data-drag-data='{"from":&Folder/id;,"at":&Folder/folder_id;}'>
+					<div class="icon-closed-folder ipm-icon"></div>
+					<span class="folder"> &Folder/name##trunc:20;</span>
+					<epic:link_action action="clip_remove_folder" p:id="&Folder/id;">
+						<i class="icon-remove red"></i>
+					</epic:link_action>
+				</div>
+			</epic:foreach>
+			<epic:foreach table="Clipboard/File">
+				<div class="file-row clipboard-item">
+					<div class="data-drag clipboard-file-container" data-drag-type="file" data-drag-data='{"from":&File/id;,"at":&File/folder_id;}'>
+						<div class="icon-&File/icon_ext; ipm-icon clipboard-file-icon"></div>
+						<span class="file" id="file_&File/id;">&File/name##trunc:20;</span>
+						<epic:link_action action="clip_remove_file" p:id="&File/id;">
+							<i class="icon-remove red"></i>
+						</epic:link_action>
+					</div>
+				</div>
+			</epic:foreach>
+			<epic:foreach table="Clipboard/UndoFolder">
+				<div class="folder-row clipboard-item data-drag" data-drag-type="undofolder" data-drag-data='{"from":&UndoFolder/id;,"at":0}'>
+					<div class="icon-closed-folder ipm-icon"></div>
+					<span class="folder"> &UndoFolder/name##trunc:20;</span>
+					<epic:link_action action="clip_remove_undofolder" p:id="&UndoFolder/id;">
+						<i class="icon-remove red"></i>
+					</epic:link_action>
+				</div>
+			</epic:foreach>
+			<epic:foreach table="Clipboard/UndoFile">
+				<div class="file-row clipboard-item">
+					<div class="data-drag clipboard-file-container" data-drag-type="undofile" data-drag-data='{"from":&UndoFile/id;,"at":0}'>
+						<div class="icon-&UndoFile/icon_ext; ipm-icon clipboard-file-icon"></div>
+						<span class="file" id="file_&UndoFile/id;">&UndoFile/name##trunc:20;</span>
+						<epic:link_action action="clip_remove_undofile" p:id="&UndoFile/id;">
+							<i class="icon-remove red"></i>
+						</epic:link_action>
+					</div>
+				</div>
+			</epic:foreach>
+		</epic:foreach>
+	</div>
+	<div class="clipboard-showhide-down" title="Hide the holding area.">
+		<i class="icon-chevron-up"></i>
+	</div>
+	<div class="clipboard-showhide-up" title="Show the holding area." style="display:none;">
+		<i class="icon-chevron-down"></i>
+	</div>
+</epic:if>
+<epic:if set="&Directory/Clipboard/is_empty;">
+	<div class="the-clipboard folder-box box-shadow data-drop" style="display: none;" data-drop-folder="folder_to_clip" data-drop-file="file_to_clip">
+		<epic:link_action action="clip_clear" class="clear-all-clipboard">
+			<i class="icon-remove icon-large red"></i>
+		</epic:link_action>
+		<div class="clipboard-header">Holding Area</div>
+		<br>
+		<br>
+	</div>
+</epic:if>

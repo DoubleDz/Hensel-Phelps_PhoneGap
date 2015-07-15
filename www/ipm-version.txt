@@ -1,0 +1,5 @@
+{
+	"index_html_version":"%MD5_INDEXHTML%",
+	"terms_use_version":"0.%MD5_TERMS_USE_PART%",
+	"privacy_version":"0.%MD5_PRIVACY_PART%"
+}

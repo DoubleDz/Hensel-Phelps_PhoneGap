@@ -1,0 +1,30 @@
+<epic:foreach table="Directory/Team">
+	<li>
+		<i class="icon-user icon-2x pull-left icon-border"></i>
+		<div class="dropdown pull-right">
+			<!-- Link or button to toggle dropdown -->
+			<a class="btn btn-mini dropdown-toggle user-manage-btn" data-toggle="dropdown" href="#">
+				<i class="icon-edit icon-small"></i> &Team/invited_as_nice; <span class="caret pull-right"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+				<li>
+					<epic:link_action action="set_as_member" p:id="&Team/user_id;">Member</epic:link_action>
+				</li>
+				<li class="&Directory/Me/is_manager#.disabled;">
+					<epic:link_action action="set_as_manager" p:id="&Team/user_id;">Manager</epic:link_action>
+				</li>
+				<li class="&Directory/Me/is_owner#.disabled;">
+					<epic:link_action action="set_as_owner" p:id="&Team/user_id;">Owner</epic:link_action>
+				</li>
+				<li>
+					<epic:link_action action="remove_member" p:id="&Team/user_id;">Remove <i class="icon-remove red"></i>
+					</epic:link_action>
+				</li>
+			</ul>
+		</div>
+		<div class="line1">&Team/first_name; &Team/last_name;</div>
+		<div class="line2 muted">
+			<small>&Team/trade_skill;</small>
+		</div>
+	</li>
+</epic:foreach>

@@ -1,0 +1,107 @@
+<div class="tab-content box-shadow span12">
+	<div class="drawer-inner users-drawer">
+		<ul class="standard-widget ipm_scroll">
+			<!-- 
+				<li>
+					<a href="#" onclick="event.preventDefault();">
+						<i class="icon-plus icon-large"></i>
+					</a>
+					<input type="text" class="share-folder-add-user span6" autofocus placeholder="Share this folder with additional users" />
+					<button class="btn">Add</button>
+					&nbsp;&nbsp;
+					<a href="#" onclick="event.preventDefault();">
+						Show All <i class="icon-external-link"></i>
+					</a>
+				</li>
+			-->
+			<epic:if set="&Folder/public;">
+				<epic:foreach table="Folder/Team">
+					<li class="clearfix users-filter-container" data-filter="&Team/name;">
+						<div class="user-perms-name pull-left">
+							<i class="icon-user icon-large pull-left"></i> &Team/name;
+						</div>
+						<div class="user-perms-panel pull-right">
+							<ul class="nav nav-pills">
+								<epic:if set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+									<epic:page_part part="folder_users_drawer_perm" p:active="&Team/have_none;&Team/have_viewer;" p:label="Viewer" p:perm="None" />
+									<epic:page_part part="folder_users_drawer_perm" p:active="&Team/have_contrib;" p:label="Contributor" p:perm="Contributor" />
+									<epic:page_part part="folder_users_drawer_perm" p:active="&Team/have_collab;" p:label="Collaborator" p:perm="Collaborator" />
+									<!-- 
+									<li>
+										<a href="#" onclick="event.preventDefault();">
+											<i class="icon-remove icon-large red"></i>
+										</a>
+									</li>
+									 -->
+								</epic:if>
+								<epic:if not_set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+									<li class="&Team/have_viewer#.active;&Team/have_none#.active;">
+										<a href="#" onclick="return false;">Viewer</a>
+									</li>
+									<li class="&Team/have_contrib#.active;">
+										<a href="#" onclick="return false;">Contributor</a>
+									</li>
+									<li class="&Team/have_collab#.active;">
+										<a href="#" onclick="return false;">Collaborator</a>
+									</li>
+								</epic:if>
+							</ul>
+						</div>
+					</li>
+				</epic:foreach>
+			</epic:if>
+			<epic:if not_set="&Folder/public;">
+				<epic:foreach table="Folder/Team">
+					<li class="clearfix users-filter-container" data-filter="&Team/name;">
+						<div class="user-perms-name pull-left">
+							<i class="icon-user icon-large pull-left"></i> &Team/name;
+						</div>
+						<div class="user-perms-panel pull-right">
+							<ul class="nav nav-pills">
+								<epic:if set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+									<epic:page_part part="folder_users_drawer_perm" p:active="&Team/have_none;" p:label="No Access" p:perm="None" />
+									<epic:page_part part="folder_users_drawer_perm" p:active="&Team/have_viewer;" p:label="Viewer" p:perm="Viewer" />
+									<epic:page_part part="folder_users_drawer_perm" p:active="&Team/have_contrib;" p:label="Contributor" p:perm="Contributor" />
+									<epic:page_part part="folder_users_drawer_perm" p:active="&Team/have_collab;" p:label="Collaborator" p:perm="Collaborator" />
+									<!--
+										<li class="&Team/have_none#.active;">
+											<epic:link_action action="choose_permission" p:id="&Team/id;" p:folder="&Folder/id;" p:perm="None">No Access</epic:link_action>
+										</li>
+										<li class="&Team/have_viewer#.active;">
+											<epic:link_action action="choose_permission" p:id="&Team/id;" p:folder="&Folder/id;" p:perm="Viewer">Viewer</epic:link_action>
+										</li>
+										<li class="&Team/have_contrib#.active;">
+											<epic:link_action action="choose_permission" p:id="&Team/id;" p:folder="&Folder/id;" p:perm="Contributor">Contributor</epic:link_action>
+										</li>
+										<li class="&Team/have_collab#.active;">
+											<epic:link_action action="choose_permission" p:id="&Team/id;" p:folder="&Folder/id;" p:perm="Collaborator">Collaborator</epic:link_action>
+										</li>
+										<li>
+											<a href="#" onclick="event.preventDefault();">
+												<i class="icon-remove icon-large red"></i>
+											</a>
+										</li>
+									 -->
+								</epic:if>
+								<epic:if not_set="&Directory/Me/is_owner;&Directory/Me/is_manager;&Directory/Me/is_admin;">
+									<li class="&Team/have_none#.active;">
+										<a href="#" onclick="return false;">No Access</a>
+									</li>
+									<li class="&Team/have_viewer#.active;">
+										<a href="#" onclick="return false;">Viewer</a>
+									</li>
+									<li class="&Team/have_contrib#.active;">
+										<a href="#" onclick="return false;">Contributor</a>
+									</li>
+									<li class="&Team/have_collab#.active;">
+										<a href="#" onclick="return false;">Collaborator</a>
+									</li>
+								</epic:if>
+							</ul>
+						</div>
+					</li>
+				</epic:foreach>
+			</epic:if>
+		</ul>
+	</div>
+</div>

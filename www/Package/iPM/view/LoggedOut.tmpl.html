@@ -1,0 +1,60 @@
+<epic:page_part part="css_home" />
+<epic:page_part part="header_home" />
+<div class="main-container">
+	<epic:page />
+</div>
+<epic:page_part part="footer_home" />
+<!-- <epic:page_part part="js_home"/> -->
+<script type="text/javascript">
+	$(window).on('resize', setup_home_page).trigger('resize');
+
+	if (window.location.hash && 'dummy' !== '#&Pageflow/V/scroll;') {
+		if (window.location.hash !== '#&Pageflow/V/scroll;') {
+			$('html,body').scrollTo('#&Pageflow/V/scroll;', 1000);
+		} else {
+			setTimeout(function() {
+				$('html,body').scrollTo('#&Pageflow/V/scroll;', 0);
+			}, 800);
+		}
+	}
+
+	$('div.selected-nav-option').html($.trim($('.top-nav-option.active').text()) + '&nbsp; <i class="icon-caret-down icon-large"></i>');
+
+	$(window).scroll(function() {
+		$('.nav-arrow-down').hide().delay(1000).fadeIn();
+	});
+
+	$('.nav-arrow-down, .top-nav-option').click(function() {
+		$('.nav-arrow-down').hide().delay(1000).fadeIn();
+	});
+
+	$('.nav-arrow-up').click(function() {
+		$('.nav-arrow-down').hide().delay(1500).fadeIn();
+	});
+
+	$('.selected-nav-option').click(function(e) {
+		e.stopPropagation();
+		$('.parent-nav-container').css("border", "1px solid #CCC");
+		$('.parent-nav-container').css("border-top", "0 none");
+		$('ul.option-container').slideToggle('fast');
+		$(':not(.selected-nav-option)').click(function() {
+			$('ul.option-container').hide();
+			$('.parent-nav-container').css("border", "0 none");
+		});
+	});
+
+	$('.top-nav-option, .next-page-icon, .inline-home-nav, .top-nav-option-alt').each(function() {
+		$(this).bind("click", function(e) {
+			$('.expander').hide();
+		});
+	});
+
+	$('.toggler').click(function() {
+		$(".btn-navbar").click();
+	});
+	
+	$('.zenbox-help').click(function(e) {
+		e.preventDefault();
+		Zenbox.show();
+	});
+</script>

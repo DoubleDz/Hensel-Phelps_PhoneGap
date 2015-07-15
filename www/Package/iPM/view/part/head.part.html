@@ -1,0 +1,109 @@
+<epic:defer name="filter_folder">
+	var effr= $('#filter_folder_results');
+	var efft= $('#filter_folder_textbox')
+		.blur(  function(){ setTimeout( function(){ effr.addClass('hidden');    }, 500) }) // Pause to allow click on contents
+		.focus( function(){ setTimeout( function(){ effr.removeClass('hidden'); }, 500) })
+		;
+	if( typeof window.filter_folder_text=== 'undefined') window.filter_folder_text= '';
+	efft.val(window.filter_folder_text).keyup();
+</epic:defer>
+<style>
+li.folder-filter-container:hover {
+	background: #FFF;
+	color: #000;
+}
+</style>
+<epic:page_part part="clipboard" />
+<div class="top-navbar-inner">
+	<div class="container" style="width: auto;">
+		<a href="" class="smaller-web-logo">
+			<img src="Package/iPM/images/iprojectmobile-web-logo.png" />
+		</a>
+		<div class="file-folder-filter-results ipm-widget ipm-scroll">
+			<ul id="filter_folder_results" class="item-list hidden">
+				<epic:foreach table="Directory/FolderFilterList">
+					<!-- only one row, but makes it easier -->
+					<epic:foreach table="FolderFilterList/Folder">
+						<li class="folder-filter-container links" data-filter="&Folder/name;" onclick="window.EpicMvc.Epic.makeClick(false,'choose_folder_from_filter',{id:'&Folder/id;'},true);">
+							<div class="icon-closed-folder ipm-icon"></div>
+							&nbsp; &Folder/name;
+						</li>
+					</epic:foreach>
+					<epic:foreach table="FolderFilterList/File">						
+						<li class="folder-filter-container links" data-filter="&File/name;" onclick="window.EpicMvc.Epic.makeClick(false,'choose_folder_from_filter',{id:'&File/folder_id;'},true);">
+							<div class="icon-&File/icon_ext; ipm-icon ipm-icon-doc"></div>
+							&nbsp; &File/name;
+						</li>
+					</epic:foreach>
+				</epic:foreach>
+			</ul>
+		</div>
+		<div class="file-folder-filter">
+			<input type="text" class="filter-textbox" id="filter_folder_textbox" placeholder="Filter Folders/Files..." onkeyup="filter_folder_text=$(this).val();input_filter(filter_folder_text,'.folder-filter-container','~',false);return false;" />
+			<i style="color:#CCC;" class="icon-remove links clear-text" onclick="$('#filter_folder_textbox').val('').keyup().focus();return false;"></i>
+		</div>
+		<ul class="nav pull-right header-nav">
+			<li>
+				<div class="nav-collapse subnav-collapse">
+					<ul class="nav pull-right user-options visible-desktop">
+						<epic:if set="&User/Me/adam_flag;">
+							<li>
+								<epic:link_action action="go_admin">
+									<i class="icon-cog icon-large"></i> Admin</epic:link_action>
+							</li>
+						</epic:if>
+						<li>
+							<epic:link_action action="go_new_user">
+								<i class="icon-plus"></i> Invite a New User</epic:link_action>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle avatar-toggle" data-toggle="dropdown">
+								<i class="icon-user icon-large"></i> &User/Me/first_name; &User/Me/last_name; <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu auto-show">
+								<li>
+									<epic:link_action action="go_profile">My Account</epic:link_action>
+								</li>
+								<li>
+									<epic:link_action action="logout">Sign Out</epic:link_action>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<li>
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" style="margin-top: 12px;">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<span class="pull-right mob-user mob-username"> &User/Me/first_name; &User/Me/last_name; </span>
+			</li>
+		</ul>
+		<div class="nav-collapse subnav-collapse logged-in-mobile-nav">
+			<ul class="nav nav-group toggler-section">
+				<li class="toggler">
+					<div class="nav-alt-header"></div>
+					<a href="#" onclick="toggle_projects_alt();return false;">Projects</a>
+					<epic:page_part part="project_list_alt" dynamic="ul" class="nav nav-list ipm-projects ipm-projects-alt" />
+				</li>
+				<li class="toggler">
+					<div class="nav-alt-header"></div>
+					<epic:link_action action="go_profile">My Account</epic:link_action>
+					<epic:if set="&User/Me/adam_flag;">
+						<div class="nav-alt-header"></div>
+						<epic:link_action action="go_new_user">Invite New User</epic:link_action>
+					</epic:if>
+					<div class="nav-alt-header"></div>
+					<epic:link_action action="logout">Sign Out</epic:link_action>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="bottom-gradient">
+		<span class="left"></span>
+		<span class="center"></span>
+		<span class="right"></span>
+	</div>
+</div>

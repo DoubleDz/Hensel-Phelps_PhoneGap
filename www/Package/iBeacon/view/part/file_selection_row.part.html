@@ -1,0 +1,23 @@
+<!-- file_selection_row -->
+<div class="row">
+	<div class="span3 clearfix">
+	
+	
+				
+		<div class="icon-&BeaconFile/icon_ext; ipm-icon ipm-icon-doc" style="margin-top: 10px; float:left;"></div>										
+		<epic:if val="&BeaconFile/icon_ext;" in_list="png,jpg,gif,jpeg">
+			<epic:link_action action="go_open_s3_file" p:id="&BeaconFile/id;">&BeaconFile/name; </epic:link_action>
+		</epic:if>
+		<epic:if val="&BeaconFile/icon_ext;" not_in_list="png,jpg,gif,jpeg">
+			<a href="#" class="file" onclick="S3Open(&Directory/Options/active_project;,&BeaconFile/id;,true);return false;" style="float:left;">&BeaconFile/name;</a>
+		</epic:if>
+				
+	</div>
+	<div class="span3" style="display:block;">
+		<div class="size-col" style="float:left !important; margin-right:10px !important; margin-left:10px !important;">&BeaconFile/size#bytes;</div>
+		<div class="modified-col" style="float:left !important; margin-right:10px !important; margin-left:10px !important;">			
+				<time class="timeago" dateTime="&BeaconFile/modified;"> &BeaconFile/modified; </time>
+
+		</div>
+	</div>
+</div>
